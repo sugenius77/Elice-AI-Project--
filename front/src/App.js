@@ -1,10 +1,14 @@
 import "./App.css";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "pages/Home";
 
 function App() {
     return (
-        <div className="App">
-            <h1>Hello review in hotel</h1>
-        </div>
+        <Router>
+            <Switch>
+                <Route path="/" exact render={() => <Home />} />
+            </Switch>
+        </Router>
     );
 }
 
