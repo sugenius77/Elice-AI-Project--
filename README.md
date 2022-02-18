@@ -11,7 +11,7 @@
 **엔드유저에게 보이는 웹서비스에 대한 소개**
   - AI : TF-IDF, SVM 
   - BE : MariaDB
-  - FE : React
+  - FE : React, React Router, recoil, tailwind css, axios
   - 국내 주요 지역의 호텔 리뷰 분석을 통해 각 호텔 별 특징을 분석함
   - 사용자가 입력한 정보에 따라 호텔를 필터링하여 적절한 호텔 추천
 
