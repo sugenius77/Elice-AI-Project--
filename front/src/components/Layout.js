@@ -5,9 +5,9 @@ import Footer from "components/Footer";
 const Layout = ({ children }) => {
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <div className="content overflow-x-hidden">{children}</div>
-            <Footer></Footer>
+            <Footer />
         </div>
     );
 };
