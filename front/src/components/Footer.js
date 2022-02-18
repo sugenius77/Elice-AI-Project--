@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <div>
+        <div className="bg-theme w-screen flex justify-center">
             <h1>Footer page</h1>
         </div>
     );
