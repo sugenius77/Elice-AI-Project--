@@ -3,9 +3,11 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                theme: "#34495e",
+                theme: "#9AA4AE",
                 primary: "#2980b9",
-                sub: "#e67e22",
+                sub: "#e5e5e5",
+                point: "#fca311",
+                point2: "#14213d",
             },
             fontFamily: {
                 doogle: ["Source Sans Pro", "sans-serif"],
