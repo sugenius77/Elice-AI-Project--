@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
     const menuItems = [
         {
-            title: "Home",
+            title: "Search",
             key: "/",
             index: 1,
         },

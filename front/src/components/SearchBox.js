@@ -39,6 +39,7 @@ const SearchBox = () => {
                 </div>
 
                 <Links />
+                <hr className="mt-5" />
 
                 {text.length > 2 ? (
                     <ul>
