@@ -23,7 +23,7 @@ const Header = () => {
     return (
         <div className="font-doogle text-white w-full z-50">
             <div
-                className={`flex justify-between bg-theme opacity-50 items-center p-2 shadow-lg `}
+                className={`flex justify-between bg-theme items-center p-2 shadow-lg `}
             >
                 <div className="flex justify-between w-full">
                     <Link to="/" className="text-4xl font-semibold mb-2">
