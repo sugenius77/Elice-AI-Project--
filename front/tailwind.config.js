@@ -8,6 +8,7 @@ module.exports = {
                 sub: "#e5e5e5",
                 point: "#fca311",
                 point2: "#14213d",
+                fontcolor: "#32292F",
             },
             fontFamily: {
                 doogle: ["Source Sans Pro", "sans-serif"],

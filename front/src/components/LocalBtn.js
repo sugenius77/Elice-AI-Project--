@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 
 const LocalBtn = ({ isProperty, setIsProperty }) => {
+    console.log(isProperty);
     const handlePropertyBtn = (e) => {
         const { value } = e.target;
         if (value === "전체") {
@@ -27,7 +27,7 @@ const LocalBtn = ({ isProperty, setIsProperty }) => {
                         type="button"
                         value={local}
                         onClick={handlePropertyBtn}
-                        clicked={isProperty.find((e) => e === { local })}
+                        // Clicked={isProperty.find((e) => e === { local })}
                         className={`text-sm border rounded-2xl p-2 cursor-pointer shadow-sm ${
                             isProperty.includes(local) &&
                             "bg-point shadow text-white"
