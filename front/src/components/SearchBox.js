@@ -2,32 +2,40 @@ import React, { useState, useEffect } from "react";
 import { Links } from "./Link";
 import { useDebounce } from "use-debounce";
 
-import { useRecoilState } from "recoil";
-import { testState } from "state/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { testState, searchDataState } from "state/atom";
 import LocalBtn from "./LocalBtn";
 
 const SearchBox = () => {
     const [results, setResults] = useRecoilState(testState);
     console.log("recoil 값은 ===>", results);
+    const [searchData, setSearchData] = useRecoilState(searchDataState);
+
     const [text, setText] = useState("hotels");
-    const [isProperty, setIsProperty] = useState("[전체]");
+    const [selectLocal, setSelectLocal] = useState(["전체"]);
 
-    // const [debouncedValue] = useDebounce(text, 300);
-
-    const filterdSearchValue = results.filter((result) => {
-        return result.review.includes(text);
-    });
+    const [inputValue] = useDebounce(text, 300);
+    const [inputLocal] = useDebounce(selectLocal, 300);
 
     useEffect(() => {
-        console.log(isProperty);
-    }, [isProperty]);
+        if (inputValue) setSearchData({ inputLocal, inputValue });
+        console.log(searchData);
+    }, [inputValue]);
+
+    const filteredSearchValue = results.filter((result) => {
+        return result.review.includes(text);
+    }); //TODO API 데이터 들어오면 삭제 되어야함
+
+    useEffect(() => {
+        console.log(selectLocal);
+    }, [selectLocal]);
 
     return (
         <div className="flex justify-center md:mx-5 mx-32 shadow-2xl bg-gray-50 items-center rounded-lg">
             <div className="py-10">
                 <LocalBtn
-                    isProperty={isProperty}
-                    setIsProperty={setIsProperty}
+                    isProperty={selectLocal}
+                    setIsProperty={setSelectLocal}
                 />
                 <div className=" flex justify-center w-96 md:w-80 border rounded-full shadow-sm hover:shadow-lg">
                     <input
@@ -54,7 +62,7 @@ const SearchBox = () => {
 
                 {text.length > 2 ? (
                     <ul>
-                        {filterdSearchValue.map((result) => {
+                        {filteredSearchValue.map((result) => {
                             return (
                                 <div key={result._id}>
                                     {result.review} -{result.title}
