@@ -14,7 +14,7 @@ def create_app():
     # migrate = Migrate()
     # migrate.init_app(app, db)
 
-    from app.controller.test import test_api
+    from app.controller.test import test_api, hello_api
     api = Api(
         app,
         version="0.1.0",
@@ -27,5 +27,6 @@ def create_app():
         license_url="https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team2/project_nlp/-/blob/master/README.mdd",
     )
     api.add_namespace(test_api)
+    api.add_namespace(hello_api)
 
     return app
