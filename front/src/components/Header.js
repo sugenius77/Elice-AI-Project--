@@ -13,15 +13,10 @@ const Header = () => {
             key: "/login",
             index: 2,
         },
-        {
-            title: "register",
-            key: "/Register",
-            index: 3,
-        },
     ];
 
     return (
-        <div className="font-doogle text-white w-full z-50">
+        <div className="font-doogle text-white fixed top-0 left-0 right-0 w-full z-50">
             <div
                 className={`flex justify-between bg-theme items-center p-2 shadow-lg `}
             >
