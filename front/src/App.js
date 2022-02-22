@@ -4,6 +4,7 @@ import Home from "pages/Home";
 import Register from "pages/Register";
 import Login from "pages/Login";
 import Header from "components/Header";
+import Detail from "pages/Detail";
 
 function App() {
     return (
@@ -12,8 +13,8 @@ function App() {
             <Switch>
                 <Route path="/" exact render={() => <Home />} />
                 <Route path="/login" render={() => <Login />} />
-                {/* <Route path="/register" render={() => <Register />} /> */}
                 <Route path={"/register"} component={Register} />
+                <Route path="/hotel/:_id" component={Detail} />
             </Switch>
         </Router>
     );

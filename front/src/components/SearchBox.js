@@ -24,7 +24,7 @@ const SearchBox = () => {
 
     const filteredSearchValue = results.filter((result) => {
         return result.review.includes(text);
-    }); //TODO API 데이터 들어오면 삭제 되어야함
+    }); //TODO  실제 API 데이터 들어오면 삭제 되어야함
 
     useEffect(() => {
         console.log(selectLocal);
