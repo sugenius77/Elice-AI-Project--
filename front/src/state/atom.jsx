@@ -34,7 +34,7 @@ export const testState = atom({
             price: 300,
         },
         {
-            _id: "1",
+            _id: 1,
             title: "라마다호텔",
             review: "여긴 바다뷰가 정말 최고네요",
             content: "좋은곳",
@@ -42,7 +42,7 @@ export const testState = atom({
             price: 200,
         },
         {
-            _id: "2",
+            _id: 2,
             title: "샘모텔",
             review: "창문이 없어서 오래오래 깊은 잠을 잘 수 있어요",
             content: "안좋은곳",
@@ -50,7 +50,7 @@ export const testState = atom({
             price: 100,
         },
         {
-            _id: "3",
+            _id: 3,
             title: "포포인츠쉐르빌",
             review: "쉐라톤인줄 알고 왔는데 생각보다 호캉스할만해요. 바다뷰도 좋아요",
             content: "괜찮은곳",

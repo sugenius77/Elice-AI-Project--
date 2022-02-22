@@ -36,12 +36,13 @@ const Result = () => {
     //     return (
     //         <div className="mt-5">
     //             <Loading />
+    //             <p className="text-2xl text-center">Loading...</p>
     //         </div>
-    //     );
+    // );
     return (
         <div className=" gird justify-center md:mx-5 mx-32 mt-10 shadow-2xl bg-sub items-center rounded-lg">
-            {testdata.map((h) => (
-                <HotelCard key={h._id} h={h} />
+            {testdata.map((h, index) => (
+                <HotelCard key={index} h={h} />
             ))}
         </div>
     );
