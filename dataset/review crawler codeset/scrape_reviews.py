@@ -31,7 +31,7 @@ def get_reviews(cityname):
 
     try:
         index = 0
-        for i in range(len(hotel_name_list)):
+        for i in range(1, len(hotel_name_list)):
             index += 1
             # 호텔 리스트와 클릭할 호텔의 이름이 같다면
             if (
@@ -74,51 +74,54 @@ def get_reviews(cityname):
                 except:
                     pass
 
-                j = 1
-                time.sleep(3)
-                while j < min(review_page, 12):
-                    j += 1
-                    for z in range(1, 10):
-                        print(index, hotel_name_list[i])
-                        region.append(cityname)
-                        hotel_index.append(index)
-                        hotel.append(hotel_name_list[i])
-                        webpage.append(hotel_link_list[i])
+                if review_page > 0:
+                    j = 1
+                    time.sleep(3)
+                    while j < min(review_page, 120):
+                        j += 1
+                        for z in range(1, 10):
+                            print(index, hotel_name_list[i])
+                            region.append(cityname)
+                            hotel_index.append(index)
+                            hotel.append(hotel_name_list[i])
+                            webpage.append(hotel_link_list[i])
 
-                        # positive review
+                            # positive review
+                            try:
+                                review_positive.append(
+                                    driver.find_element_by_css_selector(
+                                        f"#review_list_page_container > ul > li:nth-child({z}) > div > div.bui-grid > div.bui-grid__column-9.c-review-block__right > div:nth-child(2) > div > div:nth-child(1) > p > span.c-review__body"
+                                    ).get_attribute("textContent")
+                                )
+                            except:
+                                review_positive.append(" ")
+                            # negative review
+                            try:
+                                review_negative.append(
+                                    driver.find_element_by_css_selector(
+                                        f"#review_list_page_container > ul > li:nth-child({z}) > div > div.bui-grid > div.bui-grid__column-9.c-review-block__right > div:nth-child(2) > div > div.c-review__row.lalala > p > span.c-review__body"
+                                    ).get_attribute("textContent")
+                                )
+                            except:
+                                review_negative.append(" ")
+                            # date
+                            try:
+                                date.append(
+                                    driver.find_element_by_css_selector(
+                                        f"#review_list_page_container > ul > li:nth-child({z}) > div > div.bui-grid > div.bui-grid__column-3.c-review-block__left > ul.bui-list.bui-list--text.bui-list--icon.bui_font_caption.c-review-block__row.c-review-block__stay-date > li > div > span"
+                                    ).get_attribute("textContent")
+                                )
+                            except:
+                                date.append(" ")
                         try:
-                            review_positive.append(
-                                driver.find_element_by_css_selector(
-                                    f"#review_list_page_container > ul > li:nth-child({z}) > div > div.bui-grid > div.bui-grid__column-9.c-review-block__right > div:nth-child(2) > div > div:nth-child(1) > p > span.c-review__body"
-                                ).get_attribute("textContent")
-                            )
+                            time.sleep(2)
+                            driver.find_element_by_xpath(
+                                '//*[@id="review_list_page_container"]/div[4]/div/div[1]/div/div[3]/a'
+                            ).click()
                         except:
-                            review_positive.append(" ")
-                        # negative review
-                        try:
-                            review_negative.append(
-                                driver.find_element_by_css_selector(
-                                    f"#review_list_page_container > ul > li:nth-child({z}) > div > div.bui-grid > div.bui-grid__column-9.c-review-block__right > div:nth-child(2) > div > div.c-review__row.lalala > p > span.c-review__body"
-                                ).get_attribute("textContent")
-                            )
-                        except:
-                            review_negative.append(" ")
-                        # date
-                        try:
-                            date.append(
-                                driver.find_element_by_css_selector(
-                                    f"#review_list_page_container > ul > li:nth-child({z}) > div > div.bui-grid > div.bui-grid__column-3.c-review-block__left > ul.bui-list.bui-list--text.bui-list--icon.bui_font_caption.c-review-block__row.c-review-block__stay-date > li > div > span"
-                                ).get_attribute("textContent")
-                            )
-                        except:
-                            date.append(" ")
-                    try:
-                        time.sleep(2)
-                        driver.find_element_by_xpath(
-                            '//*[@id="review_list_page_container"]/div[4]/div/div[1]/div/div[3]/a'
-                        ).click()
-                    except:
-                        break
+                            break
+                else:
+                    break
 
             time.sleep(3)
             # 이전 창으로 핸들링
@@ -179,13 +182,11 @@ if __name__ == "__main__":
             final_df = pd.concat([final_df, df], ignore_index=True)
 
             final_df.to_csv(
-                f"{cityname}_hotel_review.csv",
+                f"{cityname}_hotel_review_{page}.csv",
                 mode="a",
                 encoding="utf-8-sig",
                 header=False,
                 index=False,
             )
-
-            driver.quit()
 
     pass
