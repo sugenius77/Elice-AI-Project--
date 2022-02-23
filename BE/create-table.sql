@@ -1,10 +1,14 @@
-CREATE TABLE positive_review(
-  review_id int NOT NULL PRIMARY KEY COMMENT '리뷰 index PK',
+CREATE TABLE review(
+  review_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '리뷰id PK AI',
   contents TEXT COMMENT '리뷰내용',
-  hotel_id int COMMENT '호텔 id'
-) DEFAULT CHARSET UTF8 COMMENT '긍정리뷰 테이블';
-CREATE TABLE nagative_review(
-  review_id int NOT NULL PRIMARY KEY COMMENT '리뷰 index PK',
-  contents TEXT COMMENT '리뷰내용',
-  hotel_id int COMMENT '호텔 id'
-) DEFAULT CHARSET UTF8 COMMENT '부정리뷰 테이블';
+  hotel_id INTEGER COMMENT '호텔 id',
+  review_date DATE COMMENT '리뷰작성 날짜',
+  is_positive INTEGER COMMENT '0: 부정, 1: 긍정'
+) DEFAULT CHARSET UTF8 COMMENT '리뷰 테이블';
+CREATE TABLE hotel_info(
+  hotel_id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '호텔id PK AI',
+  hotel_name VARCHAR(255) COMMENT '호텔 이름',
+  region VARCHAR(255) COMMENT '호텔 지역',
+  hotel_url VARCHAR(255) COMMENT '호텔 url',
+  hotel_img_url VARCHAR(255) COMMENT '호텔 이미지 url'
+) DEFAULT CHARSET UTF8 COMMENT '호텔정보 테이블';
