@@ -8,7 +8,7 @@ class HelloDto:
         "test_model1",
         {
             "id": fields.Integer(readonly=True, description='아이디'),
-            "review": fields.String(readonly=True, description='지역 (구)'),
+            "review": fields.String(readonly=True, description='리뷰'),
             "date": fields.Date
         },
     )
