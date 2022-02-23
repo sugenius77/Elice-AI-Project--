@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-# from app.config import config
+from app.config import config
 from flask_restx import Api
 
 
@@ -10,11 +10,14 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    # db.init_app(app) #SQLAlchemy 객체를 app객체와 이어줌.
+    app.config['JSON_AS_ASCII'] = False  # 한글깨짐 방지
+    app.config.from_object(config)  # config에서 가져온 파일 사용하기
+    db.init_app(app)  # SQLAlchemy 객체를 app객체와 이어줌.
     # migrate = Migrate()
     # migrate.init_app(app, db)
 
-    from app.controller.test import test_api
+    from app.controller.test import test_api, hello_api
+    from app.controller.hotelApi import hotel_api
     api = Api(
         app,
         version="0.1.0",
@@ -27,5 +30,6 @@ def create_app():
         license_url="https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team2/project_nlp/-/blob/master/README.mdd",
     )
     api.add_namespace(test_api)
+    api.add_namespace(hotel_api)
 
     return app
