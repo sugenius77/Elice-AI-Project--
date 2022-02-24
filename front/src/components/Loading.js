@@ -3,7 +3,7 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 export const Loading = () => (
     <div className="flex justify-center items-center ">
-        <ClimbingBoxLoader color="#fca311" size="15" />
+        <ClimbingBoxLoader color="#fca311" size="15px" />
     </div>
 );
 

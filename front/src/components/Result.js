@@ -35,17 +35,17 @@ const Result = () => {
         loadData();
     }, [searchData]);
 
-    // if (loading)
-    //     return (
-    //         <div className="mt-5">
-    //             <Loading />
-    //             <p className="text-2xl text-center">Loading...</p>
-    //         </div>
-    // );
+    if (loading)
+        return (
+            <div className="mt-5">
+                <Loading />
+                <p className="text-2xl text-center">Loading...</p>
+            </div>
+        );
     return (
         <div className=" gird justify-center md:mx-5 mx-32 mt-10 shadow-2xl bg-sub items-center rounded-lg">
-            {testdata.map((h, index) => (
-                <HotelCard key={index} h={h} />
+            {results.map((h) => (
+                <HotelCard key={h.hotel_id} h={h} />
             ))}
         </div>
     );
