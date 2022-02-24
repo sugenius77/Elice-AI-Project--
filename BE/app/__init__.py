@@ -1,8 +1,10 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from app.config import config
 from flask_restx import Api
+from flask_migrate import Migrate
+
+from app.config import config
 
 
 db = SQLAlchemy()
@@ -12,6 +14,14 @@ def create_app():
     app = Flask(__name__)
     app.config['JSON_AS_ASCII'] = False  # 한글깨짐 방지
     app.config.from_object(config)  # config에서 가져온 파일 사용하기
+
+    app.config.SWAGGER_UI_DOC_EXPANSION = "list"  # 펼쳐짐
+    app.config.SWAGGER_UI_OPERATION_ID = True
+    app.config.SWAGGER_UI_REQUEST_DURATION = True
+    # app.config.SWAGGER_SUPPORTED_SUBMIT_METHODS = ["get"]  # Try it out 제공
+    app.config['RESTX_MASK_SWAGGER'] = False
+    CORS(app)
+
     db.init_app(app)  # SQLAlchemy 객체를 app객체와 이어줌.
     # migrate = Migrate()
     # migrate.init_app(app, db)

@@ -9,7 +9,7 @@ hotel_api = HotelDto.api
 
 hotelParser = hotel_api.parser()
 hotelParser.add_argument(
-    'region', type=str, help='지역 (예)제주', location='args', required=True)
+    'region', type=str, help='지역 (예)제주|서울', location='args', required=True)
 hotelParser.add_argument(
     'search', type=str, help='검색텍스트 (예)바다가 보이고 침대가 편안한 호텔 찾아줘', location='args', required=True)
 
