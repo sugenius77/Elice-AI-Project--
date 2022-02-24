@@ -9,20 +9,27 @@ const HotelCard = ({ h }) => {
                 <div className="bg-white grid rounded-2xl hover:scale-105 duration-150 text-fontcolor p-2 grid-cols-4 mx-4 md:flex-col md:flex ">
                     <div className="text-blue items-center ">
                         <img
-                            src="https://via.placeholder.com/900x500.png?text=Hotel+hoya"
+                            src={h.hotel_img_url} //"https://via.placeholder.com/900x500.png?text=Hotel+hoya"
                             alt="sample"
-                            className="h-auto"
+                            className="h-auto mr-3 rounded-lg"
                         />
                     </div>
                     <div className="col-start-2  col-end-4 ml-2">
                         <div className="">
                             <Link
-                                to={`/hotel/${h._id}`}
-                                className="text-2xl font-bold hover:text-gray-700"
+                                to={`/hotel/${h.hotel_id}`}
+                                className="text-2xl font-bold hover:text-gray-700 mb-1"
                             >
-                                {h.title}
+                                {h.hotel_name}
                             </Link>
-                            <h5>{h.review}</h5>
+                            <span className="text-sm text-gray-400">
+                                // {h.region}
+                            </span>
+                            {h.reviews.map((review) => (
+                                <div key={review.review_id} className="text-sm">
+                                    {review.contents}
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className="flex w-full justify-center items-center mt-4">

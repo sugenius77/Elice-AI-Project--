@@ -60,7 +60,7 @@ const SearchBox = () => {
                 {/* <Links /> */}
                 <hr className="mt-5" />
 
-                {text.length > 2 ? (
+                {/* {text.length > 2 ? (
                     <ul>
                         {filteredSearchValue.map((result) => {
                             return (
@@ -72,7 +72,7 @@ const SearchBox = () => {
                     </ul>
                 ) : (
                     ""
-                )}
+                )} */}
             </div>
         </div>
     );
