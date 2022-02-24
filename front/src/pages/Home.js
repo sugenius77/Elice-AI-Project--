@@ -16,8 +16,8 @@ const Home = () => {
                 <SearchBox />
             </div>
             <div>
-                {/* <Result /> */}
-                <TestResult></TestResult>
+                <Result />
+                {/* <TestResult></TestResult> */}
             </div>
             <div id="1" className="">
                 <div className=" mx-20 items-center mt-20">

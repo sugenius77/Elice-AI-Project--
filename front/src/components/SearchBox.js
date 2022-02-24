@@ -14,13 +14,13 @@ const SearchBox = () => {
     const [text, setText] = useState("hotels");
     const [selectLocal, setSelectLocal] = useState(["전체"]);
 
-    const [inputValue] = useDebounce(text, 300);
-    const [inputLocal] = useDebounce(selectLocal, 300);
+    const [search] = useDebounce(text, 300);
+    const [region] = useDebounce(selectLocal, 300);
 
     useEffect(() => {
-        if (inputValue) setSearchData({ inputLocal, inputValue });
+        if (search) setSearchData({ region, search });
         console.log(searchData);
-    }, [inputValue]);
+    }, [search]);
 
     const filteredSearchValue = results.filter((result) => {
         return result.review.includes(text);

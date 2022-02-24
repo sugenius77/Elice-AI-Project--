@@ -20,10 +20,13 @@ const Result = () => {
             // 데이터가 온전히 들어오지 않았을 시
             // setGenres({ ...genres });
             try {
-                const response = await hotelSearch(searchData);
-                // console.log(response);
-                setResults(response.data);
-                // console.log("API 가져온 data ===> ", results);
+                const locals = searchData.region.join("|");
+                console.log(locals);
+                const response = await hotelSearch(searchData, locals);
+                // console.log(response.data.data);
+                setResults(response.data.data);
+
+                console.log("API 가져온 data ===> ", results);
                 setLoading(false);
             } catch (e) {
                 console.log("axios get Error");
