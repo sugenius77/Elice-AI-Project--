@@ -20,7 +20,7 @@ hotelParser.add_argument(
 @hotel_api.response(400, "요청 정보 정확하지 않음")
 @hotel_api.response(500, "API 서버에 문제가 발생하였음")
 class HelloApi(Resource):
-    @hotel_api.marshal_with(HotelDto.hotel_info_model, envelope="data")
+    @hotel_api.marshal_with(HotelDto.recoHotel_list_model, envelope="data")
     @hotel_api.expect(hotelParser)
     def get(self):
         '''호텔 추천 데이터 
@@ -34,6 +34,58 @@ class HelloApi(Resource):
         print(
             f'region={region}, search={search}')
 
-        hotel_list = db.session.query(HotelInfo).all()
+        similarity_list = [
+            {'hotel_id': 0,
+             'review_id': (1556, 363, 2360, 11605)},
+            {'hotel_id': 273,
+             'review_id': (41, 2120, 3711, 222)}
+        ]
+
+        #hotel_list = db.session.query(HotelInfo).all()
+        hotel_list = [
+            {
+                'hotel_id': 0,
+                'hotel_name': '테스트 호텔1',
+                'region': '제주',
+                'hotel_url': 'www.test.com',
+                'hotel_img_url': 'https://t-cf.bstatic.com/xdata/images/hotel/square600/331600864.webp?k=3436f6e2fadf753e9d51cdd3554864f07a45bc0702d9c40fc6039b03e8fb12f3&o=&s=1',
+                'reviews': [
+
+                    {'review_id': 0,
+                     'contents': '바다뷰가 좋아요',
+                     'review_date': '2022-02'},
+                    {'review_id': 1,
+                     'contents': '바다뷰최고 침구 편안',
+                     'review_date': '2022-02'},
+                    {'review_id': 2,
+                     'contents': '바다가 잘보여요',
+                     'review_date': '2022-02'},
+                    {'review_id': 3,
+                     'contents': '직원들이 친절하고 뷰가 너무 좋음',
+                     'review_date': '2022-02'}
+
+                ]
+            },
+            {
+                'hotel_id': 1,
+                'hotel_name': '테스트 호텔2',
+                'region': '제주',
+                'hotel_url': 'www.test2.com',
+                'hotel_img_url': 'https://t-cf.bstatic.com/xdata/images/hotel/square600/164398650.webp?k=12ca7e07891ffac076fb9e5037c30882b589d0061337494ace1f5dcd351bbfb1&o=&s=1',
+                'reviews': [
+
+                    {'review_id': 4,
+                     'contents': '바다 전망 최고',
+                     'review_date': '2022-02'},
+                    {'review_id': 5,
+                     'contents': '오션뷰',
+                     'review_date': '2022-02'},
+                    {'review_id': 6,
+                     'contents': '바다 바로 앞',
+                     'review_date': '2022-02'}
+
+                ]
+            }
+        ]
 
         return hotel_list

@@ -9,6 +9,6 @@ CREATE TABLE hotel_info(
   hotel_id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '호텔id PK AI',
   hotel_name VARCHAR(255) COMMENT '호텔 이름',
   region VARCHAR(255) COMMENT '호텔 지역',
-  hotel_url VARCHAR(255) COMMENT '호텔 url',
-  hotel_img_url VARCHAR(255) COMMENT '호텔 이미지 url'
+  hotel_url VARCHAR(2048) COMMENT '호텔 url',
+  hotel_img_url VARCHAR(2048) COMMENT '호텔 이미지 url'
 ) DEFAULT CHARSET UTF8 COMMENT '호텔정보 테이블';
