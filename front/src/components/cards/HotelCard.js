@@ -37,7 +37,7 @@ const HotelCard = ({ h }) => {
 };
 
 HotelCard.prototype = {
-    h: PropTypes.number,
+    h: PropTypes.array,
 };
 
 export default HotelCard;

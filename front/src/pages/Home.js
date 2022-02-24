@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "components/Layout";
 import Result from "components/Result";
+import TestResult from "components/testResult";
 
 import SearchBox from "components/SearchBox";
 
@@ -15,7 +16,8 @@ const Home = () => {
                 <SearchBox />
             </div>
             <div>
-                <Result />
+                {/* <Result /> */}
+                <TestResult></TestResult>
             </div>
             <div id="1" className="">
                 <div className=" mx-20 items-center mt-20">
