@@ -1,5 +1,4 @@
 import "./App.css";
-import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "pages/Home";
 import Header from "components/Header";
@@ -7,6 +6,8 @@ import Likes from "pages/Likes";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "state/atom";
 import axios from "axios";
+import Detail from "pages/Detail";
+
 function App() {
   const access_token =
     localStorage.access_token ||
@@ -45,6 +46,7 @@ function App() {
       asyncGetUserInfo(access_token);
     }
   }, [access_token]);
+
   return (
     <Router>
       <Header userInfo={userInfo} />
@@ -55,9 +57,11 @@ function App() {
           render={() => <Home handleUserInfoChange={handleUserInfoChange} />}
         />
         <Route path="/likes" render={() => <Likes />} />
+        <Route path="/hotel/:_id" component={Detail} />
       </Switch>
     </Router>
   );
-}
+
+
 
 export default App;
