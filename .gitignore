@@ -4,6 +4,6 @@ venv/
 #AI 모델 제외
 *.model
 *.npy
-# *.env
+*.env
 
 #node_modules
