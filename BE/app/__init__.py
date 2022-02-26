@@ -32,9 +32,8 @@ def create_app():
     api = Api(
         app,
         version="0.1.0",
-        title="REST API 문서 -호텔 추천 웹 서비스",
-        description="호텔 추천 웹 서비스 REST API 문서입니다.\n \
-            소스코드에서 문서를 관리하며, 문서 상에서 테스트 할 수 있습니다.",
+        title="키보드로 소문난 호텔 OpenAPI Specification ",
+        description="다른 방문객들의 리뷰로 호텔을 맞춤 추천하는 웹&모바일 서비스의 API DOC",
         contact="2게된다고?팀 GitLap : https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team2/project_nlp",
         license="2게된다고?팀 license",
         license_url="https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team2/project_nlp/-/blob/master/README.mdd",
