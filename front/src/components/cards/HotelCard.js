@@ -51,7 +51,7 @@ const HotelCard = ({ h }) => {
                                             <p className="text-3xl inline-block">
                                                 “
                                             </p>{" "}
-                                            <p className="text-center text-base">
+                                            <p className="text-center text-sm font-doggle">
                                                 {review[0].contents}
                                             </p>{" "}
                                             <p className="text-3xl inline-block float-right pr-3">
