@@ -1,11 +1,9 @@
 import React from "react";
-import Header from "components/Header";
 import Footer from "components/Footer";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, id }) => {
     return (
-        <div>
-            {/* <Header /> */}
+        <div id={id}>
             <div className="content overflow-x-hidden">{children}</div>
             <Footer />
         </div>
