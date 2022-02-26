@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Link as SLink } from "react-scroll";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "state/atom";
 const menuItems = [
     {
-        title: "Search",
+        title: "Home",
         key: "/",
         index: 1,
     },
     {
+        title: "Search",
+        key: "/Search",
+        index: 2,
+    },
+    {
         title: "Login",
         key: "/callback",
-        index: 2,
+        index: 3,
     },
 ];
 
@@ -26,9 +32,9 @@ const Header = () => {
     };
 
     return (
-        <div className="font-doogle text-white w-full z-50">
+        <div className="font-doogle text-white fixed top-0 left-0 right-0 w-full z-50">
             <div
-                className={`flex justify-between bg-theme opacity-50 items-center p-2 shadow-lg `}
+                className={`flex justify-between bg-theme items-center p-2 shadow-lg `}
             >
                 <div className="flex justify-between w-full">
                     <Link to="/" className="text-4xl font-semibold mb-2">
@@ -39,9 +45,9 @@ const Header = () => {
                     {userInfo.name ? (
                         <>
                             <li className="list-none mx-2 p-1">
-                                <Link to="/" key="1">
+                                <SLink to="1" spy={true} smooth={true} key="1">
                                     Search
-                                </Link>
+                                </SLink>
                             </li>
                             <li className="list-none mx-2 p-1">
                                 <div className="dropdown">
@@ -125,10 +131,10 @@ const Header = () => {
                         </>
                     ) : (
                         menuItems.map((item) => {
-                            if (item.index === 2) {
+                            if (item.index === 3) {
                                 return (
                                     <li
-                                        className="list-none mx-2 p-1"
+                                        className="list-none mx-2 p-1 cursor-pointer"
                                         onClick={() =>
                                             (window.location.href =
                                                 "https://accounts.google.com/o/oauth2/v2/auth?" +
@@ -139,6 +145,8 @@ const Header = () => {
                                                 "&redirect_uri=http://localhost:3000/&" +
                                                 "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                                         }
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         {item.title}
                                     </li>
@@ -160,9 +168,15 @@ const Header = () => {
                             </svg>;
                             return (
                                 <li className="list-none mx-2 p-1">
-                                    <Link to={item.key} key={item.index}>
+                                    <SLink
+                                        to={item.index}
+                                        spy={true}
+                                        smooth={true}
+                                        key={item.index}
+                                        className="cursor-pointer"
+                                    >
                                         {item.title}
-                                    </Link>
+                                    </SLink>
                                 </li>
                             );
                         })

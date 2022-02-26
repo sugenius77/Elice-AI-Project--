@@ -13,6 +13,13 @@ const Result = () => {
     const [results, setResults] = useState([]);
     const testdata = useRecoilValue(testState);
 
+    const [data, setData] = useState([]);
+
+    const [target, setTarget] = useState(""); // target
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [apiLoading, setApiIsLoading] = useState(false);
+
     useEffect(() => {
         async function loadData() {
             setLoading(true);
