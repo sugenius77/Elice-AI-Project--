@@ -41,9 +41,9 @@ const TestResult = () => {
 
     // const fetchItems = async () => setItemIndex((prev) => prev + 5);
 
-    useEffect(() => {
-        console.log(itemList);
-    }, [itemList]);
+    //   useEffect(() => {
+    //     console.log(itemList);
+    //   }, [itemList]);
 
     let page = 0;
 
@@ -51,7 +51,32 @@ const TestResult = () => {
         setIsLoading(true);
         await new Promise((resolve) => setTimeout(resolve, 2000));
         page = page + 5;
-        setData((cur) => [...cur].concat(movies.slice(page, page + 5)));
+
+        // setMovies immutable data flow
+
+        // setMovies(value)
+        // 1. 현재 데이터를 삭제한다.(reference 삭제)
+        // 2. 새로운 데이터를 가르키는 state 메모리 주소를 할당한다
+
+        // const memory = {
+        //     '1122': [],
+        //     '2222': [movies]
+        // }
+        //           memory address / value
+        //  movies ->  1122      ->       []
+        //  movies ->  2222      ->         [{}, {}]
+
+        // 1, useRef
+        // 2. useState call function
+        let movies;
+        setMovies((prev) => {
+            movies = prev;
+            return prev;
+        });
+
+        setData((cur) => {
+            return [...cur].concat(movies.slice(page, page + 5));
+        });
 
         setIsLoading(false);
     };
@@ -64,13 +89,14 @@ const TestResult = () => {
         }
     };
 
-    useEffect(() => {
-        console.log("data state ===>", data);
-        console.log("movies ===>", movies);
-    }, [data]);
+    // useEffect(() => {
+    // console.log("data state ===>", data);
+    // console.log("movies ===>", movies);
+    // }, [data]);
 
     useEffect(() => {
         let observer;
+        console.log("target", target);
         if (target) {
             observer = new IntersectionObserver(onIntersect, {
                 threshold: 0.4,
@@ -106,7 +132,11 @@ const TestResult = () => {
             ) : (
                 ""
             )}
-            <div ref={setTarget}></div>
+            <div
+                // style={{ backgroundColor: "red", height: 1000 }}
+                id="observer"
+                ref={setTarget}
+            ></div>
         </div>
     );
 };

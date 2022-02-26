@@ -1,17 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 
 const Header = () => {
     const menuItems = [
         {
-            title: "Search",
+            title: "Home",
             key: "/",
             index: 1,
         },
         {
+            title: "Search",
+            key: "/Search",
+            index: 2,
+        },
+        {
             title: "Login",
             key: "/login",
-            index: 2,
+            index: 3,
         },
     ];
 
@@ -29,7 +34,12 @@ const Header = () => {
                     {menuItems.map((item) => {
                         return (
                             <li className="list-none mx-2 p-1">
-                                <Link to={item.key} key={item.index}>
+                                <Link
+                                    to={item.index}
+                                    spy={true}
+                                    smooth={true}
+                                    key={item.index}
+                                >
                                     {item.title}
                                 </Link>
                             </li>
