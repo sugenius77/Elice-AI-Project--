@@ -15,8 +15,8 @@ AOS.init({
 const Home = () => {
     return (
         <Layout id="1">
-            <div className="min-h-screen bg-hero bg-cover">
-                <div className="md:text-center items-center pt-24 pl-16 justify-center">
+            <div className="min-h-screen bg-hero bg-cover bg-center">
+                <div className="md:text-center items-center pt-24 pl-16 md:pl-0 justify-center">
                     <h1 className="text-2xl md:text-xl pt-20 md:mt-0 mb-10 font-bold text-white text-doogle">
                         서비스 소개페이지
                     </h1>
@@ -24,7 +24,7 @@ const Home = () => {
                         to="2"
                         spy={true}
                         smooth={true}
-                        className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700"
+                        className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700 cursor-pointer"
                     >
                         리뷰로 호텔찾기
                     </Link>

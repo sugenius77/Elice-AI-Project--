@@ -15,7 +15,7 @@ const Header = () => {
         },
         {
             title: "Login",
-            key: "/login",
+            key: "/callback",
             index: 3,
         },
     ];
@@ -30,7 +30,7 @@ const Header = () => {
                         H O T E L S
                     </Link>
                 </div>
-                <div className="flex">
+                <div className="flex cursor-pointer">
                     {menuItems.map((item) => {
                         return (
                             <li className="list-none mx-2 p-1">
