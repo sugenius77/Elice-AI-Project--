@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app.config import config
 from flask_restx import Api
-
+from flask_cors import CORS
 
 db = SQLAlchemy()
 
@@ -33,5 +33,5 @@ def create_app():
     api.add_namespace(test_api)
     api.add_namespace(hotel_api)
     api.add_namespace(user_api)
-
+    CORS(app)   
     return app

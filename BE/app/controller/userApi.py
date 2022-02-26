@@ -9,16 +9,12 @@ user_api = Namespace("user_info")
 @user_api.route('/info')
 class UserApi(Resource):
     def post(self):
-        name = request.form.get('name')
-        email = request.form.get('email')
-        print(name)
-        print(email)
+        data = request.get_json()
         result = UserInfo.query\
-                .filter(UserInfo.name == name, UserInfo.email == email)\
+                .filter(UserInfo.name == data['name'], UserInfo.email == data['email'])\
                 .first()
-                
         if result == None:
-            user = UserInfo(user_id=None,name=name,email=email) 
+            user = UserInfo(user_id=None,name=data['name'],email=data['email']) 
             db.session.add(user)
             db.session.commit()
     
