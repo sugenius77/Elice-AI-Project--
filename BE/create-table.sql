@@ -4,7 +4,7 @@ CREATE TABLE review(
   hotel_id INTEGER COMMENT '호텔 id',
   review_date DATE COMMENT '리뷰작성 날짜',
   is_positive INTEGER COMMENT '0: 부정, 1: 긍정'
-) DEFAULT CHARSET UTF8 COMMENT '리뷰 테이블';
+) DEFAULT CHARSET utf8mb4 COMMENT '리뷰 테이블';
 CREATE TABLE hotel_info(
   hotel_id int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '호텔id PK AI',
   hotel_name VARCHAR(255) COMMENT '호텔 이름',
