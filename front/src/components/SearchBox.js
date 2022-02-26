@@ -11,7 +11,7 @@ const SearchBox = () => {
     console.log("recoil 값은 ===>", results);
     const [searchData, setSearchData] = useRecoilState(searchDataState);
 
-    const [text, setText] = useState("hotels");
+    const [text, setText] = useState("바다뷰");
     const [selectLocal, setSelectLocal] = useState(["전체"]);
 
     const [search] = useDebounce(text, 300);
@@ -59,20 +59,6 @@ const SearchBox = () => {
 
                 {/* <Links /> */}
                 <hr className="mt-5" />
-
-                {/* {text.length > 2 ? (
-                    <ul>
-                        {filteredSearchValue.map((result) => {
-                            return (
-                                <div key={result._id}>
-                                    {result.review} -{result.title}
-                                </div>
-                            );
-                        })}
-                    </ul>
-                ) : (
-                    ""
-                )} */}
             </div>
         </div>
     );
