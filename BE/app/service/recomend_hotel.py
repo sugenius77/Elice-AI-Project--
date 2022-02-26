@@ -3,19 +3,9 @@ import pandas as pd
 from konlpy.tag import Okt
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 
-okt = Okt()
-
-# 데이터 가져오기
-hotel_info_df = pd.read_csv('../../../dataset/final/hotel_info.csv', encoding='utf-8')
-hotel_review_df = pd.read_csv('../../../dataset/final/hotel_review.csv', encoding='utf-8')
-
-
-# hotel_review.csv 파일 내 column 변경 후 삭제
-hotel_review_df.rename(columns = {'hotel_index' : 'hotel_id'}, inplace=True)
-
 
 def cleansing(document):
-    # okt.tagset => 품사확인
+    okt = Okt()
 
     # document normalization
     norm_doc = okt.normalize(document)
@@ -43,8 +33,8 @@ def tag_corpus(hotel_review_df):
     
     tagged_corpus_list = []
 
-    for df in hotel_review_df[:5].itertuples():
-        print(df)
+    for df in hotel_review_df.itertuples():
+
         index = df.Index
         review_id = df.review_id
         hotel_id = df.hotel_id
@@ -63,36 +53,28 @@ def tag_corpus(hotel_review_df):
     return tagged_corpus_list
 
 
-#tagged_corpus_list = tag_corpus(hotel_review_df)
-tagged_corpus_list = ''
-
-# 너무 길거나 짧은 리뷰 제거
-#filtered_tagged_corpus_list = [x for x in tagged_corpus_list if (len(x[0]) >= 5) and (len(x[0]) <= 100)]
-
-
 def make_model(tagged_corpus_list):
-    # # 모델 생성
-    # d2v_model = Doc2Vec(vector_size=300, window=3, workers=8, min_count = len(tagged_corpus_list) // 1000)
 
-    # # 단어 빌드
-    # d2v_model.build_vocab(tagged_corpus_list)
+    # 모델 생성
+    d2v_model = Doc2Vec(vector_size=300, window=3, workers=8, min_count = len(tagged_corpus_list) // 1000)
 
-    # # 학습
-    # d2v_model.train(tagged_corpus_list, total_examples=d2v_model.corpus_count, epochs=30)
+    # 단어 빌드
+    d2v_model.build_vocab(tagged_corpus_list)
 
-    # # 저장
-    # d2v_model.save('./model/d2v.model')
+    # 학습
+    d2v_model.train(tagged_corpus_list, total_examples=d2v_model.corpus_count, epochs=30)
+
+    # 저장
+    d2v_model.save('./AI/models/d2v.model')
 
     # 로드
-    d2v_model = Doc2Vec.load('./model/d2v.model')
+    #d2v_model = Doc2Vec.load('./AI/models/d2v.model')
 
     return d2v_model
 
-d2v_model = make_model(tagged_corpus_list)
-
 
 # 사용자 입력값을 토큰화 -> 벡터화 하고 유사도 높은 tag 데이터를 반환
-def make_similar_docs(user_input):
+def make_similar_docs(d2v_model, user_input):
     
     cleansed_test_target = cleansing(user_input)
     noun_user_input = cleansed_test_target
@@ -103,10 +85,8 @@ def make_similar_docs(user_input):
     # 유사도가 높은 리뷰 확인
     most_similar_docs = d2v_model.docvecs.most_similar([user_input_vector], topn=len(d2v_model.docvecs))
 
-
     return most_similar_docs
 
-most_similar_docs = make_similar_docs('편의점이 가까워요')
 
 
 def recomend_hotel(most_similar_docs):
@@ -138,15 +118,18 @@ def recomend_hotel(most_similar_docs):
 
     return recomended_hotel
 
-recomended_hotel = recomend_hotel(most_similar_docs)
 
+def show_recomended_hotel(hotel_info_df, hotel_review_df, return_data):
+    # 추천된 호텔과 리뷰 확인
+    for i in range(len(return_data)):
+        hotel_id = return_data[i]['hotel_id']
+        review_id_list = return_data[i]['review_id']
+        
+        print(f'----- {hotel_info_df.loc[int(hotel_id),"hote_name"]} -----')
 
-# 추천된 호텔과 리뷰 확인
-for hotel_id, review_id_list in list(recomended_hotel.items()):
-    print(f'----- {hotel_info_df.loc[int(hotel_id),"hote_name"]} -----')
-    for review_id in review_id_list[:number_review]:
-        print(hotel_review_df.loc[int(review_id)]['review'])
-    print('')
+        for review_id in review_id_list[:len(return_data[-1]['review_id'])]:
+            print(hotel_review_df.loc[int(review_id)]['review'])
+        print('')
 
 
 def set_return_data(recomended_hotel):
@@ -157,7 +140,7 @@ def set_return_data(recomended_hotel):
         hotel_dict["hotel_id"] = hotel_id
         hotel_dict['review_id'] = []
         
-        for review_id in review_id_list:
+        for review_id in review_id_list[:len(recomended_hotel[-1])]:
             #print(review_id)
             hotel_dict['review_id'].append(review_id)
         
@@ -165,8 +148,31 @@ def set_return_data(recomended_hotel):
 
     return return_data
 
-return_data = set_return_data(recomended_hotel)
 
+# -------------------------
 
+def get_recomended_hotel(hotel_info_df, hotel_review_df, user_input):
+    
+    # hotel_review.csv 파일 내 column 변경 (나중에 제거 필요)
+    hotel_review_df.rename(columns = {'hotel_index' : 'hotel_id'}, inplace=True)
 
+    # 모델을 로드 하고 로드 실패시 새로 생성
+    try: 
+        d2v_model = Doc2Vec.load('./AI/models/d2v.model')
 
+    except Exception as e:
+        print(e)
+        tagged_corpus_list = tag_corpus(hotel_review_df)
+        # 너무 길거나 짧은 리뷰 제거
+        filtered_tagged_corpus_list = [x for x in tagged_corpus_list if (len(x[0]) >= 5) and (len(x[0]) <= 100)]
+
+        d2v_model = make_model(tagged_corpus_list)
+
+    most_similar_docs = make_similar_docs(d2v_model, user_input)
+    recomended_hotel = recomend_hotel(most_similar_docs)
+
+    # recomended_hotel을 백엔드에 전달하기 위해 변환
+    return_data = set_return_data(recomended_hotel)
+    show_recomended_hotel(hotel_info_df, hotel_review_df, return_data)
+
+    return return_data
