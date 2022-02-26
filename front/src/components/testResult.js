@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
-import { userState, tokenState } from "state/atom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { searchDataState, searchResultState, testState } from "state/atom";
+
 import { useEffect } from "react";
 
 import { Loading, Loading2 } from "components/Loading";
