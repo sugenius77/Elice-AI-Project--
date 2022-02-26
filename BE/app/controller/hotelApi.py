@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_restx import Resource, Namespace, abort
+from sqlalchemy import func
 from app.dto.hotelDto import HotelDto
 from app import db
-from app.models.model import HotelInfo
+from app.models.model import HotelInfo, Review
 
 hotel_api = HotelDto.api
 
@@ -23,7 +24,7 @@ class HelloApi(Resource):
     @hotel_api.marshal_with(HotelDto.recoHotel_list_model, envelope="data")
     @hotel_api.expect(hotelParser)
     def get(self):
-        '''호텔 추천 데이터 
+        '''호텔 추천 데이터
         '''
         args = hotelParser.parse_args()
         region = args['region']
@@ -35,23 +36,26 @@ class HelloApi(Resource):
             f'region={region}, search={search}')
 
         similarity_list = [
-            {'hotel_id': 0,
+            {'hotel_id': 1,
              'review_id': (1556, 363, 2360, 11605)},
             {'hotel_id': 273,
              'review_id': (41, 2120, 3711, 222)}
         ]
 
-        #hotel_list = db.session.query(HotelInfo).all()
+        hotels = list(map(hotelval, similarity_list))
+        print(hotels)
+
+        # hotel_list = db.session.query(HotelInfo).all()
         hotel_list = [
             {
-                'hotel_id': 0,
+                'hotel_id': 1,
                 'hotel_name': '테스트 호텔1',
                 'region': '제주',
                 'hotel_url': 'www.test.com',
                 'hotel_img_url': 'https://t-cf.bstatic.com/xdata/images/hotel/square600/331600864.webp?k=3436f6e2fadf753e9d51cdd3554864f07a45bc0702d9c40fc6039b03e8fb12f3&o=&s=1',
                 'reviews': [
 
-                    {'review_id': 0,
+                    {'review_id': 10,
                      'contents': '바다뷰가 좋아요',
                      'review_date': '2022-02'},
                     {'review_id': 1,
@@ -67,7 +71,7 @@ class HelloApi(Resource):
                 ]
             },
             {
-                'hotel_id': 1,
+                'hotel_id': 2,
                 'hotel_name': '테스트 호텔2',
                 'region': '제주',
                 'hotel_url': 'www.test2.com',
@@ -88,4 +92,22 @@ class HelloApi(Resource):
             }
         ]
 
-        return hotel_list
+        return hotels
+
+
+def hotelval(x):
+    print(x['hotel_id'])
+    hotels = {}
+    for u in db.session.query(HotelInfo).filter(HotelInfo.hotel_id == x['hotel_id']).all():
+        print(u)
+        hotels = u.__dict__
+
+    reviews = list(map(reviewval, x['review_id']))
+    hotels['reviews'] = reviews
+    res = hotels
+    return res
+
+
+def reviewval(y):
+
+    return db.session.query(Review.review_id, Review.is_positive, Review.hotel_id, Review.contents, func.date_format(Review.review_date, '%Y-%m').label('review_date')).filter(Review.review_id == y).all()
