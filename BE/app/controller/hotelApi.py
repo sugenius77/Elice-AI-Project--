@@ -1,9 +1,12 @@
 from flask import Flask
 from flask_restx import Resource, Namespace, abort
 from sqlalchemy import func
+import pandas as pd
+
 from app.dto.hotelDto import HotelDto
 from app import db
 from app.models.model import HotelInfo, Review
+from app.service import recomend_hotel
 
 hotel_api = HotelDto.api
 
@@ -35,15 +38,25 @@ class HelloApi(Resource):
         print(
             f'region={region}, search={search}')
 
-        similarity_list = [
-            {'hotel_id': 1,
-             'review_id': (1556, 363, 2360, 11605)},
-            {'hotel_id': 273,
-             'review_id': (41, 2120, 3711, 222)}
-        ]
+        # similarity_list = [
+        #     {'hotel_id': 1,
+        #      'review_id': (1556, 363, 2360, 11605)},
+        #     {'hotel_id': 273,
+        #      'review_id': (41, 2120, 3711, 222)}
+        # ]
+
+        #hotel_info_df = pd.DataFrame(db.session.query(HotelInfo).filter(HotelInfo.region == region), columns=['hotel_id', 'hotel_name', 'region', 'hotel_url', 'hotel_img_url'])
+        #hotel_review_df = pd.DataFrame(db.session.query(Review), columns=['review_id', 'contents', 'hotel_id', 'review_date', 'is_positive'])
+        hotel_info_df = pd.read_sql(db.session.query(HotelInfo).filter(
+            HotelInfo.region == region).statement, db.session.bind)
+
+        hotel_review_df = pd.read_sql(
+            db.session.query(Review).join(HotelInfo, Review.hotel_id == HotelInfo.hotel_id).filter(HotelInfo.region == region).statement, db.session.bind)
+
+        similarity_list = recomend_hotel.get_recomended_hotel(
+            hotel_info_df, hotel_review_df, search)
 
         hotels = list(map(hotelval, similarity_list))
-        print(hotels)
 
         # hotel_list = db.session.query(HotelInfo).all()
         hotel_list = [
@@ -96,10 +109,9 @@ class HelloApi(Resource):
 
 
 def hotelval(x):
-    print(x['hotel_id'])
+
     hotels = {}
     for u in db.session.query(HotelInfo).filter(HotelInfo.hotel_id == x['hotel_id']).all():
-        print(u)
         hotels = u.__dict__
 
     reviews = list(map(reviewval, x['review_id']))
