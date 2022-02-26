@@ -1,29 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Links } from "./Link";
+import { useDebounce } from "use-debounce";
 
-import { useRecoilState } from "recoil";
-import { searchResultState } from "state/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { testState, searchDataState } from "state/atom";
+import LocalBtn from "./LocalBtn";
 
 const SearchBox = () => {
-    const [results, setResults] = useRecoilState(searchResultState);
-    console.log("recoil 값은= =>>>", results);
-    const [text, setText] = useState("hotels");
+    const [results, setResults] = useRecoilState(testState);
+    console.log("recoil 값은 ===>", results);
+    const [searchData, setSearchData] = useRecoilState(searchDataState);
 
-    // const [debouncedValue] = useDebounce(text, 300);
+    const [text, setText] = useState("바다뷰");
+    const [selectLocal, setSelectLocal] = useState(["전체"]);
 
-    const filterdSearchValue = results.filter((result) => {
-        return result.includes(text);
-    });
+    const [search] = useDebounce(text, 300);
+    const [region] = useDebounce(selectLocal, 300);
+
+    useEffect(() => {
+        if (search) setSearchData({ region, search });
+        console.log(searchData);
+    }, [search]);
+
+    const filteredSearchValue = results.filter((result) => {
+        return result.review.includes(text);
+    }); //TODO  실제 API 데이터 들어오면 삭제 되어야함
+
+    useEffect(() => {
+        console.log(selectLocal);
+    }, [selectLocal]);
 
     return (
         <div className="flex justify-center md:mx-5 mx-32 shadow-2xl bg-gray-50 items-center rounded-lg">
             <div className="py-10">
-                <div className=" flex justify-center w-96 border rounded-full  shadow-sm hover:shadow-lg">
+                <LocalBtn
+                    isProperty={selectLocal}
+                    setIsProperty={setSelectLocal}
+                />
+                <div className=" flex justify-center w-96 md:w-80 border rounded-full shadow-sm hover:shadow-lg">
                     <input
                         value={text}
                         type="text"
-                        className="sm:w-96 w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full outline-none p-6  focus:underline text-black  flex mr-2 "
-                        placeholder="🔎 Search Google or type URL"
+                        className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full outline-none p-6  focus:underline text-black  flex mr-2 "
+                        placeholder="🔎 Search Hotel's Keyword in Reviews"
                         onChange={(e) => setText(e.target.value)}
                     />
                     <button type="submit"></button>
@@ -38,18 +57,8 @@ const SearchBox = () => {
                     )}
                 </div>
 
-                <Links />
+                {/* <Links /> */}
                 <hr className="mt-5" />
-
-                {text.length > 2 ? (
-                    <ul>
-                        {filterdSearchValue.map((result) => {
-                            return <li key={result}> {result} </li>;
-                        })}
-                    </ul>
-                ) : (
-                    ""
-                )}
             </div>
         </div>
     );
