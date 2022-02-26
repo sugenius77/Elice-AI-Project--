@@ -12,3 +12,9 @@ CREATE TABLE hotel_info(
   hotel_url VARCHAR(2048) COMMENT '호텔 url',
   hotel_img_url VARCHAR(2048) COMMENT '호텔 이미지 url'
 ) DEFAULT CHARSET UTF8 COMMENT '호텔정보 테이블';
+
+CREATE TABLE user_info(
+  user_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '고객 index PK',
+  name text DEFAULT NULL COMMENT '고객 이름',
+  email text DEFAULT NULL COMMENT '고객 이메일',
+) DEFAULT CHARSET UTF8 COMMENT '고객 정보 테이블';
