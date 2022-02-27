@@ -37,15 +37,23 @@ const Header = () => {
                 className={`flex justify-between bg-theme items-center p-2 shadow-lg `}
             >
                 <div className="flex justify-between w-full">
-                    <Link to="/" className="text-4xl font-semibold mb-2">
+                    <Link
+                        to="/"
+                        className="text-4xl font-semibold font-doogle mb-2"
+                    >
                         H O T E L S
                     </Link>
                 </div>
                 <div className="flex items-center">
                     {userInfo.name ? (
                         <>
-                            <li className="list-none mx-2 p-1">
+                            <li className="list-none mx-2 p-1 cursor-pointer">
                                 <SLink to="1" spy={true} smooth={true} key="1">
+                                    Home
+                                </SLink>
+                            </li>
+                            <li className="list-none mx-2 p-1 cursor-pointer">
+                                <SLink to="2" spy={true} smooth={true} key="2">
                                     Search
                                 </SLink>
                             </li>
@@ -57,8 +65,9 @@ const Header = () => {
                                         className="flex z-10 items-center border-transparent rounded-full focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white cursor-not-allowe"
                                     >
                                         <img
-                                            className="flex  max-w-md h-10 w-10 rounded-full ring-3"
+                                            className="flex text-black max-w-md h-10 w-10 rounded-full ring-3"
                                             src={userInfo.picture}
+                                            alt="google-login"
                                         />
                                     </button>
                                     {showMenu && (
@@ -66,7 +75,7 @@ const Header = () => {
                                             onClick={handleMenuClose}
                                             className="w-full h-full inset-0 absolute"
                                         >
-                                            <div className="absolute top-12 right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
+                                            <div className="absolute top-12 text-black right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
                                                 <div className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 ">
                                                     <div className="mx-1">
                                                         <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
