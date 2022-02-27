@@ -78,8 +78,6 @@ def recomend_hotel(region, most_similar_docs):
             count_pass_hotel = len(
                 similar_review_hotel[similar_review_hotel['count'] >= number_review])
 
-            print(count_pass_hotel)
-
             if count_pass_hotel >= number_top:
                 break
 
