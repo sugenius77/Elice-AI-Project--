@@ -51,8 +51,10 @@ const HotelCard = ({ h }) => {
                                             <p className="text-3xl inline-block">
                                                 “
                                             </p>{" "}
-                                            <p className="text-center text-sm font-doggle">
-                                                {review[0].contents}
+                                            <p className="text-center text-sm font-reviewsFont">
+                                                {review[0]
+                                                    ? review[0].contents
+                                                    : ""}
                                             </p>{" "}
                                             <p className="text-3xl inline-block float-right pr-3">
                                                 ”
@@ -68,9 +70,9 @@ const HotelCard = ({ h }) => {
                             href={h.hotel_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-3/4"
+                            className="w-40"
                         >
-                            <button className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-yellow-500 hover:bg-yellow-700 w-3/5 md:w-3/4">
+                            <button className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-yellow-500 hover:bg-yellow-700 w-40 md:w-40">
                                 예약
                             </button>
                         </a>
