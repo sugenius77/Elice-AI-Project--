@@ -31,3 +31,16 @@ class Review(db.Model):
         self.contents = contents
         self.hotel_id = hotel_id
         self.is_positive = is_positive
+
+class UserInfo(db.Model):
+    __tablename__ = "user_info"
+    user_id = db.Column(db.Integer, primary_key=True,
+                         nullable=False, autoincrement=True)
+    name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
+
+    def __init__(self, user_id, name, email):
+        self.user_id = user_id
+        self.name = name
+        self.email = email
+        
