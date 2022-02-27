@@ -45,17 +45,18 @@ const HotelCard = ({ h }) => {
                                 >
                                     {h.reviews.map((review) => (
                                         <SwiperSlide
-                                            key={review.hotel_id}
+                                            key={review.review_id}
                                             className=" pr-5 h-52"
                                         >
                                             <p className="text-3xl inline-block">
                                                 “
                                             </p>{" "}
                                             <p className="text-center text-sm font-reviewsFont">
-                                                {review[0]
-                                                    ? review[0].contents
-                                                    : ""}
+                                                {review.contents}
                                             </p>{" "}
+                                            <p className="text-sm text-center mt-3">
+                                                {review.review_date.slice(0, 7)}
+                                            </p>
                                             <p className="text-3xl inline-block float-right pr-3">
                                                 ”
                                             </p>
