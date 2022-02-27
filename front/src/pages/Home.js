@@ -16,9 +16,9 @@ const Home = () => {
     return (
         <Layout id="1">
             <div className="min-h-screen bg-hero bg-cover bg-center">
-                <div className="md:text-center items-center pt-24 pl-16 md:pl-0 justify-center">
-                    <h1 className="text-2xl md:text-xl pt-20 md:mt-0 mb-10 font-bold text-white text-doogle">
-                        서비스 소개페이지
+                <div className="md:text-center items-center pt-36 pl-16 md:pl-0 justify-center">
+                    <h1 className=" text-5xl md:text-xl pt-20  md:mt-0 mb-10 font-bold text-white text-doogle">
+                        키보드로 소문난 호텔
                     </h1>
                     <Link
                         to="2"
