@@ -26,12 +26,13 @@ def cleansing(document):
     return cleansed_doc
 
 
-# review_list를 가져와서 명사만 추출한 후 tag(region, hotel_id)와 함께 tagged_corpus_list에 저장
+# review_list를 가져와서 형태소 추출 후 tag(region, hotel_id)와 함께 tagged_corpus_list에 저장
 def tag_corpus(hotel_info_df, hotel_review_df):
+    positive_hotel_review_df = hotel_review_df[hotel_review_df['label'] == 1]
     reindex_hotel_info_df = hotel_info_df.set_index('hotel_id')
     tagged_corpus_list = []
 
-    for df in hotel_review_df.itertuples():
+    for df in positive_hotel_review_df.itertuples():
         index = df.Index
         review_id = df.review_id
         hotel_id = df.hotel_id
@@ -69,7 +70,7 @@ def make_model(tagged_corpus_list):
 
 
 def save_model(hotel_info_df, hotel_review_df):
-    hotel_review_df = hotel_review_df[hotel_review_df['initial_label'] == 1]
+    
     tagged_corpus_list = tag_corpus(hotel_info_df, hotel_review_df)
     # 너무 길거나 짧은 리뷰 제거
     filtered_tagged_corpus_list = [x for x in tagged_corpus_list if (
