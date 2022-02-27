@@ -53,31 +53,39 @@ def recomend_hotel(region, most_similar_docs):
     number_review = 4
 
     # similarity가 높은 순서대로 저장
-    similar_review_hotel = pd.DataFrame(columns=['region', 'review_id', 'similarity', 'score', 'count'], dtype='object')
+    similar_review_hotel = pd.DataFrame(
+        columns=['region', 'review_id', 'similarity', 'score', 'count'], dtype='object')
 
     for review, similarity in most_similar_docs:
         city, hotel_id, review_id = review.split("@")
 
         if city in region:
             if hotel_id not in similar_review_hotel.index:
-                similar_review_hotel.loc[hotel_id] = [city, [review_id], [similarity], similarity, 1]
-            
-            elif similar_review_hotel.loc[hotel_id, 'count'] < number_review:
-                    similar_review_hotel.loc[hotel_id, 'review_id'].append(review_id)
-                    similar_review_hotel.loc[hotel_id, 'similarity'].append(similarity)
-                    similar_review_hotel.loc[hotel_id, 'score'] += similarity
-                    similar_review_hotel.loc[hotel_id, 'count'] += 1
-            
-            elif similar_review_hotel.loc[hotel_id, 'count'] >= number_review:
-                pass  
+                similar_review_hotel.loc[hotel_id] = [
+                    city, [review_id], [similarity], similarity, 1]
 
-        count_pass_hotel = similar_review_hotel.apply(lambda x: True if x['count'] >= number_review else False, axis=1).sum()
-        
-        if count_pass_hotel >= number_top:
-            break
+            elif similar_review_hotel.loc[hotel_id, 'count'] < number_review:
+                similar_review_hotel.loc[hotel_id,
+                                         'review_id'].append(review_id)
+                similar_review_hotel.loc[hotel_id,
+                                         'similarity'].append(similarity)
+                similar_review_hotel.loc[hotel_id, 'score'] += similarity
+                similar_review_hotel.loc[hotel_id, 'count'] += 1
+
+            elif similar_review_hotel.loc[hotel_id, 'count'] >= number_review:
+                pass
+
+            count_pass_hotel = len(
+                similar_review_hotel[similar_review_hotel['count'] >= number_review])
+
+            print(count_pass_hotel)
+
+            if count_pass_hotel >= number_top:
+                break
 
     # 호텔들을 similar_review list가 많은 순서대로 정렬
-    recomended_hotel = similar_review_hotel.sort_values('score', ascending=False)
+    recomended_hotel = similar_review_hotel.sort_values(
+        'score', ascending=False)
 
     return recomended_hotel
 
@@ -124,18 +132,18 @@ def get_recomended_hotel(region, user_input):
     # 모델을 로드 하고 로드 실패시 새로 생성
     try:
         print(os.getcwd())
-        d2v_model = Doc2Vec.load('./AI/models/d2v.model')
-        
+        d2v_model = Doc2Vec.load('../AI/models/d2v.model')
+
     except Exception as e:
         print(e)
-    
+
     most_similar_docs = make_similar_docs(d2v_model, user_input)
-    
+
     recomended_hotel = recomend_hotel(region, most_similar_docs)
-    
+
     # recomended_hotel을 백엔드에 전달하기 위해 변환
     return_data = set_return_data(recomended_hotel)
-    
-    #show_recomended_hotel(hotel_info_df, hotel_review_df, return_data) DB변화 후 에러로 주석
+
+    # show_recomended_hotel(hotel_info_df, hotel_review_df, return_data) DB변화 후 에러로 주석
 
     return return_data
