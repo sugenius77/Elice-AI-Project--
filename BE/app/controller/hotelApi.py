@@ -55,7 +55,7 @@ class HelloApi(Resource):
         print(region_list)
         similarity_list = recomend_hotel.get_recomended_hotel(
             region_list, search)
-
+        print(similarity_list)
         hotel_list = list(map(hotelval, similarity_list))
 
         return hotel_list
@@ -68,6 +68,7 @@ def hotelval(x):
         hotels = u.__dict__
 
     reviews = list(map(reviewval, x['review_id']))
+
     hotels['reviews'] = reviews
     res = hotels
     return res
@@ -75,4 +76,5 @@ def hotelval(x):
 
 def reviewval(y):
 
-    return db.session.query(Review.review_id, Review.is_positive, Review.hotel_id, Review.contents, func.date_format(Review.review_date, '%Y-%m').label('review_date')).filter(Review.review_id == y).all()
+    return db.session.query(Review.review_id, Review.is_positive, Review.hotel_id, Review.contents, func.date_format(
+        Review.review_date, '%Y-%m').label('review_date')).filter(Review.review_id == y).first()
