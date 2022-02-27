@@ -15,6 +15,7 @@ module.exports = {
             },
             fontFamily: {
                 doogle: ["Source Sans Pro", "sans-serif"],
+                reviewsFont: ["Sunflower", "sans-serif"],
             },
         },
         screens: {
