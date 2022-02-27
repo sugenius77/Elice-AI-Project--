@@ -32,7 +32,7 @@ const HotelCard = ({ h }) => {
                             <span className="text-sm text-gray-400">
                                 // {h.region}
                             </span>
-                            <div className="h-40 w-full">
+                            <div className="h-52 w-full mt-3">
                                 <Swiper
                                     direction={"vertical"}
                                     loop={true}
@@ -41,18 +41,25 @@ const HotelCard = ({ h }) => {
                                     }}
                                     // navigation={true}
                                     modules={[Navigation, Pagination]}
-                                    className="mySwiper w-full h-full"
+                                    className="mySwiper w-full h-40"
                                 >
                                     {h.reviews.map((review) => (
                                         <SwiperSlide
                                             key={review.review_id}
-                                            className="text-xl mt-3 md:pr-3"
+                                            className=" pr-5 h-52"
                                         >
-                                            <span className="text-3xl">“</span>{" "}
-                                            <span className="">
+                                            <p className="text-3xl inline-block">
+                                                “
+                                            </p>{" "}
+                                            <p className="text-center text-sm font-reviewsFont">
                                                 {review.contents}
-                                            </span>{" "}
-                                            <span className="text-3xl">”</span>
+                                            </p>{" "}
+                                            <p className="text-sm text-center mt-3">
+                                                {review.review_date.slice(0, 7)}
+                                            </p>
+                                            <p className="text-3xl inline-block float-right pr-3">
+                                                ”
+                                            </p>
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
@@ -60,9 +67,16 @@ const HotelCard = ({ h }) => {
                         </div>
                     </div>
                     <div className="flex w-full justify-center items-center mt-4">
-                        <button className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-yellow-500 hover:bg-yellow-700 w-3/5 md:w-3/4">
-                            바로가기
-                        </button>
+                        <a
+                            href={h.hotel_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-40"
+                        >
+                            <button className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-yellow-500 hover:bg-yellow-700 w-40 md:w-40">
+                                예약
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>

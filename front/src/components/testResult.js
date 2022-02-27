@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
-import { userState, tokenState } from "state/atom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { searchDataState, searchResultState, testState } from "state/atom";
+
 import { useEffect } from "react";
 
 import { Loading, Loading2 } from "components/Loading";
 import axios from "axios";
+import { hotelSearch } from "action/HotelSearch";
 
 const TestResult = () => {
     const [itemList, setItemList] = useState([
@@ -19,15 +21,16 @@ const TestResult = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [apiLoading, setApiIsLoading] = useState(false);
+    const [searchData, setSearchData] = useRecoilState(searchDataState);
 
     useEffect(() => {
         async function loadData() {
             setApiIsLoading(true);
             try {
-                const response = await axios.get(
-                    `https://yts.mx/api/v2/list_movies.json?minimum_rating=8&sort_by=year`
-                );
-                setMovies(response.data.data.movies);
+                const locals = searchData.region.join("|");
+                console.log(locals);
+                const response = await hotelSearch(searchData, locals);
+                setMovies(response.data.data);
                 setData(response.data.data.movies.slice(0, 5));
 
                 console.log("get api");

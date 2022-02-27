@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const hotelSearch = async (searchData, locals) =>
     await axios.get(
-        `${process.env.REACT_APP_API}region=${locals}&search=${searchData.search}`
+        `${process.env.REACT_APP_API}/hotel/recommendHotelList?region=${locals}&search=${searchData.search}`
     );
 
 export const hotelDetail = async (_id) =>
