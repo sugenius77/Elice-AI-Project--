@@ -4,21 +4,21 @@ import { Link as SLink } from "react-scroll";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "state/atom";
 const menuItems = [
-    {
-        title: "Home",
-        key: "/",
-        index: 1,
-    },
-    {
-        title: "Search",
-        key: "/Search",
-        index: 2,
-    },
-    {
-        title: "Login",
-        key: "/callback",
-        index: 3,
-    },
+  {
+    title: "Home",
+    key: "/",
+    index: 1,
+  },
+  {
+    title: "Search",
+    key: "/Search",
+    index: 2,
+  },
+  {
+    title: "Login",
+    key: "/callback",
+    index: 3,
+  },
 ];
 
 const Header = () => {
@@ -176,11 +176,11 @@ const Header = () => {
                                 );
                             }
                             <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -207,9 +207,64 @@ const Header = () => {
                         })
                     )}
                 </div>
-            </div>
+              </li>
+            </>
+          ) : (
+            menuItems.map((item) => {
+              if (item.index === 3) {
+                return (
+                  <li
+                    className="list-none mx-2 p-1 cursor-pointer"
+                    onClick={() =>
+                      (window.location.href =
+                        "https://accounts.google.com/o/oauth2/v2/auth?" +
+                        "client_id=" +
+                        "944228758716-ik6sa442kp2ielcg2pqbi5npocgqkq1n.apps.googleusercontent.com" +
+                        "&response_type=token" +
+                        //"&access_type=offline" +
+                        "&redirect_uri=http://localhost:3000/&" +
+                        "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.title}
+                  </li>
+                );
+              }
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>;
+              return (
+                <li className="list-none mx-2 p-1">
+                  <SLink
+                    to={item.index}
+                    spy={true}
+                    smooth={true}
+                    key={item.index}
+                    className="cursor-pointer"
+                  >
+                    {item.title}
+                  </SLink>
+                </li>
+              );
+            })
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Header;
