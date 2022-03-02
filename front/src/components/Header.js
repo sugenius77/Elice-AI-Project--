@@ -78,7 +78,7 @@ const Header = () => {
                                     <button
                                         onClick={handleMenuToggle}
                                         type="button"
-                                        className="flex z-10 items-center border-transparent rounded-full focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white cursor-not-allowe"
+                                        className="flex z-10 items-center border-transparent rounded-full focus:border-blue-500 focus:ring-opacity-40  focus:ring-blue-300 "
                                     >
                                         <img
                                             className="flex text-black max-w-md h-10 w-10 rounded-full ring-3"
