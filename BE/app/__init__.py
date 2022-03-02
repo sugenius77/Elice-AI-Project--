@@ -29,6 +29,8 @@ def create_app():
     from app.controller.test import test_api, hello_api
     from app.controller.hotelApi import hotel_api
     from app.controller.userApi import user_api
+    from app.controller.wishListApi import wish_list_api
+    
     api = Api(
         app,
         version="0.1.0",
@@ -41,4 +43,5 @@ def create_app():
     api.add_namespace(test_api)
     api.add_namespace(hotel_api)
     api.add_namespace(user_api)
+    api.add_namespace(wish_list_api)
     return app
