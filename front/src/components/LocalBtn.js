@@ -25,10 +25,11 @@ const LocalBtn = ({ isProperty, setIsProperty }) => {
                 return (
                     <input
                         type="button"
+                        key={local}
                         value={local}
                         onClick={handlePropertyBtn}
                         // Clicked={isProperty.find((e) => e === { local })}
-                        className={`text-sm border rounded-2xl p-2 cursor-pointer shadow-sm ${
+                        className={` text-sm border rounded-2xl p-2 cursor-pointer shadow-sm ${
                             isProperty.includes(local) &&
                             "bg-point shadow text-white"
                         } `}
