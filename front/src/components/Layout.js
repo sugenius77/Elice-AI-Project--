@@ -4,7 +4,9 @@ import Footer from "components/Footer";
 const Layout = ({ children, id }) => {
     return (
         <div id={id}>
-            <div className="content overflow-x-hidden">{children}</div>
+            <div className="content overflow-x-hidden font-doogle bg-primary">
+                {children}
+            </div>
             <Footer />
         </div>
     );

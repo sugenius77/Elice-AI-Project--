@@ -1,9 +1,9 @@
 import { atom, selector } from "recoil";
 
 export const LoginState = atom({
-  key: "LoginState",
-  default: { name: "Ryan", role: "Seller" },
-  dangerouslyAllowMutability: true,
+    key: "LoginState",
+    default: { name: "Ryan", role: "Seller" },
+    dangerouslyAllowMutability: true,
 });
 
 export const testState = atom({
@@ -62,22 +62,21 @@ export const testState = atom({
 });
 
 export const searchResultState = atom({
-  key: "searchResultState",
-  default: ["desktop", "notebook", "smart phone", "clock", "chair", "iPad"],
-  dangerouslyAllowMutability: true,
+    key: "searchResultState",
+    default: ["desktop", "notebook", "smart phone", "clock", "chair", "iPad"],
+    dangerouslyAllowMutability: true,
 });
 
 export const userInfoState = atom({
-  key: "userInfo",
-  default: {},
-  dangerouslyAllowMutability: true,
+    key: "userInfo",
+    default: {},
+    dangerouslyAllowMutability: true,
 });
 
 export const tokenState = atom({
-  key: "tokenState",
-  default: "",
-    key: "searchResultState",
-    default: [],
+    key: "tokenState",
+    default: "",
+
     dangerouslyAllowMutability: true,
 });
 
