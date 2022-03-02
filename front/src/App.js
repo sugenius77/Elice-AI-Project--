@@ -28,7 +28,7 @@ function App() {
                 handleUserInfoChange(res);
                 window.history.replaceState({}, null, "/");
                 await axios.post(
-                    `${process.env.REACT_APP_API}/user_info/info`,
+                    `${process.env.REACT_APP_API}/user_info/info`, // 'http://111.67.218.42:1234'
                     { name: res.name, email: res.email },
                     {
                         headers: {
