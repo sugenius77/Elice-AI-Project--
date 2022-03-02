@@ -4,8 +4,8 @@ from flask_restx import Namespace, fields
 
 class HotelDto:
     api = Namespace("hotel", description="호텔관련 api입니다.")
-    hotel_info_model = api.model(
-        "hotel_info_model",
+    hotel_model = api.model(
+        "hotel_model",
         {
             "hotel_id": fields.Integer(readonly=True, description='호텔 id'),
             "hotel_name": fields.String(readonly=False, description='호텔 이름'),
