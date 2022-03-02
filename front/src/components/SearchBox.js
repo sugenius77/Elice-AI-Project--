@@ -37,7 +37,7 @@ const SearchBox = () => {
                     <input
                         value={text}
                         type="text"
-                        className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full focus:outline-none p-6 focus:caret-point text-black flex mr-2 "
+                        className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full focus:outline-none p-6 focus:caret-point text-black flex mr-2 focus:scale-150 focus:mt-3 focus:ml-10 duration-100 focus:ring focus:ring-headerColor "
                         placeholder="🔎 Search Hotel's Keyword in Reviews"
                         onChange={(e) => setText(e.target.value)}
                     />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,9 +8,11 @@ import "swiper/css/navigation";
 import { Pagination } from "swiper";
 
 import "swiper/css";
+import HeartButton from "components/HeartButton";
 
 const HotelCard = ({ h }) => {
     const history = useHistory();
+
     return (
         <>
             <div className="mb-3">
@@ -86,8 +88,9 @@ const HotelCard = ({ h }) => {
                         </div>
                     </div>
                     <div className="flex w-full justify-center items-center md:mt-4">
+                        <HeartButton />
                         <button
-                            className="btn py-2 px-4 font-semibold items-center outline-none border-0 rounded-lg shadow-md text-white bg-[#5282a7] hover:bg-[#1c69a5] w-2/5 md:w-40"
+                            className="btn py-2 px-4 font-semibold items-center outline-none border-0  shadow-md text-white bg-[#5282a7] hover:bg-[#1c69a5] w-2/5 md:w-40"
                             onClick={() => window.open(h.hotel_url, "_blank")}
                         >
                             예약

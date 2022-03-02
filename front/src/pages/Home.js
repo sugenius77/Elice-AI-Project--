@@ -29,7 +29,7 @@ const Home = () => {
             <div className="min-h-screen md:bg-hero md:bg-cover md:bg-center">
                 <div className="md:text-center md:w-full relative items-center pt-36 pl-16 md:pl-0 justify-center w-fit flex-col">
                     <h1 className=" text-5xl md:text-xl pt-20  md:mt-0 mb-10 font-bold text-white text-reviewsFont">
-                        키보드로 소문난 호텔
+                        <b>키보드</b>로 소문난 호텔
                     </h1>
                     <div className="flex justify-center">
                         <Link
@@ -46,7 +46,7 @@ const Home = () => {
 
             <div id="2" className=" w-full pt-20 bg-primary">
                 <h1 className="text-4xl text-center m-5 font-semibold text-fontcolor">
-                    키보드로 소문난 호텔
+                    <b data-aos="slide-left">키보드</b>로 소문난 호텔
                 </h1>
                 <h1 className="text-4xl text-center">⌨</h1>
                 <SearchBox />
