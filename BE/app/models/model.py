@@ -33,10 +33,11 @@ class Review(db.Model):
         self.is_positive = is_positive
 
 
-class UserInfo(db.Model):
-    __tablename__ = "user_info"
-    user_id = db.Column(db.Integer, primary_key=True,
-                        nullable=False, autoincrement=True)
+
+class User(db.Model):
+    __tablename__ = "user"
+    user_id = db.Column(db.String, primary_key=True,
+                         nullable=False)
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
 
@@ -44,3 +45,16 @@ class UserInfo(db.Model):
         self.user_id = user_id
         self.name = name
         self.email = email
+        
+class WishList(db.Model):
+    __tablename__ = "wish_list"
+    id = db.Column(db.Integer, primary_key=True,
+                         nullable=False)
+    user_id = db.Column(db.String,
+                         nullable=False)
+    hotel_id = db.Column(db.Integer, 
+                         nullable=False )
+    def __init__(self,id, user_id, hotel_id):
+        self.id = id
+        self.user_id = user_id
+        self.hotel_id = hotel_id
