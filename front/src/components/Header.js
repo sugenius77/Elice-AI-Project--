@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Link as SLink } from "react-scroll";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "state/atom";
@@ -22,6 +22,10 @@ const menuItems = [
 ];
 
 const Header = () => {
+    const location = useLocation();
+    const pathname = location.pathname.slice(0, 6);
+    console.log("pathname is header", pathname);
+
     const [userInfo, setUserInfo] = useRecoilState(userInfoState);
     const [showMenu, setShowMenu] = useState(false);
     const handleMenuToggle = () => {
@@ -32,27 +36,39 @@ const Header = () => {
     };
 
     return (
-        <div className="font-doogle text-white fixed top-0 left-0 right-0 w-full z-50">
+        <div className="font-doogle text-headerColor fixed top-0 left-0 right-0 w-full z-50">
             <div
                 className={`flex justify-between bg-theme items-center p-2 shadow-lg `}
             >
                 <div className="flex justify-between w-full">
-                    <Link
-                        to="/"
-                        className="text-4xl font-semibold font-doogle mb-2"
-                    >
-                        H O T E L S
-                    </Link>
+                    {pathname !== "/hotel" ? (
+                        <SLink
+                            to="1"
+                            spy={true}
+                            smooth={true}
+                            key="1"
+                            className="text-4xl font-semibold font-doogle mb-2 cursor-pointer"
+                        >
+                            H O T E L S
+                        </SLink>
+                    ) : (
+                        <Link
+                            to="/"
+                            className="text-4xl font-semibold font-doogle mb-2"
+                        >
+                            H O T E L S
+                        </Link>
+                    )}
                 </div>
                 <div className="flex items-center">
                     {userInfo.name ? (
                         <>
-                            <li className="list-none mx-2 p-1 cursor-pointer">
+                            <li className="list-none mx-2 p-1 cursor-pointer font-doogle hover:scale-105 duration-150">
                                 <SLink to="1" spy={true} smooth={true} key="1">
                                     Home
                                 </SLink>
                             </li>
-                            <li className="list-none mx-2 p-1 cursor-pointer">
+                            <li className="list-none mx-2 p-1 cursor-pointer font-reviewsFont hover:scale-105 duration-150">
                                 <SLink to="2" spy={true} smooth={true} key="2">
                                     Search
                                 </SLink>
@@ -87,7 +103,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <a
-                                                    className="flex items-center px-3 py-3 cursor-pointer hover:bg-gray-600 font-light text-sm focus:outline-none"
+                                                    className="flex items-center px-3 py-3 cursor-pointer hover:bg-gray-600 hover:text-white font-light text-sm focus:outline-none"
                                                     href="/likes"
                                                 >
                                                     <div className="mr-2">
@@ -107,7 +123,7 @@ const Header = () => {
                                                     My Favorite
                                                 </a>
                                                 <div
-                                                    className="flex items-center px-3 py-3 cursor-pointer hover:bg-gray-600 font-light text-sm focus:outline-none"
+                                                    className="flex items-center px-3 py-3 cursor-pointer hover:bg-gray-600 hover:text-white font-light text-sm focus:outline-none"
                                                     onClick={() => {
                                                         setUserInfo({});
                                                         localStorage.clear();
@@ -143,7 +159,7 @@ const Header = () => {
                             if (item.index === 3) {
                                 return (
                                     <li
-                                        className="list-none mx-2 p-1 cursor-pointer"
+                                        className="list-none mx-2 p-1 cursor-pointer hover:scale-105 duration-150"
                                         onClick={() =>
                                             (window.location.href =
                                                 "https://accounts.google.com/o/oauth2/v2/auth?" +
@@ -154,8 +170,6 @@ const Header = () => {
                                                 "&redirect_uri=http://localhost:3000/&" +
                                                 "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                                         }
-                                        target="_blank"
-                                        rel="noopener noreferrer"
                                     >
                                         {item.title}
                                     </li>
@@ -176,16 +190,18 @@ const Header = () => {
                                 />
                             </svg>;
                             return (
-                                <li className="list-none mx-2 p-1">
-                                    <SLink
-                                        to={item.index}
-                                        spy={true}
-                                        smooth={true}
-                                        key={item.index}
-                                        className="cursor-pointer"
-                                    >
-                                        {item.title}
-                                    </SLink>
+                                <li className="list-none mx-2 p-1 hover:scale-105 duration-150">
+                                    {pathname !== "/hotel" ? (
+                                        <SLink
+                                            to={item.index}
+                                            spy={true}
+                                            smooth={true}
+                                            key={item.index}
+                                            className="cursor-pointer "
+                                        >
+                                            {item.title}
+                                        </SLink>
+                                    ) : null}
                                 </li>
                             );
                         })
