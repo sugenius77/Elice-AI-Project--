@@ -110,7 +110,7 @@ def set_return_data(recomended_hotel):
 
 # -------------------------
 
-def get_recomended_hotel(region, user_input, model_name='base_d2v'):
+def get_recomended_hotel(region, user_input, model_name='d2v'):
 
     # 모델을 로드 하고 로드 실패시 새로 생성
     try:
