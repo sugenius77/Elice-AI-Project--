@@ -66,7 +66,7 @@ def make_model(model_name, tagged_corpus_list, window, min_count, epochs):
     d2v_model.train(tagged_corpus_list,
                     total_examples=d2v_model.corpus_count, epochs=epochs)
     # 저장
-    d2v_model.save(f'../AI/models/{model_name}.model')
+    d2v_model.save(f'./AI/models/{model_name}.model')
     print(f'{model_name} save success')
     return model_name
 
