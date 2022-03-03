@@ -163,9 +163,7 @@ if __name__ == '__main__':
     ## 모델 생성 -----
     # 테스트 할 변수 선택 : 1(리뷰 시작일), 2(품사), 3(토큰 길이), 4(window), 5(min_count), 6(epochs), 7(custom)
     if select_num == '1':
-        print("테스트 할 변수 선택 : 1(리뷰 시작일), 2(품사), 3(토큰 길이), 4(window), 5(min_count), 6(epochs), 7(custom)")
-        test_num = int(input())
-        
+        test_num = 7
         data = set_test_data(hotel_info_df, hotel_review_df, test_num)
 
         with Pool(4) as p:
@@ -176,8 +174,7 @@ if __name__ == '__main__':
     # 테스트 할 지역, 예시 리뷰 입력
     if select_num == '2':
         region = ['서울', '부산', '강원도', '제주', '여수']
-        print("원하는 문장을 입력 : ")
-        user_input = input()
+        user_input = '가성비'
         #user_input = '편의점'
         model_name = "base_d2v"
 
