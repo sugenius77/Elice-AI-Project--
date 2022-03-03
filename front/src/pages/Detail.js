@@ -67,7 +67,10 @@ const Detail = () => {
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             지도
-                            <MapContainer searchPlace={detail.title} />
+                            <MapContainer
+                                searchPlace={detail.title}
+                                region={detail.region}
+                            />
                         </div>
                     </div>
                 )}
