@@ -39,7 +39,6 @@ const HotelCard = ({ h }) => {
 
                             {/* // Progress bar FIX 유사도 값 넣어야함 */}
                             <div className="mt-2">
-                                <span></span>
                                 <div className="w-full bg-gray-200 rounded-full">
                                     <div
                                         className="bg-point text-xs font-medium text-gray-500 text-center p-0.5 leading-none rounded-full"
