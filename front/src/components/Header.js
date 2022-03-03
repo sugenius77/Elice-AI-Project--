@@ -35,7 +35,6 @@ const Header = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [wishList, setWishList] = useRecoilState(wishListState);
   const [showMenu, setShowMenu] = useState(false);
-  console.log("위시 리스트", wishList);
   const asyncGetHotels = async () => {
     try {
       const res = await axios.get(

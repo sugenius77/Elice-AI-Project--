@@ -26,10 +26,10 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
     wishList.map((item) => {
       return (
         <>
-          <div class="mb-3.5">
-            <div class="card card-side h-48 bg-base-100 shadow-xl h-45">
+          <div className="mb-3.5">
+            <div className="card card-side h-48 bg-base-100 shadow-xl h-45">
               <img
-                class="max-w-[40%] cursor-pointer"
+                className="max-w-[40%] cursor-pointer"
                 src={item.hotel_img_url}
                 onClick={() => {
                   history.push(`/hotel/${item.hotel_id}`);
@@ -37,7 +37,7 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
                 }}
                 alt="hotel_img"
               />
-              <div class="justify-between card-body p-4">
+              <div className="justify-between card-body p-4">
                 <div
                   className="text-2xl font-bold hover:text-yellow-400 hover:shadow-sm"
                   onClick={() => {
@@ -45,11 +45,11 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
                     setOpen(false);
                   }}
                 >
-                  <h2 class="card-title">{item.hotel_name}</h2>
+                  <h2 className="card-title">{item.hotel_name}</h2>
                   <span className="badge text-sm">{item.region}</span>
                 </div>
 
-                <div class="justify-end card-actions">
+                <div className="justify-end card-actions">
                   <button
                     class="btn btn-sm btn-primary"
                     onClick={() => window.open(item.hotel_url, "_blank")}
