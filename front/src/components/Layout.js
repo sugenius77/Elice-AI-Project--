@@ -4,7 +4,7 @@ import Footer from "components/Footer";
 const Layout = ({ children, id }) => {
     return (
         <div id={id}>
-            <div className="content overflow-x-hidden font-doogle bg-primary">
+            <div className="content overflow-x-hidden font-notoSans bg-primary">
                 {children}
             </div>
             <Footer />

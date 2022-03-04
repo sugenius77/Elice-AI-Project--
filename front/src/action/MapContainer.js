@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 const { kakao } = window;
 
-const MapContainer = ({ searchPlace }) => {
+const MapContainer = ({ searchPlace, region }) => {
     let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const MapContainer = ({ searchPlace }) => {
         const map = new kakao.maps.Map(container, options);
         const ps = new kakao.maps.services.Places();
 
-        ps.keywordSearch("파크 하얏트 부산 부산", placesSearchCB);
+        ps.keywordSearch(searchPlace + region, placesSearchCB);
 
         function placesSearchCB(data, status, pagination) {
             if (status === kakao.maps.services.Status.OK) {
