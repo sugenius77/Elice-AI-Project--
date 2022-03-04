@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+
+  be:
+    build:
+      dockerfile: Dockerfile
+      context: ./BE
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+      DB_CONNECT: mysql+pymysql://root:team02@111.67.218.42:3306/testDB
+
+    container_name: app_backend
