@@ -52,7 +52,7 @@ const HotelCard = ({ h }) => {
                                     {h.reviews.map((review) => (
                                         <SwiperSlide
                                             key={review.review_id}
-                                            className=" pr-5 h-52 flex items-center justify-center"
+                                            className=" pr-6 h-52 flex items-center justify-center"
                                         >
                                             <div>
                                                 <p className="text-3xl inline-block">
@@ -78,9 +78,9 @@ const HotelCard = ({ h }) => {
                         </div>
                     </div>
                     <div className="flex w-full justify-center items-center md:mt-4">
-                        <HeartButton />
+                        <HeartButton hotel_id={h.hotel_id} />
                         <button
-                            className="btn py-2 px-4 font-semibold items-center outline-none border-0  shadow-md text-white bg-[#5282a7] hover:bg-[#1c69a5] w-2/5 md:w-40"
+                            className="btn py-2 px-4 font-semibold items-center outline-none border-0  shadow-md text-white bg-point hover:bg-[#F6bD60] w-2/5 md:w-40"
                             onClick={() => window.open(h.hotel_url, "_blank")}
                         >
                             예약
