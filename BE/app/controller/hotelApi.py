@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restx import Resource, Namespace, abort
-from sqlalchemy import func
+from sqlalchemy import func, desc
 import pandas as pd
 
 from app.dto.hotelDto import HotelDto
@@ -73,7 +73,7 @@ hotelInfoParser.add_argument(
 @hotel_api.response(400, "요청 정보 정확하지 않음")
 @hotel_api.response(500, "API 서버에 문제가 발생하였음")
 class HotelInfoApi(Resource):
-    @hotel_api.marshal_with(HotelDto.hotel_model, envelope="data")
+    @hotel_api.marshal_with(HotelDto.recoHotel_list_model, envelope="data")
     @hotel_api.expect(hotelInfoParser)
     def get(self):
         '''호텔 정보 데이터
@@ -85,7 +85,13 @@ class HotelInfoApi(Resource):
 
         print(f'hotel_id={hotel_id}')
 
-        return db.session.query(Hotel).filter(Hotel.hotel_id == hotel_id).first()
+        hotel = db.session.query(Hotel).filter(
+            Hotel.hotel_id == hotel_id).first().__dict__
+
+        hotel['reviews'] = db.session.query(Review.review_id, Review.is_positive, Review.hotel_id, Review.contents, func.date_format(
+            Review.review_date, '%Y-%m').label('review_date')).filter(Review.hotel_id == hotel_id).order_by(desc('review_date')).limit(10).all()
+       
+        return hotel
 
 
 def hotelval(x):
