@@ -155,7 +155,7 @@ def show_recomended_hotel(hotel_info_df, hotel_review_df, return_data):
 if __name__ == '__main__':
     # 데이터 로드
     hotel_info_df = pd.read_csv('./dataset/final/hotel_info.csv', encoding='utf-8')
-    hotel_review_df = pd.read_csv('./dataset/final/hotel_review.csv', encoding='utf-8')
+    hotel_review_df = pd.read_csv('./dataset/final/final_hotel_review.csv', encoding='utf-8')
     hotel_review_df.rename(columns={'review' :'contents'}, inplace=True)
     hotel_review_df = hotel_review_df.loc[hotel_review_df['date'] >= '2020-01']
 
@@ -179,7 +179,7 @@ if __name__ == '__main__':
         print("원하는 문장을 입력 : ")
         user_input = input()
         #user_input = '편의점'
-        model_name = "base_d2v"
+        model_name = "positive_d2v"
 
         start = time.time()
         return_data = recomend_hotel.get_recomended_hotel(region, user_input, model_name)
