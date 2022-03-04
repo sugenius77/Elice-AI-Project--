@@ -1,9 +1,0 @@
-__pycache__/
-venv/
-
-#AI 모델 제외
-*.model
-*.npy
-*.env
-
-#node_modules
