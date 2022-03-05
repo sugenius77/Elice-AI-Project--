@@ -31,14 +31,14 @@ const Home = () => {
                     <div className="h-screen w-full bg-gradient-to-r from-black  opacity-60 z-30 absolute md:hidden"></div>
                     <div className="min-h-screen md:bg-hero md:bg-cover md:bg-center absolute md:static z-40">
                         <div className="md:text-center md:w-full relative items-center pt-36 pl-52 md:pl-0 justify-center w-fit flex-col">
-                            <h1 className=" text-6xl md:text-xl pt-20  md:mt-0 mb-5 font-bold text-white  ">
+                            <h1 className=" text-7xl md:text-xl pt-20  md:mt-0 mb-5 text-white font-title  ">
                                 키보드로
                                 <br />
                                 소문난
                                 <br />
                                 호텔
                             </h1>
-                            <p className="text-white mb-5 font-serif">
+                            <p className=" mb-5 font-notoSans text-gray-100">
                                 대충 타자치는 소리{" "}
                             </p>
                             <div className="flex justify-center z-40">
