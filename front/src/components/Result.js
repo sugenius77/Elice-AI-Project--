@@ -86,14 +86,12 @@ const Result = () => {
         return (
             <div className="mt-5">
                 <Loading />
-                <p className="text-2xl text-center font-reviewsFont">
-                    Loading...
-                </p>
+                <p className="text-2xl text-center font-reviewsFont my-10"></p>
             </div>
         );
     return (
         <div>
-            <div className=" gird justify-center md:mx-5 mx-32 mt-10 shadow-2xl bg-sub items-center rounded-lg">
+            <div className=" gird justify-center md:mx-5 mx-32 mt-10 p-5 shadow-2xl bg-[#9DC3C2] items-center rounded-lg">
                 {data.map((h) => (
                     <HotelCard key={h.hotel_id} h={h} />
                 ))}

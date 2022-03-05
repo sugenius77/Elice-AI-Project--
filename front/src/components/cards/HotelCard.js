@@ -8,11 +8,36 @@ import "swiper/css/navigation";
 import { Pagination } from "swiper";
 
 import "swiper/css";
-import HeartButton from "components/HeartButton";
+import HeartButton from "action/HeartButton";
 import ProgressBar from "action/ProgressBar";
 
 const HotelCard = ({ h }) => {
     const history = useHistory();
+
+    let last_name = [
+        "김",
+        "이",
+        "박",
+        "최",
+        "정",
+        "강",
+        "조",
+        "윤",
+        "장",
+        "임",
+        "한",
+        "오",
+        "서",
+        "남궁",
+        "탁",
+        "차",
+        "황",
+    ];
+
+    function randomValueFromArray(array) {
+        const random = Math.floor(Math.random() * array.length);
+        return array[random];
+    }
 
     return (
         <>
@@ -30,12 +55,12 @@ const HotelCard = ({ h }) => {
                         <div className="">
                             <Link
                                 to={`/hotel/${h.hotel_id}`}
-                                className="text-2xl font-bold hover:text-yellow-400 hover:shadow-sm"
+                                className="text-3xl md:text-xl font-semibold hover:text-gray-400 hover:underline hover:font-bold"
                             >
                                 {h.hotel_name}
                             </Link>
-                            <span className="text-sm text-gray-400">
-                                // {h.region}
+                            <span className="badge text-sm mt-2">
+                                {h.region}
                             </span>
 
                             <ProgressBar />
@@ -52,23 +77,30 @@ const HotelCard = ({ h }) => {
                                     {h.reviews.map((review) => (
                                         <SwiperSlide
                                             key={review.review_id}
-                                            className=" pr-5 h-52 flex items-center justify-center"
+                                            className=" pr-6 h-52 flex items-center justify-center"
                                         >
                                             <div>
                                                 <p className="text-3xl inline-block">
                                                     “
                                                 </p>{" "}
-                                                <p className="text-center text-sm font-reviewsFont">
+                                                <p className="text-center text-sm font-reviewsFont p-3">
                                                     {review.contents}
                                                 </p>{" "}
-                                                <p className="text-sm text-center mt-3">
+                                                <p className="text-3xl inline-block float-right pr-3">
+                                                    ”
+                                                </p>
+                                                <p className="text-sm text-center mt-4 text-gray-300">
+                                                    <span>
+                                                        @
+                                                        {randomValueFromArray(
+                                                            last_name
+                                                        )}
+                                                        △△님,{" "}
+                                                    </span>
                                                     {review.review_date.slice(
                                                         0,
                                                         7
                                                     )}
-                                                </p>
-                                                <p className="text-3xl inline-block float-right pr-3">
-                                                    ”
                                                 </p>
                                             </div>
                                         </SwiperSlide>
@@ -78,9 +110,9 @@ const HotelCard = ({ h }) => {
                         </div>
                     </div>
                     <div className="flex w-full justify-center items-center md:mt-4">
-                        <HeartButton />
+                        <HeartButton hotel_id={h.hotel_id} />
                         <button
-                            className="btn py-2 px-4 font-semibold items-center outline-none border-0  shadow-md text-white bg-[#5282a7] hover:bg-[#1c69a5] w-2/5 md:w-40"
+                            className="btn py-2 px-4 font-semibold items-center outline-none border-0  shadow-md text-white bg-point hover:bg-[#F6bD60] w-2/5 md:w-40"
                             onClick={() => window.open(h.hotel_url, "_blank")}
                         >
                             예약
