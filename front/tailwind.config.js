@@ -17,7 +17,8 @@ module.exports = {
             fontFamily: {
                 notoSans: ["Noto Sans KR", "sans-serif"],
                 // reviewsFont: ["Sunflower", "sans-serif"],
-                reviewsFont: ["Noto Sans KR", "sans-serif"],
+                title: ["Do Hyeon", "sans-serif"],
+                subTitle: ["Nanum Gothic Coding", "monospace"],
             },
         },
         screens: {
