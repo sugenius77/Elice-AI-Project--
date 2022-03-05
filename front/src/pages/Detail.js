@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { Loading } from "components/Loading";
 import Layout from "components/Layout";
 
@@ -12,6 +12,7 @@ const Detail = () => {
     const [loading, setLoading] = useState(false);
     const [detail, setDetail] = useState([]);
     const { _id } = useParams();
+    const history = useHistory();
     console.log("params id ===> ", _id);
 
     // detail components 접속 시 스크롤 최상단으로 이동
@@ -114,6 +115,16 @@ const Detail = () => {
                                 searchPlace={detail.hotel_name}
                                 region={detail.region}
                             />
+                        </div>
+                        <div className="flex items-center justify-center m-5">
+                            <button
+                                className="btn"
+                                onClick={() => {
+                                    history.goBack();
+                                }}
+                            >
+                                돌아가기
+                            </button>
                         </div>
                     </div>
                 )}
