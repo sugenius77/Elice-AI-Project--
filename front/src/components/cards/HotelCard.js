@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
+import { randomValueFromArray } from "action/HotelSearch";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -14,30 +15,29 @@ import ProgressBar from "action/ProgressBar";
 const HotelCard = ({ h }) => {
     const history = useHistory();
 
-    let last_name = [
-        "김",
-        "이",
-        "박",
-        "최",
-        "정",
-        "강",
-        "조",
-        "윤",
-        "장",
-        "임",
-        "한",
-        "오",
-        "서",
-        "남궁",
-        "탁",
-        "차",
-        "황",
-    ];
-
-    function randomValueFromArray(array) {
-        const random = Math.floor(Math.random() * array.length);
-        return array[random];
-    }
+    // function randomValueFromArray() {
+    //     let last_name = [
+    //         "김",
+    //         "이",
+    //         "박",
+    //         "최",
+    //         "정",
+    //         "강",
+    //         "조",
+    //         "윤",
+    //         "장",
+    //         "임",
+    //         "한",
+    //         "오",
+    //         "서",
+    //         "남궁",
+    //         "탁",
+    //         "차",
+    //         "황",
+    //     ];
+    //     const random = Math.floor(Math.random() * last_name.length);
+    //     return last_name[random];
+    // }
 
     return (
         <>
@@ -80,21 +80,19 @@ const HotelCard = ({ h }) => {
                                             className=" pr-6 h-52 flex items-center justify-center"
                                         >
                                             <div>
-                                                <p className="text-3xl inline-block">
+                                                <p className="text-2xl inline-block">
                                                     “
                                                 </p>{" "}
                                                 <p className="text-center text-sm font-reviewsFont p-3">
                                                     {review.contents}
                                                 </p>{" "}
-                                                <p className="text-3xl inline-block float-right pr-3">
+                                                <p className="text-2xl inline-block float-right pr-2">
                                                     ”
                                                 </p>
                                                 <p className="text-sm text-center mt-4 text-gray-300">
                                                     <span>
                                                         @
-                                                        {randomValueFromArray(
-                                                            last_name
-                                                        )}
+                                                        {randomValueFromArray()}
                                                         △△님,{" "}
                                                     </span>
                                                     {review.review_date.slice(
