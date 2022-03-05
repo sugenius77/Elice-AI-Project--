@@ -86,9 +86,7 @@ const Result = () => {
         return (
             <div className="mt-5">
                 <Loading />
-                <p className="text-2xl text-center font-reviewsFont">
-                    Loading...
-                </p>
+                <p className="text-2xl text-center font-reviewsFont my-10"></p>
             </div>
         );
     return (

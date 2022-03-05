@@ -19,29 +19,38 @@ const Home = () => {
     document.title = "키보드호텔";
     return (
         <>
-            {/* <div className="h-full w-full bg-gradient-to-r from-black  opacity-60 z-40 fixed"></div> */}
             <Layout id="1">
-                <VideoPlayer
-                    className="video md:hidden opacity-90 "
-                    src={mainVideo}
-                    autoPlay={true}
-                    muted={true}
-                    // disableBackgroundCover={true}
-                />
-                <div className="min-h-screen md:bg-hero md:bg-cover md:bg-center z-20">
-                    <div className="md:text-center md:w-full relative items-center pt-36 pl-16 md:pl-0 justify-center w-fit flex-col">
-                        {/* <h1 className=" text-5xl md:text-xl pt-20  md:mt-0 mb-10 font-bold text-white text-reviewsFont">
-                        <b>키보드</b>로 소문난 호텔
-                    </h1> */}
-                        <div className="flex justify-center">
-                            <Link
-                                to="2"
-                                spy={true}
-                                smooth={true}
-                                className="py-2 px-4 font-semibold rounded-lg shadow-md bg-sub hover:bg-point2 hover:text-white cursor-pointer btn border-0 text-gray-600 items-center justify-center"
-                            >
-                                get started
-                            </Link>
+                <div className="h-screen">
+                    <VideoPlayer
+                        className="video md:hidden h-full mt-4"
+                        src={mainVideo}
+                        autoPlay={true}
+                        muted={true}
+                        // disableBackgroundCover={true}
+                    />
+                    <div className="h-screen w-full bg-gradient-to-r from-black  opacity-60 z-30 absolute md:hidden"></div>
+                    <div className="min-h-screen md:bg-hero md:bg-cover md:bg-center absolute md:static z-40">
+                        <div className="md:text-center md:w-full relative items-center pt-36 pl-52 md:pl-0 justify-center w-fit flex-col">
+                            <h1 className=" text-6xl md:text-xl pt-20  md:mt-0 mb-5 font-bold text-white  ">
+                                키보드로
+                                <br />
+                                소문난
+                                <br />
+                                호텔
+                            </h1>
+                            <p className="text-white mb-5 font-serif">
+                                대충 타자치는 소리{" "}
+                            </p>
+                            <div className="flex justify-center z-40">
+                                <Link
+                                    to="2"
+                                    spy={true}
+                                    smooth={true}
+                                    className="py-2 px-4 font-semibold rounded-lg shadow-md bg-sub hover:bg-point2 hover:text-white cursor-pointer btn border-0 text-gray-600 items-center justify-center"
+                                >
+                                    get started
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
