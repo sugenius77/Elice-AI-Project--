@@ -90,7 +90,7 @@ const Detail = () => {
                             <div className="  w-3/4 bg-base-200  ">
                                 안녕하세요 워드 클라우드
                                 <div className="flex md:flex-col w-full flex-row">
-                                    <div className="grid flex-grow overflow-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
+                                    <div className="example grid flex-grow overflow-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
                                         <p>긍정 리뷰</p>
                                         <DetailReview
                                             reviews={detail.reviews}
@@ -98,7 +98,7 @@ const Detail = () => {
                                         />
                                     </div>
                                     <div className="md:divider divider-horizontal"></div>
-                                    <div className="grid flex-grow overflow-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
+                                    <div className="example grid flex-grow overflow-y-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
                                         <p>부정 리뷰</p>
                                         <DetailReview
                                             reviews={detail.reviews}
