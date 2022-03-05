@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+
 import EmptyHeartImg from "components/img_src/heart1.png";
 import HeartImg from "components/img_src/heart2.png";
-
-import axios from "axios";
 
 import { useRecoilValue } from "recoil";
 import { userInfoState } from "state/atom";
@@ -14,12 +15,12 @@ const HeartButton = ({ onClick, hotel_id }) => {
     const wishList = useRecoilValue(wishListState);
 
     console.log("userInfo ===> ", userInfo);
-    console.log("hotelid ===> ", hotel_id);
-    console.log("wishList ===> ", wishList);
+    // console.log("hotelid ===> ", hotel_id);
+    // console.log("wishList ===> ", wishList);
 
     useEffect(() => {
         if (wishList.length > 2) {
-            wishList.map((hotel) => {
+            wishList.filter((hotel) => {
                 if (hotel.hotel_id === hotel_id) {
                     setLike(true);
                 }
@@ -29,15 +30,23 @@ const HeartButton = ({ onClick, hotel_id }) => {
 
     const toggleLike = async (e) => {
         if (like === false) {
-            let body = {
-                user_id: userInfo.id,
-                hotel_id: hotel_id,
-            };
-            const res = await axios
-                .post(`${process.env.REACT_APP_API}/wish-list/add`, body)
-                .catch((e) => console.log(e));
-
-            setLike((cur) => !cur); // [POST] 사용자가 좋아요를 누름 -> DB 갱신
+            try {
+                let body = {
+                    user_id: userInfo.id,
+                    hotel_id: hotel_id,
+                };
+                const res = await axios.post(
+                    `${process.env.REACT_APP_API}/wish-list/add`,
+                    body
+                );
+                setLike((cur) => !cur);
+                toast.success("Wish List에서 확인하세요.");
+            } catch (err) {
+                console.log(err);
+                if (err.response.status == 400) {
+                    toast.warning("Please Login");
+                }
+            }
         } else {
             // let body = {
             //     movie_id: resultmovieid,

@@ -1,12 +1,17 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Home from "pages/Home";
+import Detail from "pages/Detail";
 import Header from "components/Header";
+
 import { useRecoilState } from "recoil";
 import { userInfoState } from "state/atom";
 import { wishListState } from "state/atom";
-import axios from "axios";
-import Detail from "pages/Detail";
+
 import { useCallback, useEffect } from "react";
 
 function App() {
@@ -56,6 +61,7 @@ function App() {
     return (
         <Router>
             <Header userInfo={userInfo} />
+            <ToastContainer position="top-center" />
             <Switch>
                 <Route
                     path="/"

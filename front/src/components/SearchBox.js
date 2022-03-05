@@ -7,8 +7,8 @@ import { testState, searchDataState } from "state/atom";
 import LocalBtn from "./LocalBtn";
 
 const SearchBox = () => {
-    const [results, setResults] = useRecoilState(testState);
-    console.log("recoil 값은 ===>", results);
+    // const [results, setResults] = useRecoilState(testState);
+    // console.log("recoil 값은 ===>", results);
     const [searchData, setSearchData] = useRecoilState(searchDataState);
 
     const [text, setText] = useState("바다뷰가 정말 좋은 호텔");

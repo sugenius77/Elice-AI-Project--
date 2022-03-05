@@ -49,7 +49,7 @@ const Detail = () => {
                 ) : (
                     <div className="flex justify-center flex-col">
                         <div className="w-full items-center justify-center flex">
-                            <div className="hero min-h-screen w-3/4 bg-base-200  ">
+                            <div className="hero  w-3/4 bg-base-200  ">
                                 <div className="md:flex-col hero-content flex-row ">
                                     <img
                                         // src="https://api.lorem.space/image/movie?w=260&h=400"
@@ -80,7 +80,11 @@ const Detail = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <hr />
                             </div>
+                        </div>
+                        <div className="flex">
+                            안녕하세요 워드 클라우드 긍부정리뷰
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             지도
