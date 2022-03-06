@@ -4,7 +4,7 @@ import os
 from konlpy.tag import Okt
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 
-
+# 유저 입력값을 cleansing
 def cleansing(document):
     okt = Okt()
     # document normalization
@@ -112,10 +112,10 @@ def set_return_data(recomended_hotel):
 
 def get_recomended_hotel(region, user_input, model_name='positive_d2v'):
 
-    # 모델을 로드 하고 로드 실패시 새로 생성
+    # 모델을 로드 하고 로드 에러 반환
     try:
         print(os.getcwd())
-        d2v_model = Doc2Vec.load(f'./AI/models/{model_name}.model')
+        d2v_model = Doc2Vec.load(f'../AI/models/{model_name}.model')
 
     except Exception as e:
         print(e)
