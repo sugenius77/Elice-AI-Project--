@@ -3,12 +3,12 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                theme: "#DBD0C0",
+                theme: "#2a5454",
                 primary: "#ffffff",
                 sub: "#F9E4C8",
                 point: "#F9CF93",
-                point2: "#FF3F38",
-                fontcolor: "#32292F",
+                point2: "#fc475f",
+                fontcolor: "#BFADA3",
                 headerColor: "#4C4C42",
             },
             backgroundImage: {
@@ -43,5 +43,6 @@ module.exports = {
         require("@tailwindcss/forms"),
         require("@tailwindcss/typography"),
         require("daisyui"),
+        require("tailwindcss-textshadow"),
     ],
 };

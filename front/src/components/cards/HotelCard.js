@@ -15,39 +15,15 @@ import ProgressBar from "action/ProgressBar";
 const HotelCard = ({ h }) => {
     const history = useHistory();
 
-    // function randomValueFromArray() {
-    //     let last_name = [
-    //         "김",
-    //         "이",
-    //         "박",
-    //         "최",
-    //         "정",
-    //         "강",
-    //         "조",
-    //         "윤",
-    //         "장",
-    //         "임",
-    //         "한",
-    //         "오",
-    //         "서",
-    //         "남궁",
-    //         "탁",
-    //         "차",
-    //         "황",
-    //     ];
-    //     const random = Math.floor(Math.random() * last_name.length);
-    //     return last_name[random];
-    // }
-
     return (
         <>
             <div className="mb-3">
-                <div className="bg-white grid rounded-2xl hover:scale-105 duration-150 text-fontcolor p-2 grid-cols-4 mx-4 md:flex-col md:flex ">
+                <div className="bg-white grid rounded-2xl hover:scale-105 duration-150 text-[#210203] p-2 grid-cols-4 mx-4 md:flex-col md:flex ">
                     <div className="text-blue items-center ">
                         <img
                             src={h.hotel_img_url} //"https://via.placeholder.com/900x500.png?text=Hotel+hoya"
                             alt="sample"
-                            className=" mr-3 rounded-lg w-96 h-60 mb-3 cursor-pointer"
+                            className=" mr-3 rounded-lg w-96 h-60 mb-3 cursor-pointer hover:scale-95 duration-200"
                             onClick={() => history.push(`/hotel/${h.hotel_id}`)}
                         />
                     </div>
@@ -80,16 +56,16 @@ const HotelCard = ({ h }) => {
                                             className=" pr-6 h-52 flex items-center justify-center"
                                         >
                                             <div>
-                                                <p className="text-2xl inline-block">
+                                                <p className="text-xl inline-block ">
                                                     “
                                                 </p>{" "}
                                                 <p className="text-center text-sm font-reviewsFont p-3">
                                                     {review.contents}
                                                 </p>{" "}
-                                                <p className="text-2xl inline-block float-right pr-2">
+                                                <p className="text-xl inline-block float-right pr-2">
                                                     ”
                                                 </p>
-                                                <p className="text-sm text-center mt-4 text-gray-300">
+                                                <p className="text-sm text-center mt-4 text-gray-300 px-3">
                                                     <span>
                                                         @
                                                         {randomValueFromArray()}
