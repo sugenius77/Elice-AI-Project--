@@ -90,7 +90,7 @@ class HotelInfoApi(Resource):
 
         hotel['reviews'] = db.session.query(Review.review_id, Review.is_positive, Review.hotel_id, Review.contents, func.date_format(
             Review.review_date, '%Y-%m').label('review_date')).filter(Review.hotel_id == hotel_id).order_by(desc('review_date')).limit(10).all()
-       
+
         return hotel
 
 

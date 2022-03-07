@@ -2,9 +2,9 @@ import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { wishListState } from "state/atom";
-import { userInfoState } from "state/atom";
-import HeartImg from "components/img_src/heart2.png";
+import { wishListState } from "../state/atom";
+import { userInfoState } from "../state/atom";
+import HeartImg from "./img_src/heart2.png";
 
 const WishList = ({ setOpen, asyncGetHotels }) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
@@ -14,7 +14,7 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
   const handlehHeartChange = async (user_id, hotel_id) => {
     try {
       await axios.delete(
-        `http://192.168.219.187:1234/wish-list/${user_id}/${hotel_id}`
+        `${process.env.REACT_APP_API}/wish-list/${user_id}/${hotel_id}`
       );
       asyncGetHotels();
     } catch (e) {
