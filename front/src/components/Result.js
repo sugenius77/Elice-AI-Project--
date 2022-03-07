@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Loading, Loading2 } from "./Loading";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchDataState, searchResultState, testState } from "state/atom";
+import { searchDataState, searchResultState, testState } from "../state/atom";
 
-import { hotelSearch } from "action/HotelSearch";
+import { hotelSearch } from "../action/HotelSearch";
 import HotelCard from "./cards/HotelCard";
 
 const Result = () => {

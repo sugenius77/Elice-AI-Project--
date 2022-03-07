@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EmptyHeartImg from "components/img_src/heart1.png";
-import HeartImg from "components/img_src/heart2.png";
+import EmptyHeartImg from "./img_src/heart1.png";
+import HeartImg from "./img_src/heart2.png";
 
 import axios from "axios";
 

@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchDataState, searchResultState, testState } from "state/atom";
+import { searchDataState, searchResultState, testState } from "../state/atom";
 
 import { useEffect } from "react";
 
-import { Loading, Loading2 } from "components/Loading";
+import { Loading, Loading2 } from "./Loading";
 import axios from "axios";
-import { hotelSearch } from "action/HotelSearch";
+import { hotelSearch } from "../action/HotelSearch";
 
 const TestResult = () => {
     const [itemList, setItemList] = useState([

@@ -1,10 +1,10 @@
-import WishList from "components/WishList";
+import WishList from "./WishList";
 import React, { useState, Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Link as SLink } from "react-scroll";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "state/atom";
-import { wishListState } from "state/atom";
+import { userInfoState } from "../state/atom";
+import { wishListState } from "../state/atom";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import axios from "axios";
@@ -38,7 +38,7 @@ const Header = () => {
   const asyncGetHotels = async () => {
     try {
       const res = await axios.get(
-        `http://0.0.0.0:1234/wish-list/${userInfo.id}`
+        `${process.env.REACT_APP_API}/wish-list/${userInfo.id}`
       );
       setWishList(res.data.data);
     } catch (e) {

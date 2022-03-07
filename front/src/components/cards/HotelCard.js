@@ -8,8 +8,8 @@ import "swiper/css/navigation";
 import { Pagination } from "swiper";
 
 import "swiper/css";
-import HeartButton from "components/HeartButton";
-import ProgressBar from "action/ProgressBar";
+import HeartButton from "../../components/HeartButton";
+import ProgressBar from "../../action/ProgressBar";
 
 const HotelCard = ({ h }) => {
     const history = useHistory();

@@ -20,6 +20,7 @@ def create_app():
     app.config.SWAGGER_UI_REQUEST_DURATION = True
     # app.config.SWAGGER_SUPPORTED_SUBMIT_METHODS = ["get"]  # Try it out 제공
     app.config['RESTX_MASK_SWAGGER'] = False
+    app.secret_key = 'testSECRET'
     CORS(app)
 
     db.init_app(app)  # SQLAlchemy 객체를 app객체와 이어줌.
@@ -30,7 +31,7 @@ def create_app():
     from app.controller.hotelApi import hotel_api
     from app.controller.userApi import user_api
     from app.controller.wishListApi import wish_list_api
-    
+
     api = Api(
         app,
         version="0.1.0",
