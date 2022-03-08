@@ -39,7 +39,7 @@ const HotelCard = ({ h }) => {
                                 {h.region}
                             </span>
 
-                            <ProgressBar />
+                            <ProgressBar value={h.similarity} />
                             <div className="h-40 w-full mt-1 ">
                                 <Swiper
                                     direction={"vertical"}
@@ -81,7 +81,10 @@ const HotelCard = ({ h }) => {
                         </div>
                     </div>
                     <div className="flex w-full justify-center items-center md:mt-4">
-                        <HeartButton hotel_id={h.hotel_id} />
+                        <HeartButton
+                            hotel_id={h.hotel_id}
+                            is_wish={h.is_wish}
+                        />
                         <button
                             className="btn py-2 px-4 font-semibold items-center outline-none border-0  shadow-md text-white bg-point hover:bg-[#F6bD60] w-2/5 md:w-40"
                             onClick={() => window.open(h.hotel_url, "_blank")}

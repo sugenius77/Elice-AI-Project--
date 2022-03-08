@@ -9,7 +9,8 @@ import { useRecoilValue } from "recoil";
 import { userInfoState } from "state/atom";
 import { wishListState } from "state/atom";
 
-const HeartButton = ({ onClick, hotel_id }) => {
+const HeartButton = ({ hotel_id, is_wish }) => {
+    console.log("is_wish", is_wish);
     const [like, setLike] = useState(false);
     const userInfo = useRecoilValue(userInfoState);
     const wishList = useRecoilValue(wishListState);

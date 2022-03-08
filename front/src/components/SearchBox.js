@@ -12,7 +12,7 @@ const SearchBox = () => {
     const [searchData, setSearchData] = useRecoilState(searchDataState);
 
     const [text, setText] = useState("편의점과 접근성");
-    const [selectLocal, setSelectLocal] = useState(["전체"]); //TODO 000으로 수정필요
+    const [selectLocal, setSelectLocal] = useState(["000"]); //TODO 000으로 수정필요
 
     const [search] = useDebounce(text, 300);
     const [region] = useDebounce(selectLocal, 300);
