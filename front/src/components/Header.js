@@ -1,10 +1,10 @@
-import WishList from "components/WishList";
+import WishList from "./WishList";
 import React, { useState, Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Link as SLink } from "react-scroll";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "state/atom";
-import { wishListState } from "state/atom";
+import { userInfoState } from "../state/atom";
+import { wishListState } from "../state/atom";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import axios from "axios";
@@ -65,28 +65,39 @@ const Header = () => {
                 spy={true}
                 smooth={true}
                 key="1"
-                className="text-3xl font-semibold font-notoSans mb-2 cursor-pointer"
+                className="text-md font-semibold font-notoSans my-2 cursor-pointer"
               >
-                H O T E L S
+                {/* H O T E L S */}
+                <div class="flex justify-center gap-1 my-1 w-full text-black">
+                  <kbd className="kbd">H</kbd>
+                  <kbd className="kbd">O</kbd>
+                  <kbd className="kbd">T</kbd>
+                  <kbd className="kbd">E</kbd>
+                  <kbd className="kbd">L</kbd>
+                </div>
               </SLink>
             ) : (
-              <Link
-                to="/"
-                className="text-3xl font-semibold font-notoSans mb-2"
-              >
-                H O T E L S
+              <Link to="/" className="text-md font-semibold font-notoSans mb-2">
+                {/* H O T E L S */}
+                <div class="flex justify-center gap-1 my-1 w-full text-black">
+                  <kbd className="kbd">H</kbd>
+                  <kbd className="kbd">O</kbd>
+                  <kbd className="kbd">T</kbd>
+                  <kbd className="kbd">E</kbd>
+                  <kbd className="kbd">L</kbd>
+                </div>
               </Link>
             )}
           </div>
           <div className="flex items-center">
             {userInfo.name ? (
               <>
-                <li className="list-none mx-2 p-1 cursor-pointer font-notoSans hover:scale-105 duration-150">
+                <li className="list-none mx-2 p-1 cursor-pointer font-notoSans hover:scale-105 duration-150 md:hidden">
                   <SLink to="1" spy={true} smooth={true} key="1">
                     Home
                   </SLink>
                 </li>
-                <li className="list-none mx-2 p-1 cursor-pointer font-reviewsFont hover:scale-105 duration-150">
+                <li className="list-none mx-2 p-1 cursor-pointer font-reviewsFont hover:scale-105 duration-150 md:hidden">
                   <SLink to="2" spy={true} smooth={true} key="2">
                     Search
                   </SLink>
@@ -188,7 +199,7 @@ const Header = () => {
                           "client_id=" +
                           "944228758716-ik6sa442kp2ielcg2pqbi5npocgqkq1n.apps.googleusercontent.com" +
                           "&response_type=token" +
-                          "&redirect_uri=http://localhost:3000/&" +
+                          "&redirect_uri=http://localhost/&" +
                           "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                       }
                     >
@@ -211,7 +222,7 @@ const Header = () => {
                   />
                 </svg>;
                 return (
-                  <li className="list-none mx-2 p-1 hover:scale-105 duration-150">
+                  <li className="list-none mx-2 p-1 hover:scale-105 duration-150 md:hidden">
                     {pathname !== "/hotel" ? (
                       <SLink
                         to={item.index}
