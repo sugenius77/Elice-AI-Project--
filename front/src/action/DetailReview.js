@@ -1,12 +1,8 @@
 import React from "react";
-import { randomValueFromArray } from "../action/HotelSearch";
+import { randomValueFromArray } from "action/HotelSearch";
 
 const DetailReview = ({ reviews, positive }) => {
-  return (
-    <div>
-      {reviews === undefined ? (
-        "null"
-      ) : (
+    return (
         <div>
             {reviews === undefined ? (
                 <></>
@@ -46,9 +42,8 @@ const DetailReview = ({ reviews, positive }) => {
                     })}
                 </div>
             )}
-
-    </div>
-  );
+        </div>
+    );
 };
 
 export default DetailReview;
