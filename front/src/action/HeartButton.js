@@ -17,17 +17,23 @@ const HeartButton = ({ hotel_id, is_wish }) => {
 
     // console.log("userInfo ===> ", userInfo);
     // console.log("hotelid ===> ", hotel_id);
-    // console.log("wishList ===> ", wishList);
+    console.log("is_wish ===> ", is_wish);
 
-    useEffect(() => {
-        if (wishList.length > 2) {
-            wishList.filter((hotel) => {
-                if (hotel.hotel_id === hotel_id) {
-                    setLike(true);
-                }
-            });
+    // useEffect(() => {
+    //     if (wishList.length > 2) {
+    //         wishList.filter((hotel) => {
+    //             if (hotel.hotel_id === hotel_id) {
+    //                 setLike(true);
+    //             }
+    //         });
+    //     }
+    // }, []);
+
+    React.useEffect(() => {
+        if (is_wish) {
+            setLike(true);
         }
-    }, []);
+    }, [is_wish]);
 
     const toggleLike = async (e) => {
         if (like === false) {
