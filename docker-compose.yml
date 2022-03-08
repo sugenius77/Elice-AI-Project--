@@ -26,6 +26,8 @@ services:
       dockerfile: Dockerfile
       context: ./BE
     container_name: app_backend
+    volumes:
+      - ./BE:/app
     restart: always
     env_file:
       - .env
@@ -38,5 +40,8 @@ services:
     # Since our Dockerfile for web-server is located in react-app foler, our build context is ./react-app
     build: ./front
     container_name: nginx
+    volumes:
+      - /app/node_modules
+      - ./front:/react-app
     ports:
       - "80:8080"

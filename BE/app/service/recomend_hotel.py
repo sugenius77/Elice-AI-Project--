@@ -116,7 +116,7 @@ def get_recomended_hotel(region, user_input, model_name='positive_d2v'):
     # 모델을 로드 하고 로드 실패시 새로 생성
     try:
         print(os.getcwd())
-        d2v_model = Doc2Vec.load(f'./ai/{model_name}.model')
+        d2v_model = Doc2Vec.load(f'app/service/ai/{model_name}.model')
         most_similar_docs = make_similar_docs(d2v_model, user_input)
 
         recomended_hotel = recomend_hotel(region, most_similar_docs)
