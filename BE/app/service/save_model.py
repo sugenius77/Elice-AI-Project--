@@ -3,7 +3,13 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import pandas as pd
 import os
 
+<< << << < HEAD
+
+== == == =
 # document 문장이 들어오면 토큰화 하고 필요없는 품사, stopwords 삭제 후 반환
+>>>>>> > 8bf7c7ed463b721f6f1a131107c8c00a92c106cd
+
+
 def cleansing(document, pos):
     okt = Okt()
 
@@ -34,14 +40,14 @@ def tag_corpus(hotel_info_df, hotel_review_df, pos):
     positive_hotel_review_df = hotel_review_df[hotel_review_df['label'] == 1]
     reindex_hotel_info_df = hotel_info_df.set_index('hotel_id')
     tagged_corpus_list = []
-    
+
     print(f'start tagging pid : {os.getpid()}')
     for df in positive_hotel_review_df.itertuples():
         index = df.Index
         review_id = df.review_id
         hotel_id = df.hotel_id
         review = df.contents
-        
+
         try:
             region = reindex_hotel_info_df.loc[hotel_id]['region']
             cleansed_doc = cleansing(review, pos)
@@ -68,8 +74,8 @@ def build_model(model_name, tagged_corpus_list, window, min_count, epochs):
     d2v_model.train(tagged_corpus_list,
                     total_examples=d2v_model.corpus_count, epochs=epochs)
     # 저장
-    d2v_model.save(f'../AI/models/{model_name}.model')
-    
+    d2v_model.save(f'app/service/ai/{model_name}.model')
+
     return model_name
 
 
@@ -80,9 +86,10 @@ def save_model(hotel_info_df, hotel_review_df, model_name, pos, token_min, token
         filtered_tagged_corpus_list = [x for x in tagged_corpus_list if (
             len(x[0]) >= token_min) and (len(x[0]) <= token_max)]
 
-        model_name = build_model(model_name, filtered_tagged_corpus_list, window, min_count, epochs)
+        model_name = build_model(
+            model_name, filtered_tagged_corpus_list, window, min_count, epochs)
     except Exception as e:
         print(e)
         return(f'{model_name} save fail')
-    
+
     return f"{model_name} save success"
