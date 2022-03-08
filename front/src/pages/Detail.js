@@ -7,6 +7,8 @@ import { hotelDetail } from "action/HotelSearch";
 
 import MapContainer from "../action/MapContainer";
 import DetailReview from "../action/DetailReview";
+import DetailKeywords from "action/DetailKeywords";
+import HeartButton from "action/HeartButton";
 
 const Detail = () => {
     const [loading, setLoading] = useState(true);
@@ -35,10 +37,12 @@ const Detail = () => {
         getHotel();
     }, []);
 
+    let positive_keywords;
     useEffect(() => {
         console.log("detail state  ===> ", detail);
-        console.log("detail state  ===> ", detail.positive_keywords);
-    }, [detail]);
+
+        // console.log("detail state  ===> ", detail.positive_keywords);
+    }, [loading]);
 
     return (
         <Layout>
@@ -77,30 +81,18 @@ const Detail = () => {
                                             >
                                                 예약 바로가기
                                             </button>
-                                            <div className="font-notoSans mb-2">
-                                                <p className="my-2">
-                                                    ▶︎리뷰로 보는 핵심 키워드
-                                                </p>
-                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
-                                                    고급스러움
-                                                </kbd>
-                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
-                                                    접근성
-                                                </kbd>
-                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
-                                                    친절
-                                                </kbd>
-                                            </div>
-                                            <div className="font-notoSans">
-                                                <kbd className="kbd text-sm font-notoSans border-red-200">
-                                                    유료
-                                                </kbd>
-                                                <kbd className="kbd text-sm font-notoSans border-red-200">
-                                                    더러운
-                                                </kbd>
-                                                <kbd className="kbd text-sm font-notoSans border-red-200">
-                                                    가성비가 별로
-                                                </kbd>
+                                            <div className="font-notoSans my-5">
+                                                <DetailKeywords
+                                                    data={
+                                                        detail.positive_keywords
+                                                    }
+                                                    positive={true}
+                                                />
+                                                <DetailKeywords
+                                                    data={
+                                                        detail.negative_keywords
+                                                    }
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -147,6 +139,7 @@ const Detail = () => {
                             <MapContainer
                                 searchPlace={detail.hotel_name}
                                 region={detail.region}
+                                address={detail.address}
                             />
                         </div>
                         <div className="flex items-center justify-center m-5">

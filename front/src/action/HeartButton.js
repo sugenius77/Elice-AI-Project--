@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -7,17 +7,15 @@ import HeartImg from "../components/img_src/heart2.png";
 
 import { useRecoilValue } from "recoil";
 import { userInfoState } from "../state/atom";
-import { wishListState } from "../state/atom";
 
 const HeartButton = ({ hotel_id, is_wish }) => {
-    console.log("is_wish", is_wish);
+    // console.log("is_wish", is_wish);
     const [like, setLike] = useState(false);
     const userInfo = useRecoilValue(userInfoState);
-    const wishList = useRecoilValue(wishListState);
 
     // console.log("userInfo ===> ", userInfo);
     // console.log("hotelid ===> ", hotel_id);
-    console.log("is_wish ===> ", is_wish);
+    // console.log("is_wish ===> ", is_wish);
 
     // useEffect(() => {
     //     if (wishList.length > 2) {
