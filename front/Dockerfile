@@ -15,8 +15,11 @@ COPY src ./src
 # react pulbic folder copy
 COPY public ./public
 
+COPY tailwind.config.js ./
+COPY .env ./
 # nginx config file copy
 COPY addition_container_server.conf ./
+
 
 # nginx build
 RUN npm run build

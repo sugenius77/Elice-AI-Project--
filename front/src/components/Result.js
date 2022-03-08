@@ -6,8 +6,8 @@ import {
   searchResultState,
   wishListIsDeletedState,
   testState,
-} from "state/atom";
-import { hotelSearch } from "action/HotelSearch";
+} from "../state/atom";
+import { hotelSearch } from "../action/HotelSearch";
 import HotelCard from "./cards/HotelCard";
 
 const Result = () => {
@@ -36,7 +36,6 @@ const Result = () => {
       setResults(response.data.data);
       setData(response.data.data.slice(0, 5));
 
-      console.log("API 가져온 data ===> ", results);
       setLoading(false);
     } catch (e) {
       console.log("axios get Error");
@@ -45,6 +44,10 @@ const Result = () => {
   useEffect(() => {
     loadData();
   }, [searchData]);
+
+  useEffect(() => {
+    console.log("Result API 가져온 data ===> ", results);
+  }, [results]);
 
   useEffect(() => {
     if (isDeleted) {

@@ -55,7 +55,7 @@ const MapContainer = ({ searchPlace, region }) => {
             //     width: "500px",
             //     height: "500px",
             // }}
-            className="h-80 w-3/4 p-10 border-2"
+            className="h-80 w-3/4 p-10 border-2 rounded-lg cursor-grab"
         ></div>
     );
 };
