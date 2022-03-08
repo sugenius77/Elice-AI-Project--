@@ -27,7 +27,7 @@ const Detail = () => {
                 const response = await hotelDetail(_id);
 
                 setDetail(response.data.data);
-                setLoading((cur) => !cur);
+                setLoading(false);
             } catch (e) {
                 console.log("axios get Error");
             }
@@ -42,11 +42,6 @@ const Detail = () => {
     return (
         <Layout>
             <div className=" w-full min-h-screen mt-24 ">
-                <h1 className="text-5xl text-center m-5 font-semibold text-yellow-500">
-                    ⌨
-                </h1>
-                {/* <h1 className="text-4xl text-center">⌨</h1> */}
-
                 {loading ? (
                     <Loading />
                 ) : (
@@ -78,8 +73,33 @@ const Detail = () => {
                                                     )
                                                 }
                                             >
-                                                Get Reservation
+                                                예약 바로가기
                                             </button>
+                                            <div className="font-notoSans mb-2">
+                                                <p className="my-2">
+                                                    ▶︎리뷰로 보는 핵심 키워드
+                                                </p>
+                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
+                                                    고급스러움
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
+                                                    접근성
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
+                                                    친절
+                                                </kbd>
+                                            </div>
+                                            <div className="font-notoSans">
+                                                <kbd className="kbd text-sm font-notoSans border-red-200">
+                                                    유료
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-red-200">
+                                                    더러운
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-red-200">
+                                                    가성비가 별로
+                                                </kbd>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +108,6 @@ const Detail = () => {
                         </div>
                         <div className="flex justify-center">
                             <div className="  w-3/4 bg-base-200  ">
-                                안녕하세요 워드 클라우드
                                 <div className="flex md:flex-col w-full flex-row cursor-default">
                                     <div className="flex flex-col w-1/2  md:w-full">
                                         <p className="font-semibold w-full border-2 rounded-full text-center my-2 font-notoSans border-blue-200 text-xl">

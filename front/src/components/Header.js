@@ -236,7 +236,7 @@ const Header = () => {
                                 </svg>;
                                 return (
                                     <li className="list-none mx-2 p-1 hover:scale-105 duration-150 md:hidden">
-                                        {pathname !== "/hotel" && (
+                                        {pathname !== "/hotel" ? (
                                             <SLink
                                                 to={item.index}
                                                 spy={true}
@@ -246,6 +246,8 @@ const Header = () => {
                                             >
                                                 {item.title}
                                             </SLink>
+                                        ) : (
+                                            <></>
                                         )}
                                     </li>
                                 );
