@@ -19,7 +19,7 @@ const HotelCard = ({ h }) => {
         <>
             <div className="mb-3">
                 <div className="bg-white grid rounded-2xl hover:scale-105 duration-150 text-[#210203] p-2 grid-cols-4 mx-4 md:flex-col md:flex ">
-                    <div className="text-blue items-center ">
+                    <div className="text-blue items-center  ">
                         <img
                             src={h.hotel_img_url} //"https://via.placeholder.com/900x500.png?text=Hotel+hoya"
                             alt="sample"
