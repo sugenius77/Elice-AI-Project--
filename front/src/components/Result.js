@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Loading, Loading2 } from "./Loading";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
     searchDataState,
-    searchResultState,
     wishListIsDeletedState,
     userInfoState,
 } from "../state/atom";
