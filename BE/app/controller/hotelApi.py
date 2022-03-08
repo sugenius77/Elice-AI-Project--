@@ -9,7 +9,6 @@ from app.models.model import Hotel, Review, WishList
 from app.service import recomend_hotel
 from app.controller.commonUtil import Region
 
-import datetime
 
 hotel_api = HotelDto.api
 
@@ -54,17 +53,18 @@ class RecommendHotelApi(Resource):
         #     db.session.query(Review).join(Hotel, Review.hotel_id == Hotel.hotel_id).filter(Hotel.region == region).statement, db.session.bind)
 
         # TODO DB 데이터로 변경?
-        print(datetime.datetime.now())
+
         r = Region()
         region_list = r.transRegion(region)
         print(region_list)
-        print(datetime.datetime.now())
+
         similarity_list = recomend_hotel.get_recomended_hotel(
             region_list, search)
-        print(datetime.datetime.now())
+
+        print(similarity_list)
         hotelmap = hotelMapping(user_id)
         hotel_list = list(map(hotelmap.hotelval, similarity_list))
-        print(datetime.datetime.now())
+
         return hotel_list
 
 
@@ -122,6 +122,7 @@ class hotelMapping:
 
         hotels['is_wish'] = is_wish
         hotels['reviews'] = reviews
+        hotels['similarity'] = x['similarity']
 
         res = hotels
         return res
