@@ -1,7 +1,7 @@
 FROM node:16-alpine as build-stage
 
 # 작업 디렉토리
-WORKDIR /app
+WORKDIR /react-app
 
 # json 파일 COPY
 COPY package*.json ./
@@ -27,10 +27,10 @@ FROM nginx:1.15
 RUN rm /etc/nginx/conf.d/default.conf
 
 # copy our config
-COPY --from=build-stage /app/addition_container_server.conf /etc/nginx/conf.d/
+COPY --from=build-stage /react-app/addition_container_server.conf /etc/nginx/conf.d/
 
 # copying production build from last stage to serve through nginx
-COPY --from=build-stage /app/build/ /usr/share/nginx/html
+COPY --from=build-stage /react-app/build/ /usr/share/nginx/html
 
 # exposing port 8080 on container
 EXPOSE 8080
