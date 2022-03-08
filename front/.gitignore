@@ -12,7 +12,7 @@ logs
 node_modules
 build
 bower_components
-img_src
+video_src
 
 *.sublime*
 

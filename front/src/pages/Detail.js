@@ -9,7 +9,7 @@ import MapContainer from "action/MapContainer";
 import DetailReview from "action/DetailReview";
 
 const Detail = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [detail, setDetail] = useState([]);
     const { _id } = useParams();
     const history = useHistory();
@@ -23,12 +23,11 @@ const Detail = () => {
 
     useEffect(() => {
         async function getHotel() {
-            setLoading((cur) => !cur);
             try {
                 const response = await hotelDetail(_id);
 
                 setDetail(response.data.data);
-                setLoading((cur) => !cur);
+                setLoading(false);
             } catch (e) {
                 console.log("axios get Error");
             }
@@ -38,23 +37,19 @@ const Detail = () => {
 
     useEffect(() => {
         console.log("detail state  ===> ", detail);
+        console.log("detail state  ===> ", detail.positive_keywords);
     }, [detail]);
 
     return (
         <Layout>
             <div className=" w-full min-h-screen mt-24 ">
-                <h1 className="text-5xl text-center m-5 font-semibold text-yellow-500">
-                    ⌨
-                </h1>
-                {/* <h1 className="text-4xl text-center">⌨</h1> */}
-
                 {loading ? (
                     <Loading />
                 ) : (
-                    <div className="flex justify-center flex-col">
+                    <div className="flex flex-col">
                         <div className="w-full items-center justify-center flex">
-                            <div className="hero  w-3/4 bg-base-200  ">
-                                <div className="md:flex-col hero-content flex-row ">
+                            <div className="block hero w-3/4 bg-base-200  ">
+                                <div className="md:flex-col justify-start hero-content flex-row cursor-default ">
                                     <img
                                         // src="https://api.lorem.space/image/movie?w=260&h=400"
                                         src={detail.hotel_img_url}
@@ -62,16 +57,17 @@ const Detail = () => {
                                         className="max-w-sm rounded-lg shadow-2xl"
                                     />
                                     <div>
-                                        <h1 className="text-5xl font-bold">
+                                        <h1 className="text-5xl font-bold text-shadow-sm font-notoSans md:text-3xl ">
                                             {detail.hotel_name}
                                         </h1>
-                                        <span className="badge text-sm mt-2">
+                                        <span className="badge text-xl mt-2">
                                             {detail.region}
                                         </span>
+                                        <span>{detail.address}</span>
 
                                         <div className="mt-5">
                                             <button
-                                                className="btn btn-primary"
+                                                className="btn btn-primary bg-[#F6bD60] hover:bg-[#FFC145] outline-none border-0"
                                                 onClick={() =>
                                                     window.open(
                                                         detail.hotel_url,
@@ -79,8 +75,33 @@ const Detail = () => {
                                                     )
                                                 }
                                             >
-                                                Get Reservation
+                                                예약 바로가기
                                             </button>
+                                            <div className="font-notoSans mb-2">
+                                                <p className="my-2">
+                                                    ▶︎리뷰로 보는 핵심 키워드
+                                                </p>
+                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
+                                                    고급스러움
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
+                                                    접근성
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-blue-200">
+                                                    친절
+                                                </kbd>
+                                            </div>
+                                            <div className="font-notoSans">
+                                                <kbd className="kbd text-sm font-notoSans border-red-200">
+                                                    유료
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-red-200">
+                                                    더러운
+                                                </kbd>
+                                                <kbd className="kbd text-sm font-notoSans border-red-200">
+                                                    가성비가 별로
+                                                </kbd>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -89,28 +110,40 @@ const Detail = () => {
                         </div>
                         <div className="flex justify-center">
                             <div className="  w-3/4 bg-base-200  ">
-                                안녕하세요 워드 클라우드
-                                <div className="flex md:flex-col w-full flex-row">
-                                    <div className="example grid flex-grow overflow-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
-                                        <p>긍정 리뷰</p>
-                                        <DetailReview
-                                            reviews={detail.reviews}
-                                            positive={1}
-                                        />
+                                <div className="flex md:flex-col w-full flex-row cursor-default">
+                                    <div className="flex flex-col w-1/2  md:w-full">
+                                        <p className="font-semibold w-full border-2 rounded-full text-center my-2 font-notoSans border-blue-200 text-xl">
+                                            😃긍정 경험
+                                        </p>
+                                        <div className="example grid flex-grow overflow-auto h-80 card bg-[#F5F1ED] rounded-box place-items-center w-full">
+                                            <DetailReview
+                                                reviews={detail.reviews}
+                                                positive={1}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="md:divider divider-horizontal"></div>
-                                    <div className="example grid flex-grow overflow-y-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
-                                        <p>부정 리뷰</p>
-                                        <DetailReview
-                                            reviews={detail.reviews}
-                                            positive={0}
-                                        />
+                                    <div className="flex flex-col w-1/2 md:w-full">
+                                        <p className="font-semibold w-full border-2 rounded-full text-center my-2 font-notoSans border-red-200 text-xl">
+                                            😰부정 경험
+                                        </p>
+                                        <div className="example grid flex-grow overflow-y-auto h-80 card bg-[#F5F1ED] rounded-box place-items-center w-full ">
+                                            <DetailReview
+                                                reviews={detail.reviews}
+                                                positive={0}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col items-center justify-center">
-                            지도
+
+                        <div className="flex flex-col items-center justify-center  my-4">
+                            <div class="flex justify-center gap-1 my-1 w-full cursor-default">
+                                <kbd className="kbd">m</kbd>
+                                <kbd className="kbd">a</kbd>
+                                <kbd className="kbd">p</kbd>
+                            </div>
                             <MapContainer
                                 searchPlace={detail.hotel_name}
                                 region={detail.region}
@@ -123,7 +156,7 @@ const Detail = () => {
                                     history.goBack();
                                 }}
                             >
-                                돌아가기
+                                검색으로 돌아가기
                             </button>
                         </div>
                     </div>
