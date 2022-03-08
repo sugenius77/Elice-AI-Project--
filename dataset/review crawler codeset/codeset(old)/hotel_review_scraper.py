@@ -194,7 +194,8 @@ def set_hotels(driver: webdriver, hotel_link_list: list, hotel_num: int, review_
 
 # 동작 부분
 with webdriver.Chrome('C:/Users/Administrator/AppData/Local/Google/Chrome/chromedriver.exe') as driver:
-    link_file = f'{path}\\link_file.txt'
+    #link_file = f'{path}\\link_file.txt'
+    link_file = pd.read_csv('./dataset/final/hotel_info.csv')
  
     if not os.path.isfile(link_file):
         # 기본 페이지 호출 후 목적지로 검색 된 페이지 리턴

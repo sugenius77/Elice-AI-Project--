@@ -3,6 +3,12 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import pandas as pd
 import os
 
+<< << << < HEAD
+
+== == == =
+# document 문장이 들어오면 토큰화 하고 필요없는 품사, stopwords 삭제 후 반환
+>>>>>> > 8bf7c7ed463b721f6f1a131107c8c00a92c106cd
+
 
 def cleansing(document, pos):
     okt = Okt()
@@ -56,7 +62,7 @@ def tag_corpus(hotel_info_df, hotel_review_df, pos):
     return tagged_corpus_list
 
 
-def make_model(model_name, tagged_corpus_list, window, min_count, epochs):
+def build_model(model_name, tagged_corpus_list, window, min_count, epochs):
     # 모델 생성
     d2v_model = Doc2Vec(vector_size=300, window=window, workers=8,
                         min_count=len(tagged_corpus_list) // min_count)
@@ -80,7 +86,7 @@ def save_model(hotel_info_df, hotel_review_df, model_name, pos, token_min, token
         filtered_tagged_corpus_list = [x for x in tagged_corpus_list if (
             len(x[0]) >= token_min) and (len(x[0]) <= token_max)]
 
-        model_name = make_model(
+        model_name = build_model(
             model_name, filtered_tagged_corpus_list, window, min_count, epochs)
     except Exception as e:
         print(e)

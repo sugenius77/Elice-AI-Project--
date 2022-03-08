@@ -6,4 +6,30 @@ export const hotelSearch = async (searchData, locals) =>
     );
 
 export const hotelDetail = async (_id) =>
-    await axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${_id}`);
+    await axios.get(
+        `${process.env.REACT_APP_API}/hotel/hotel-info?hotel_id=${_id}`
+    );
+
+export function randomValueFromArray() {
+    let last_name = [
+        "김",
+        "이",
+        "박",
+        "최",
+        "정",
+        "강",
+        "조",
+        "윤",
+        "장",
+        "임",
+        "한",
+        "오",
+        "서",
+        "남궁",
+        "탁",
+        "차",
+        "황",
+    ];
+    const random = Math.floor(Math.random() * last_name.length);
+    return last_name[random];
+}

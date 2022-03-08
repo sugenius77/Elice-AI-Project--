@@ -81,8 +81,8 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
     elif test_num == 7:
         pos = ["Adjective", "Noun", "Verb"]
 
-        return_input.append([hotel_info_df, hotel_review_df, f'base_d2v', 
-        pos, token_min, token_max, window, 8000, 40])
+        return_input.append([hotel_info_df, hotel_review_df, f'test_d2v', 
+        pos, 5, 50, window, 8000, 25])
     
     return return_input
 
@@ -176,7 +176,7 @@ if __name__ == '__main__':
         region = ['서울', '부산', '강원도', '제주', '여수']
         user_input = '가성비'
         #user_input = '편의점'
-        model_name = "base_d2v"
+        model_name = "positive_d2v"
 
         start = time.time()
         return_data = recomend_hotel.get_recomended_hotel(region, user_input, model_name)

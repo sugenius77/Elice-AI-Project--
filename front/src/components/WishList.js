@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { wishListState } from "state/atom";
-import { userInfoState } from "state/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  wishListState,
+  userInfoState,
+  wishListIsDeletedState,
+} from "state/atom";
 import HeartImg from "components/img_src/heart2.png";
 
 const WishList = ({ setOpen, asyncGetHotels }) => {
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const [wishList, setWishList] = useRecoilState(wishListState);
-
+  const userInfo = useRecoilValue(userInfoState);
+  const wishList = useRecoilValue(wishListState);
+  const wishIsDeletedFlag = useRef(null);
+  const [_, setIsDeleted] = useRecoilState(wishListIsDeletedState);
   const history = useHistory();
+
   const handlehHeartChange = async (user_id, hotel_id) => {
     try {
       await axios.delete(
-        `http://192.168.219.187:1234/wish-list/${user_id}/${hotel_id}`
+        `${process.env.REACT_APP_API}/wish-list/${user_id}/${hotel_id}`
       );
       asyncGetHotels();
+      wishIsDeletedFlag.current = true; // 삭제 여부 flag
     } catch (e) {
       console.error(e);
     }
   };
+  useEffect(() => {
+    return () => {
+      if (wishIsDeletedFlag.current) setIsDeleted(true);
+    };
+  }, []);
 
   const item = wishList.length ? (
     wishList.map((item) => {
@@ -39,7 +50,7 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
               />
               <div className="justify-between card-body p-4">
                 <div
-                  className="text-2xl font-bold hover:text-yellow-400 hover:shadow-sm"
+                  className="text-2xl font-bold hover:text-[#f6bd60] hover:shadow-sm"
                   onClick={() => {
                     history.push(`/hotel/${item.hotel_id}`);
                     setOpen(false);
@@ -51,13 +62,13 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
 
                 <div className="justify-end card-actions">
                   <button
-                    class="btn btn-sm btn-primary"
+                    class="btn btn-sm bg-[#f6bd60] border-[#f6bd60]"
                     onClick={() => window.open(item.hotel_url, "_blank")}
                   >
                     예약하기
                   </button>
                   <button
-                    className="btn btn-sm btn-square btn-outline mr-2 bg-inherit"
+                    className="btn btn-sm btn-square btn-ghost mr-2 bg-inherit"
                     onClick={() => {
                       handlehHeartChange(userInfo.id, item.hotel_id);
                     }}

@@ -2,6 +2,8 @@ from konlpy.tag import Okt
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import pandas as pd
 import os
+
+# document 문장이 들어오면 토큰화 하고 필요없는 품사, stopwords 삭제 후 반환
 def cleansing(document, pos):
     okt = Okt()
 
@@ -54,7 +56,7 @@ def tag_corpus(hotel_info_df, hotel_review_df, pos):
     return tagged_corpus_list
 
 
-def make_model(model_name, tagged_corpus_list, window, min_count, epochs):
+def build_model(model_name, tagged_corpus_list, window, min_count, epochs):
     # 모델 생성
     d2v_model = Doc2Vec(vector_size=300, window=window, workers=8,
                         min_count=len(tagged_corpus_list) // min_count)
@@ -66,8 +68,8 @@ def make_model(model_name, tagged_corpus_list, window, min_count, epochs):
     d2v_model.train(tagged_corpus_list,
                     total_examples=d2v_model.corpus_count, epochs=epochs)
     # 저장
-    d2v_model.save(f'./AI/models/{model_name}.model')
-    print(f'{model_name} save success')
+    d2v_model.save(f'../AI/models/{model_name}.model')
+    
     return model_name
 
 
@@ -78,7 +80,7 @@ def save_model(hotel_info_df, hotel_review_df, model_name, pos, token_min, token
         filtered_tagged_corpus_list = [x for x in tagged_corpus_list if (
             len(x[0]) >= token_min) and (len(x[0]) <= token_max)]
 
-        model_name = make_model(model_name, filtered_tagged_corpus_list, window, min_count, epochs)
+        model_name = build_model(model_name, filtered_tagged_corpus_list, window, min_count, epochs)
     except Exception as e:
         print(e)
         return(f'{model_name} save fail')

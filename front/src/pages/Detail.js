@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { Loading } from "components/Loading";
 import Layout from "components/Layout";
+
 import { hotelDetail } from "action/HotelSearch";
+
 import MapContainer from "action/MapContainer";
+import DetailReview from "action/DetailReview";
 
 const Detail = () => {
     const [loading, setLoading] = useState(false);
     const [detail, setDetail] = useState([]);
     const { _id } = useParams();
+    const history = useHistory();
     console.log("params id ===> ", _id);
+
+    // detail components 접속 시 스크롤 최상단으로 이동
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     useEffect(() => {
         async function getHotel() {
@@ -17,7 +27,7 @@ const Detail = () => {
             try {
                 const response = await hotelDetail(_id);
 
-                setDetail(response.data.data.movie);
+                setDetail(response.data.data);
                 setLoading((cur) => !cur);
             } catch (e) {
                 console.log("axios get Error");
@@ -26,48 +36,95 @@ const Detail = () => {
         getHotel();
     }, []);
 
-    console.log(detail.title);
+    useEffect(() => {
+        console.log("detail state  ===> ", detail);
+    }, [detail]);
 
     return (
         <Layout>
             <div className=" w-full min-h-screen mt-24 ">
-                <h1 className="text-4xl text-center m-5 font-semibold text-fontcolor">
-                    호텔세심히
+                <h1 className="text-5xl text-center m-5 font-semibold text-yellow-500">
+                    ⌨
                 </h1>
-                <h1 className="text-4xl text-center">⌨</h1>
+                {/* <h1 className="text-4xl text-center">⌨</h1> */}
 
                 {loading ? (
                     <Loading />
                 ) : (
                     <div className="flex justify-center flex-col">
                         <div className="w-full items-center justify-center flex">
-                            <div className="hero min-h-screen w-3/4 bg-base-200  ">
+                            <div className="hero  w-3/4 bg-base-200  ">
                                 <div className="md:flex-col hero-content flex-row ">
                                     <img
-                                        src="https://api.lorem.space/image/movie?w=260&h=400"
+                                        // src="https://api.lorem.space/image/movie?w=260&h=400"
+                                        src={detail.hotel_img_url}
                                         alt="img"
                                         className="max-w-sm rounded-lg shadow-2xl"
                                     />
                                     <div>
                                         <h1 className="text-5xl font-bold">
-                                            {detail.title}
+                                            {detail.hotel_name}
                                         </h1>
-                                        <p className="py-6">
-                                            Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit. Libero
-                                            magnam laboriosam voluptate quod aut
-                                            eos. Sequi molestiae sint sunt unde.
-                                        </p>
-                                        <button className="btn btn-primary">
-                                            Get Reservation
-                                        </button>
+                                        <span className="badge text-sm mt-2">
+                                            {detail.region}
+                                        </span>
+
+                                        <div className="mt-5">
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={() =>
+                                                    window.open(
+                                                        detail.hotel_url,
+                                                        "_blank"
+                                                    )
+                                                }
+                                            >
+                                                Get Reservation
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                        <div className="flex justify-center">
+                            <div className="  w-3/4 bg-base-200  ">
+                                안녕하세요 워드 클라우드
+                                <div className="flex md:flex-col w-full flex-row">
+                                    <div className="example grid flex-grow overflow-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
+                                        <p>긍정 리뷰</p>
+                                        <DetailReview
+                                            reviews={detail.reviews}
+                                            positive={1}
+                                        />
+                                    </div>
+                                    <div className="md:divider divider-horizontal"></div>
+                                    <div className="example grid flex-grow overflow-y-auto h-80 card bg-base-300 rounded-box place-items-center w-1/2 md:w-full">
+                                        <p>부정 리뷰</p>
+                                        <DetailReview
+                                            reviews={detail.reviews}
+                                            positive={0}
+                                        />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             지도
-                            <MapContainer searchPlace={detail.title} />
+                            <MapContainer
+                                searchPlace={detail.hotel_name}
+                                region={detail.region}
+                            />
+                        </div>
+                        <div className="flex items-center justify-center m-5">
+                            <button
+                                className="btn"
+                                onClick={() => {
+                                    history.goBack();
+                                }}
+                            >
+                                돌아가기
+                            </button>
                         </div>
                     </div>
                 )}

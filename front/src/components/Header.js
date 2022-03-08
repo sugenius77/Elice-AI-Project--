@@ -38,7 +38,7 @@ const Header = () => {
   const asyncGetHotels = async () => {
     try {
       const res = await axios.get(
-        `http://0.0.0.0:1234/wish-list/${userInfo.id}`
+        `${process.env.REACT_APP_API}/wish-list/${userInfo.id}`
       );
       setWishList(res.data.data);
     } catch (e) {
@@ -54,9 +54,9 @@ const Header = () => {
 
   return (
     <>
-      <div className="font-doogle text-headerColor fixed top-0 left-0 right-0 w-full z-50">
+      <div className="font-notoSans text-white fixed top-0 left-0 right-0 w-full z-50">
         <div
-          className={`flex justify-between bg-theme items-center p-2 shadow-lg `}
+          className={`flex justify-between bg-[#2a5454] items-center p-2 shadow-lg `}
         >
           <div className="flex justify-between w-full">
             {pathname !== "/hotel" ? (
@@ -65,12 +65,15 @@ const Header = () => {
                 spy={true}
                 smooth={true}
                 key="1"
-                className="text-4xl font-semibold font-doogle mb-2 cursor-pointer"
+                className="text-3xl font-semibold font-notoSans mb-2 cursor-pointer"
               >
                 H O T E L S
               </SLink>
             ) : (
-              <Link to="/" className="text-4xl font-semibold font-doogle mb-2">
+              <Link
+                to="/"
+                className="text-3xl font-semibold font-notoSans mb-2"
+              >
                 H O T E L S
               </Link>
             )}
@@ -78,7 +81,7 @@ const Header = () => {
           <div className="flex items-center">
             {userInfo.name ? (
               <>
-                <li className="list-none mx-2 p-1 cursor-pointer font-doogle hover:scale-105 duration-150">
+                <li className="list-none mx-2 p-1 cursor-pointer font-notoSans hover:scale-105 duration-150">
                   <SLink to="1" spy={true} smooth={true} key="1">
                     Home
                   </SLink>
@@ -122,7 +125,7 @@ const Header = () => {
                               setOpen(true);
                               asyncGetHotels();
                             }}
-                            className="flex items-center px-3 py-3 cursor-pointer hover:bg-gray-600 hover:text-white font-light text-sm focus:outline-none"
+                            className="flex items-center px-3 py-3 cursor-pointer hover:bg-[#2a5454] hover:text-white font-light text-sm focus:outline-none"
                           >
                             <div className="mr-2">
                               <svg
@@ -141,10 +144,11 @@ const Header = () => {
                             Wish List
                           </div>
                           <div
-                            className="flex items-center px-3 py-3 cursor-pointer hover:bg-gray-600 hover:text-white font-light text-sm focus:outline-none"
+                            className="flex items-center px-3 py-3 cursor-pointer hover:bg-[#2a5454] hover:text-white font-light text-sm focus:outline-none"
                             onClick={() => {
                               setUserInfo({});
                               localStorage.clear();
+                              window.location.reload();
                             }}
                           >
                             {" "}
