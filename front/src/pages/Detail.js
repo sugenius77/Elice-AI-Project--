@@ -9,7 +9,7 @@ import MapContainer from "action/MapContainer";
 import DetailReview from "action/DetailReview";
 
 const Detail = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [detail, setDetail] = useState([]);
     const { _id } = useParams();
     const history = useHistory();
@@ -23,7 +23,6 @@ const Detail = () => {
 
     useEffect(() => {
         async function getHotel() {
-            setLoading((cur) => !cur);
             try {
                 const response = await hotelDetail(_id);
 
@@ -62,10 +61,10 @@ const Detail = () => {
                                         className="max-w-sm rounded-lg shadow-2xl"
                                     />
                                     <div>
-                                        <h1 className="text-5xl font-bold text-shadow-sm font-notoSans ">
+                                        <h1 className="text-5xl font-bold text-shadow-sm font-notoSans md:text-3xl ">
                                             {detail.hotel_name}
                                         </h1>
-                                        <span className="badge text-sm mt-2">
+                                        <span className="badge text-xl mt-2">
                                             {detail.region}
                                         </span>
 

@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "components/Layout";
 import Result from "components/Result";
-import TestResult from "components/testResult";
 import { Link } from "react-scroll";
 
 import SearchBox from "components/SearchBox";
@@ -22,16 +21,16 @@ const Home = () => {
             <Layout id="1">
                 <div className="h-screen">
                     <VideoPlayer
-                        className="video md:hidden h-full mt-4"
+                        className="video md:hidden lg:hidden h-full"
                         src={mainVideo}
                         autoPlay={true}
                         muted={true}
                         // disableBackgroundCover={true}
                     />
-                    <div className="h-screen w-full bg-gradient-to-r from-black  opacity-60 z-30 absolute md:hidden"></div>
-                    <div className="min-h-screen md:bg-hero md:bg-cover md:bg-center absolute md:static z-40">
+                    <div className="h-screen w-full bg-gradient-to-r from-black  opacity-50 z-30 absolute md:hidden lg:hidden"></div>
+                    <div className="min-h-screen md:bg-hero md:bg-cover md:bg-center lg:bg-hero lg:bg-cover lg:bg-center lg:w-full absolute md:static z-40">
                         <div className="md:text-center md:w-full relative items-center pt-36 pl-52 md:pl-0 justify-center w-fit flex-col">
-                            <h1 className=" text-7xl md:text-xl pt-20  md:mt-0 mb-5 text-white font-title text-shadow-lg ">
+                            <h1 className=" text-7xl md:text-4xl pt-20  md:mt-0 mb-5 text-white font-title text-shadow-lg">
                                 키보드로
                                 <br />
                                 소문난
@@ -66,7 +65,6 @@ const Home = () => {
 
                 <div>
                     <Result />
-                    {/* <TestResult></TestResult> */}
                 </div>
             </Layout>
         </>

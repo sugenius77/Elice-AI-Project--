@@ -56,16 +56,13 @@ const HotelCard = ({ h }) => {
                                             className=" pr-6 h-52 flex items-center justify-center"
                                         >
                                             <div>
-                                                <p className="text-xl inline-block ">
-                                                    “
+                                                <p className="text-center text-lg md:text-base font-reviewsFont p-3">
+                                                    " {review.contents} "{" "}
                                                 </p>{" "}
-                                                <p className="text-center text-sm font-reviewsFont p-3">
-                                                    {review.contents}
-                                                </p>{" "}
-                                                <p className="text-xl inline-block float-right pr-2">
+                                                {/* <p className="text-xl inline-block float-right pr-2">
                                                     ”
-                                                </p>
-                                                <p className="text-sm text-center mt-4 text-gray-300 px-3">
+                                                </p> */}
+                                                <p className="text-sm text-center text-gray-300 px-3">
                                                     <span>
                                                         @
                                                         {randomValueFromArray()}

@@ -59,7 +59,7 @@ const Result = () => {
 
     const getMoreItem = async () => {
         setIsLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 1100));
         page = page + 5;
 
         let movies;
@@ -103,15 +103,15 @@ const Result = () => {
             </div>
         );
     return (
-        <div>
-            <div className=" gird justify-center md:mx-5 mx-32 mt-10 p-5 shadow-2xl bg-[#9DC3C2] items-center rounded-lg">
+        <>
+            <div className=" gird justify-center md:mx-5 mx-32 mt-10 p-5 shadow-2xl bg-[#9DC3C2] items-center rounded-lg ">
                 {data.map((h) => (
                     <HotelCard key={h.hotel_id} h={h} />
                 ))}
             </div>
             {isLoading ? (
                 <div>
-                    <Loading2></Loading2>
+                    <Loading2 />
                 </div>
             ) : (
                 ""
@@ -121,7 +121,7 @@ const Result = () => {
                 id="observer"
                 ref={setTarget}
             ></div>
-        </div>
+        </>
     );
 };
 
