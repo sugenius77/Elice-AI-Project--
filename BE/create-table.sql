@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS nlp;
+CREATE DATABASE nlp;
+USE nlp;
 CREATE TABLE review(
   review_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '리뷰id PK AI',
   contents TEXT COMMENT '리뷰내용',
@@ -12,16 +15,12 @@ CREATE TABLE hotel_info(
   hotel_url VARCHAR(2048) COMMENT '호텔 url',
   hotel_img_url VARCHAR(2048) COMMENT '호텔 이미지 url'
 ) DEFAULT CHARSET UTF8 COMMENT '호텔정보 테이블';
-
 CREATE TABLE `user` (
   `user_id` varchar(255) NOT NULL PRIMARY KEY COMMENT '사용자id PK',
   `name` varchar(255) DEFAULT NULL COMMENT '사용자 이름',
   `email` varchar(255) DEFAULT NULL COMMENT '사용자 이메일',
-) DEFAULT CHARSET UTF8 COMMENT='사용자 정보 테이블'
-
-CREATE TABLE `wish_list` (
+) DEFAULT CHARSET UTF8 COMMENT = '사용자 정보 테이블' CREATE TABLE `wish_list` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `user_id` varchar(255) NOT NULL COMMENT '사용자id',
   `hotel_id` int(11) NOT NULL COMMENT '호텔id',
-) DEFAULT CHARSET UTF8 COMMENT='찜 목록 테이블'
-
+) DEFAULT CHARSET UTF8 COMMENT = '찜 목록 테이블'
