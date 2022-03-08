@@ -6,8 +6,8 @@ import {
     searchResultState,
     wishListIsDeletedState,
     testState,
-} from "state/atom";
-import { hotelSearch } from "action/HotelSearch";
+} from "../state/atom";
+import { hotelSearch } from "../action/HotelSearch";
 import HotelCard from "./cards/HotelCard";
 
 const Result = () => {

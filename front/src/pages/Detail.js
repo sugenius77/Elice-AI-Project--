@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { Loading } from "components/Loading";
-import Layout from "components/Layout";
+import { Loading } from "../components/Loading";
+import Layout from "../components/Layout";
 
 import { hotelDetail } from "action/HotelSearch";
 
-import MapContainer from "action/MapContainer";
-import DetailReview from "action/DetailReview";
+import MapContainer from "../action/MapContainer";
+import DetailReview from "../action/DetailReview";
 
 const Detail = () => {
     const [loading, setLoading] = useState(true);

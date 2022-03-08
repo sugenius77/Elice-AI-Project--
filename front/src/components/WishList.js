@@ -6,8 +6,8 @@ import {
   wishListState,
   userInfoState,
   wishListIsDeletedState,
-} from "state/atom";
-import HeartImg from "components/img_src/heart2.png";
+} from "../state/atom";
+import HeartImg from "./img_src/heart2.png";
 
 const WishList = ({ setOpen, asyncGetHotels }) => {
   const userInfo = useRecoilValue(userInfoState);
@@ -65,7 +65,7 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
                     class="btn btn-sm bg-[#f6bd60] border-[#f6bd60]"
                     onClick={() => window.open(item.hotel_url, "_blank")}
                   >
-                    예약하기
+                    예약
                   </button>
                   <button
                     className="btn btn-sm btn-square btn-ghost mr-2 bg-inherit"

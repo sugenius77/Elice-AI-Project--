@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
-import { randomValueFromArray } from "action/HotelSearch";
+import { randomValueFromArray } from "../../action/HotelSearch";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -9,8 +9,8 @@ import "swiper/css/navigation";
 import { Pagination } from "swiper";
 
 import "swiper/css";
-import HeartButton from "action/HeartButton";
-import ProgressBar from "action/ProgressBar";
+import HeartButton from "../../action/HeartButton";
+import ProgressBar from "../../action/ProgressBar";
 
 const HotelCard = ({ h }) => {
     const history = useHistory();

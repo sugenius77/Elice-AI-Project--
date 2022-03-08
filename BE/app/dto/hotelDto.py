@@ -29,9 +29,14 @@ class HotelDto:
 
     recoHotel_list_model = api.model('recoHotel_list_model', {
         "hotel_id": fields.Integer(readonly=True, description='호텔 id'),
-        "hotel_name": fields.String(readonly=False, description='호텔 이름'),
+        "hotel_name": fields.String(readonly=True, description='호텔 이름'),
         "region": fields.String(readonly=True, description='호텔 지역'),
         "hotel_url": fields.String(readonly=True, description='호텔 url'),
         "hotel_img_url": fields.String(readonly=True, description='호텔 이미지 url'),
+        "is_wish": fields.Boolean(readonly=True, description='찜 체크'),
+        'similarity': fields.Integer(readonly=True, description='유사도'),
+        'address': fields.String(readonly=True, description='호텔 주소'),
+        'positive_keywords': fields.String(readonly=True, description='호텔 긍정키워드'),
+        'negative_keywords': fields.String(readonly=True, description='호텔 부정키워드'),
         'reviews': fields.List(fields.Nested(review_model))
     })
