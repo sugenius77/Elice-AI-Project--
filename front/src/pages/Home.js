@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Result from "../components/Result";
-import TestResult from "../components/testResult";
+import About from "components/About";
 import { Link } from "react-scroll";
 
 import SearchBox from "../components/SearchBox";
