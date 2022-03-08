@@ -7,13 +7,13 @@ const Progressbar = ({ value }) => {
     React.useEffect(() => {
         const fn = () => {
             const myInter = setInterval(() => {
-                console.log("ref.current ", ref.current);
+                // console.log("ref.current ", ref.current);
                 setEffect((prev) => !prev);
-                if (ref.current < 45) ref.current++;
+                if (ref.current < value) ref.current++;
                 else clearInterval(myInter);
             }, 10);
         };
-        console.log("ref", ref);
+        // console.log("ref", ref);
         if (ref.current !== undefined) fn();
     }, [ref]);
 

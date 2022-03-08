@@ -37,6 +37,7 @@ const Detail = () => {
 
     useEffect(() => {
         console.log("detail state  ===> ", detail);
+        console.log("detail state  ===> ", detail.positive_keywords);
     }, [detail]);
 
     return (
@@ -62,6 +63,7 @@ const Detail = () => {
                                         <span className="badge text-xl mt-2">
                                             {detail.region}
                                         </span>
+                                        <span>{detail.address}</span>
 
                                         <div className="mt-5">
                                             <button
