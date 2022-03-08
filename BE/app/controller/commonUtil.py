@@ -10,10 +10,13 @@ class Region():
     }
 
     def transRegion(self, region):
+        try:
+            region_list = region.split("|")
+            if len(region_list) >= 1 and '000' in region_list:
+                result = self.region_code['000']
+            else:
 
-        region_list = region.split("|")
-        if len(region_list) > 1 and '000' in region_list:
-            result = self.region_code['000']
-        else:
-            result = list(map(lambda x: self.region_code[x], region_list))
-        return result
+                result = list(map(lambda x: self.region_code[x], region_list))
+            return result
+        except:
+            return 400
