@@ -6,7 +6,7 @@ const Progressbar = ({ value }) => {
         <div className="mt-2">
             <div className="w-full bg-gray-200 rounded-full">
                 <div
-                    className="bg-point text-xs font-medium text-gray-500 text-center p-0.5 leading-none rounded-full"
+                    className="bg-sub text-xs font-medium text-gray-500 text-center p-0.5 leading-none rounded-full"
                     style={{ width: "45%" }}
                 >
                     Similarity : 45%

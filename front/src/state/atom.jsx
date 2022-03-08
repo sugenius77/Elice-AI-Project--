@@ -91,3 +91,9 @@ export const wishListState = atom({
   default: { data: [] },
   dangerouslyAllowMutability: true,
 });
+
+export const wishListIsDeletedState = atom({
+  key: "wishListIsDeletedState",
+  default: false,
+  dangerouslyAllowMutability: true,
+});
