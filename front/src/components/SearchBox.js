@@ -11,8 +11,8 @@ const SearchBox = () => {
     // console.log("recoil 값은 ===>", results);
     const [searchData, setSearchData] = useRecoilState(searchDataState);
 
-    const [text, setText] = useState("바다뷰가 정말 좋은 호텔");
-    const [selectLocal, setSelectLocal] = useState(["전체"]);
+    const [text, setText] = useState("편의점과 접근성");
+    const [selectLocal, setSelectLocal] = useState(["000"]); //TODO 000으로 수정필요
 
     const [search] = useDebounce(text, 300);
     const [region] = useDebounce(selectLocal, 300);

@@ -9,12 +9,13 @@ import { useRecoilValue } from "recoil";
 import { userInfoState } from "state/atom";
 import { wishListState } from "state/atom";
 
-const HeartButton = ({ onClick, hotel_id }) => {
+const HeartButton = ({ hotel_id, is_wish }) => {
+    console.log("is_wish", is_wish);
     const [like, setLike] = useState(false);
     const userInfo = useRecoilValue(userInfoState);
     const wishList = useRecoilValue(wishListState);
 
-    console.log("userInfo ===> ", userInfo);
+    // console.log("userInfo ===> ", userInfo);
     // console.log("hotelid ===> ", hotel_id);
     // console.log("wishList ===> ", wishList);
 
@@ -48,10 +49,6 @@ const HeartButton = ({ onClick, hotel_id }) => {
                 }
             }
         } else {
-            // let body = {
-            //     movie_id: resultmovieid,
-            //     liked: 0,
-            // };
             const res = await axios
                 .delete(
                     `${process.env.REACT_APP_API}/wish-list/${userInfo.id}/${hotel_id}`
@@ -66,7 +63,7 @@ const HeartButton = ({ onClick, hotel_id }) => {
         <div>
             <button
                 onClick={toggleLike}
-                className="btn btn-square btn-outline mr-2 bg-inherit"
+                className="btn btn-square btn-outline mr-2 bg-inherit hover:bg-white"
             >
                 <img
                     className="w-5 h-5"
