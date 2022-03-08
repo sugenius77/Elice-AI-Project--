@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import EmptyHeartImg from "components/img_src/heart1.png";
-import HeartImg from "components/img_src/heart2.png";
+import EmptyHeartImg from "../components/img_src/heart1.png";
+import HeartImg from "../components/img_src/heart2.png";
 
 import { useRecoilValue } from "recoil";
-import { userInfoState } from "state/atom";
-import { wishListState } from "state/atom";
+import { userInfoState } from "../state/atom";
+import { wishListState } from "../state/atom";
 
 const HeartButton = ({ hotel_id, is_wish }) => {
     console.log("is_wish", is_wish);

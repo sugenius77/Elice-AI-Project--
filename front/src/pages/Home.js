@@ -1,16 +1,16 @@
 import React from "react";
-import Layout from "components/Layout";
-import Result from "components/Result";
-import About from "components/About";
+import Layout from "../components/Layout";
+import Result from "../components/Result";
+import TestResult from "../components/testResult";
 import { Link } from "react-scroll";
 
-import SearchBox from "components/SearchBox";
+import SearchBox from "../components/SearchBox";
 
 import AOS from "aos";
 
 import VideoPlayer from "react-background-video-player";
-import mainVideo from "components/video_src/main_video.mp4";
-import logo from "components/img_src/logo.jpg";
+import mainVideo from "../components/video_src/main_video.mp4";
+import logo from "../components/img_src/logo.jpg";
 
 AOS.init({
     duration: 1000,

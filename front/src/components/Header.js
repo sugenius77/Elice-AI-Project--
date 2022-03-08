@@ -1,10 +1,10 @@
-import WishList from "components/WishList";
+import WishList from "./WishList";
 import React, { useState, Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Link as SLink } from "react-scroll";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "state/atom";
-import { wishListState } from "state/atom";
+import { userInfoState } from "../state/atom";
+import { wishListState } from "../state/atom";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import axios from "axios";
@@ -212,7 +212,7 @@ const Header = () => {
                                                     "client_id=" +
                                                     "944228758716-ik6sa442kp2ielcg2pqbi5npocgqkq1n.apps.googleusercontent.com" +
                                                     "&response_type=token" +
-                                                    "&redirect_uri=http://localhost:3000/&" +
+                                                    "&redirect_uri=http://localhost/&" +
                                                     "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                                             }
                                         >
@@ -246,9 +246,7 @@ const Header = () => {
                                             >
                                                 {item.title}
                                             </SLink>
-                                        ) : (
-                                            <></>
-                                        )}
+                                        ) : null}
                                     </li>
                                 );
                             })

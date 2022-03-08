@@ -3,7 +3,7 @@ import { Links } from "./Link";
 import { useDebounce } from "use-debounce";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { testState, searchDataState } from "state/atom";
+import { testState, searchDataState } from "../state/atom";
 import LocalBtn from "./LocalBtn";
 
 const SearchBox = () => {

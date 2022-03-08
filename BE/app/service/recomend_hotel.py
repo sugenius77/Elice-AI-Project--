@@ -54,12 +54,12 @@ def recomend_hotel(region, most_similar_docs):
     # similarity가 높은 순서대로 저장
     similar_review_hotel = pd.DataFrame(
         columns=['region', 'review_id', 'similarity', 'score', 'count'], dtype='object')
-    
+
     for review, similarity in most_similar_docs:
         city, hotel_id, review_id = review.split("@")
-        
+
         if city in region:
-            
+
             if hotel_id not in similar_review_hotel.index:
                 similar_review_hotel.loc[hotel_id] = [
                     city, [review_id], [similarity], similarity, 1]
@@ -77,14 +77,15 @@ def recomend_hotel(region, most_similar_docs):
 
             if count_pass_hotel >= number_top:
                 break
-    
+
     # 통과한 리뷰가 number_review 보다 적은 호텔 제거
     pass_similar_review_hotel = similar_review_hotel[similar_review_hotel['count'] == number_review]
     # 호텔들을 similar_review list가 많은 순서대로 정렬
     recomended_hotel = pass_similar_review_hotel.sort_values(
         'score', ascending=False)
     # score : sum -> avg %로 변경
-    recomended_hotel['score'] = round((recomended_hotel['score'] / number_review) * 100, 1)
+    recomended_hotel['score'] = round(
+        (recomended_hotel['score'] / number_review) * 100, 1)
 
     return recomended_hotel
 
@@ -115,16 +116,17 @@ def get_recomended_hotel(region, user_input, model_name='positive_d2v'):
     # 모델을 로드 하고 로드 에러 반환
     try:
         print(os.getcwd())
-        d2v_model = Doc2Vec.load(f'../AI/models/{model_name}.model')
+        d2v_model = Doc2Vec.load(f'app/service/ai/{model_name}.model')
+        most_similar_docs = make_similar_docs(d2v_model, user_input)
+
+        recomended_hotel = recomend_hotel(region, most_similar_docs)
+
+        # recomended_hotel을 백엔드에 전달하기 위해 변환
+        return_data = set_return_data(recomended_hotel)
+
+        return return_data
 
     except Exception as e:
         print(e)
 
-    most_similar_docs = make_similar_docs(d2v_model, user_input)
-
-    recomended_hotel = recomend_hotel(region, most_similar_docs)
-
-    # recomended_hotel을 백엔드에 전달하기 위해 변환
-    return_data = set_return_data(recomended_hotel)
-
-    return return_data
+        return e
