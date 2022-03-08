@@ -5,16 +5,16 @@ services:
     image: mariadb:10.2.10
     command:
       [
-        '--character-set-server=utf8mb4',
-        '--skip-character-set-client-handshake',
-        '--collation-server=utf8mb4_unicode_ci'
+        "--character-set-server=utf8mb4",
+        "--skip-character-set-client-handshake",
+        "--collation-server=utf8mb4_unicode_ci",
       ]
     container_name: app_db
     restart: always
     ports:
       - 3306:3306
     volumes:
-      #volumes : container 상의 Data를 host machine과 공유하기 위한 기능입니다. volumes는 host_path:container_path 로 값을 입력할 수 있습니다. 
+      #volumes : container 상의 Data를 host machine과 공유하기 위한 기능입니다. volumes는 host_path:container_path 로 값을 입력할 수 있습니다.
       - ./db/data:/var/lib/mysql
       - ./db/initdb.d:/docker-entrypoint-initdb.d
     env_file: .env
@@ -45,3 +45,5 @@ services:
       - ./front:/react-app
     ports:
       - "80:8080"
+    depends_on:
+      - be
