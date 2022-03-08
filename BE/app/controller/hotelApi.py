@@ -1,21 +1,25 @@
 from flask import Flask
 from flask_restx import Resource, Namespace, abort
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, case, and_
 import pandas as pd
 
 from app.dto.hotelDto import HotelDto
 from app import db
-from app.models.model import Hotel, Review
+from app.models.model import Hotel, Review, WishList
 from app.service import recomend_hotel
+from app.controller.commonUtil import Region
+
 
 hotel_api = HotelDto.api
 
 
 hotelParser = hotel_api.parser()
 hotelParser.add_argument(
-    'region', type=str, help='지역 (예)제주|서울', location='args', required=True)
+    'region', type=str, help='지역번호. 구분자 | (예)002|061', location='args', required=True)
 hotelParser.add_argument(
     'search', type=str, help='검색텍스트 (예)바다가 보이고 침대가 편안한 호텔 찾아줘', location='args', required=True)
+hotelParser.add_argument(
+    'user_id', type=str, help='구글 사용자 토큰', location='args', required=False)
 
 
 @hotel_api.route("/recommend-hotel-list", methods=["GET"])
@@ -32,11 +36,12 @@ class RecommendHotelApi(Resource):
         args = hotelParser.parse_args()
         region = args['region']
         search = args['search']
+        user_id = args['user_id']
         if region == None or search == None:
             abort(400, msg='요청 정보 정확하지 않음.')
 
         print(
-            f'region={region}, search={search}')
+            f'region={region}, search={search}, user_id={user_id}')
 
         #hotel_info_df = pd.DataFrame(db.session.query(Hotel).filter(Hotel.region == region), columns=['hotel_id', 'hotel_name', 'region', 'hotel_url', 'hotel_img_url'])
         #hotel_review_df = pd.DataFrame(db.session.query(Review), columns=['review_id', 'contents', 'hotel_id', 'review_date', 'is_positive'])
@@ -46,18 +51,19 @@ class RecommendHotelApi(Resource):
 
         # hotel_review_df = pd.read_sql(
         #     db.session.query(Review).join(Hotel, Review.hotel_id == Hotel.hotel_id).filter(Hotel.region == region).statement, db.session.bind)
-        # TODO 지역 코드화(프론트-백엔트-AI 통일)
-        # TODO DB 데이터로 변경?
-        if region == "전체":
-            region_list = ['서울', '부산', '제주', '강원', '여수']
-        else:
-            region_list = region.split("|")
 
+        # TODO DB 데이터로 변경?
+
+        r = Region()
+        region_list = r.transRegion(region)
         print(region_list)
+
         similarity_list = recomend_hotel.get_recomended_hotel(
             region_list, search)
+
         print(similarity_list)
-        hotel_list = list(map(hotelval, similarity_list))
+        hotelmap = hotelMapping(user_id)
+        hotel_list = list(map(hotelmap.hotelval, similarity_list))
 
         return hotel_list
 
@@ -88,26 +94,35 @@ class HotelInfoApi(Resource):
         hotel = db.session.query(Hotel).filter(
             Hotel.hotel_id == hotel_id).first().__dict__
 
-        hotel['reviews'] = db.session.query(Review.review_id, Review.is_positive, Review.hotel_id, Review.contents, func.date_format(
-            Review.review_date, '%Y-%m').label('review_date')).filter(Review.hotel_id == hotel_id).order_by(desc('review_date')).limit(10).all()
-       
+        hotel['reviews'] = db.session.query(
+            Review.review_id, Review.is_positive, Review.hotel_id, Review.contents,
+            func.date_format(Review.review_date, '%Y-%m').label('review_date')
+        ).filter(Review.hotel_id == hotel_id).order_by(desc('review_date')).limit(10).all()
+
         return hotel
 
 
-def hotelval(x):
+class hotelMapping:
+    def __init__(self, user_id):
+        self.user_id = user_id
 
-    hotels = {}
-    for u in db.session.query(Hotel).filter(Hotel.hotel_id == x['hotel_id']).all():
-        hotels = u.__dict__
+    def hotelval(self, x):
+        hotels = {}
+        #w = case([(WishList.id != None, True)], else_=False).label("is_wish")
+        # print(db.session.query(Hotel, w).filter(Hotel.hotel_id == x['hotel_id']).join(WishList, and_(WishList.user_id == user_id, WishList.hotel_id == x['hotel_id'])).all())
+        for u in db.session.query(Hotel).filter(Hotel.hotel_id == x['hotel_id']).all():
+            hotels = u.__dict__
 
-    reviews = list(map(reviewval, x['review_id']))
+        is_wish = True if db.session.query(WishList.id).filter(
+            WishList.user_id == self.user_id, WishList.hotel_id == x['hotel_id']).first() != None else False
+        reviews = list(map(lambda y: db.session.query(
+            Review.review_id, Review.is_positive, Review.hotel_id, Review.contents,
+            func.date_format(Review.review_date, '%Y-%m').label('review_date')
+        ).filter(Review.review_id == y).first(), x['review_id']))
 
-    hotels['reviews'] = reviews
-    res = hotels
-    return res
+        hotels['is_wish'] = is_wish
+        hotels['reviews'] = reviews
+        hotels['similarity'] = x['similarity']
 
-
-def reviewval(y):
-
-    return db.session.query(Review.review_id, Review.is_positive, Review.hotel_id, Review.contents, func.date_format(
-        Review.review_date, '%Y-%m').label('review_date')).filter(Review.review_id == y).first()
+        res = hotels
+        return res
