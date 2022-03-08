@@ -5,14 +5,17 @@ const DetailReview = ({ reviews, positive }) => {
     return (
         <div>
             {reviews === undefined ? (
-                "null"
+                <></>
             ) : (
                 <div>
                     {reviews.map((review, index) => {
                         if (review.is_positive === positive)
                             return (
                                 <>
-                                    <div key={index} className="text-sm">
+                                    <div
+                                        key={review.review_id}
+                                        className="text-sm"
+                                    >
                                         <br />
                                     </div>
                                     <div className="card w-96 md:w-full bg-base-100 shadow-xl mb-1 cursor-default">
@@ -32,13 +35,6 @@ const DetailReview = ({ reviews, positive }) => {
                                             <p className="p-3">
                                                 {review.contents}
                                             </p>
-                                            {/* <div className="card-actions justify-end">
-                                                <button className="btn btn-primary">
-                                                    {positive === 1
-                                                        ? "긍정"
-                                                        : "부정"}
-                                                </button>
-                                            </div> */}
                                         </div>
                                     </div>
                                 </>
