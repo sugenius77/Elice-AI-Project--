@@ -37,19 +37,13 @@ class ListApi(Resource):
                 .with_entities(
                     WishList.hotel_id
                 )\
-                .all()
-                   
-        hotel_id_list =[]
-        for i in range(0,len(list)):
-            hotel_id_list.append(list[i][0])
-        
+                .all()                   
+
         hotel_list = []
-        hotels ={}
-        for i in range(0,len(hotel_id_list)):
-            for j in Hotel.query.filter(Hotel.hotel_id == hotel_id_list[i]).all():
-                hotels = j.__dict__   
-                hotel_list.append(hotels)
-    
+
+        for i in range(0,len(list)):
+            for j in Hotel.query.filter(Hotel.hotel_id == list[i][0]).all(): 
+                hotel_list.append(j.__dict__)
         
         return hotel_list
 
