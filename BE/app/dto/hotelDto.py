@@ -34,5 +34,9 @@ class HotelDto:
         "hotel_url": fields.String(readonly=True, description='호텔 url'),
         "hotel_img_url": fields.String(readonly=True, description='호텔 이미지 url'),
         "is_wish": fields.Boolean(readonly=True, description='찜 체크'),
+        'similarity': fields.Integer(readonly=True, description='유사도'),
+        'address': fields.String(readonly=True, description='호텔 주소'),
+        'positive_keywords': fields.String(readonly=True, description='호텔 긍정키워드'),
+        'negative_keywords': fields.String(readonly=True, description='호텔 부정키워드'),
         'reviews': fields.List(fields.Nested(review_model))
     })
