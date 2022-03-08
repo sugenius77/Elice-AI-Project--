@@ -57,11 +57,12 @@ class RecommendHotelApi(Resource):
         r = Region()
         region_list = r.transRegion(region)
         print(region_list)
+        if region_list == 400:
+            abort(400, msg='요청 정보 정확하지 않음.')
 
         similarity_list = recomend_hotel.get_recomended_hotel(
             region_list, search)
 
-        print(similarity_list)
         hotelmap = hotelMapping(user_id)
         hotel_list = list(map(hotelmap.hotelval, similarity_list))
 
