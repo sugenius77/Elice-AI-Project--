@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Result from "../components/Result";
-import About from "components/About";
+import About from "../components/About";
 import { Link } from "react-scroll";
 
 import SearchBox from "../components/SearchBox";
@@ -12,7 +12,7 @@ import mainVideo from "../components/video_src/main_video.mp4";
 import logo from "../components/img_src/logo.jpg";
 
 AOS.init({
-    duration: 1000,
+  duration: 1000,
 });
 
 const Home = () => {
@@ -63,23 +63,19 @@ const Home = () => {
                     {/* <h1 className="text-6xl text-center mb-5 font-semibold text-fontcolor">
                         ⌨
                     </h1> */}
-                    <div className="flex justify-center">
-                        <img
-                            src={logo}
-                            alt=""
-                            className=" h-28 shadow-lg mb-8"
-                        />
-                    </div>
-                    {/* <h1 className="text-4xl text-center">⌨</h1> */}
-                    <SearchBox />
-                </div>
+          <div className="flex justify-center">
+            <img src={logo} alt="" className=" h-28 shadow-lg mb-8" />
+          </div>
+          {/* <h1 className="text-4xl text-center">⌨</h1> */}
+          <SearchBox />
+        </div>
 
-                <div>
-                    <Result />
-                </div>
-            </Layout>
-        </>
-    );
+        <div>
+          <Result />
+        </div>
+      </Layout>
+    </>
+  );
 };
 
 export default Home;
