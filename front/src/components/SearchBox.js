@@ -11,10 +11,10 @@ const SearchBox = () => {
     // console.log("recoil 값은 ===>", results);
     const [searchData, setSearchData] = useRecoilState(searchDataState);
 
-    const [text, setText] = useState("편의점과 접근성");
+    const [text, setText] = useState("");
     const [selectLocal, setSelectLocal] = useState(["000"]); //TODO 000으로 수정필요
 
-    const [search] = useDebounce(text, 300);
+    const [search] = useDebounce(text, 500);
     const [region] = useDebounce(selectLocal, 300);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const SearchBox = () => {
                         value={text}
                         type="text"
                         className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full focus:outline-none p-6 focus:caret-point text-black flex mr-2 focus:scale-150 focus:mt-3 focus:ml-10 duration-100 focus:ring focus:ring-headerColor "
-                        placeholder="🔎 Search Hotel's Keyword in Reviews"
+                        placeholder="🔎바다뷰가좋았어요 검색 "
                         onChange={(e) => setText(e.target.value)}
                     />
 
