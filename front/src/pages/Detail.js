@@ -3,19 +3,24 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import { Loading } from "../components/Loading";
 import Layout from "../components/Layout";
 
-import { hotelDetail } from "action/HotelSearch";
+import { hotelDetail } from "../action/HotelSearch"; // api 호출을 위한 import
 
 import MapContainer from "../action/MapContainer";
 import DetailReview from "../action/DetailReview";
-import DetailKeywords from "action/DetailKeywords";
-import HeartButton from "action/HeartButton";
+import DetailKeywords from "../action/DetailKeywords";
+import HeartButton from "../action/HeartButton";
 
-const Detail = () => {
+const Detail = ({ location }) => {
     const [loading, setLoading] = useState(true);
     const [detail, setDetail] = useState([]);
     const { _id } = useParams();
     const history = useHistory();
+
+    const hotel_id = location.state.hotel_id;
+    const is_wish = location.state.is_wish;
+
     console.log("params id ===> ", _id);
+    console.log("is_wish ===> ", is_wish);
 
     // detail components 접속 시 스크롤 최상단으로 이동
     const { pathname } = useLocation();
@@ -37,11 +42,8 @@ const Detail = () => {
         getHotel();
     }, []);
 
-    let positive_keywords;
     useEffect(() => {
         console.log("detail state  ===> ", detail);
-
-        // console.log("detail state  ===> ", detail.positive_keywords);
     }, [loading]);
 
     return (
@@ -51,8 +53,8 @@ const Detail = () => {
                     <Loading />
                 ) : (
                     <div className="flex flex-col">
-                        <div className="w-full items-center justify-center flex">
-                            <div className="block hero w-3/4 bg-base-200  ">
+                        <div className="w-full items-center justify-center flex mb-5 p-3">
+                            <div className="block hero w-3/4 bg-base-200 md:w-full  ">
                                 <div className="md:flex-col justify-start hero-content flex-row cursor-default ">
                                     <img
                                         // src="https://api.lorem.space/image/movie?w=260&h=400"
@@ -64,23 +66,33 @@ const Detail = () => {
                                         <h1 className="text-5xl font-bold text-shadow-sm font-notoSans md:text-3xl ">
                                             {detail.hotel_name}
                                         </h1>
-                                        <span className="badge text-xl mt-2">
+                                        <span className="badge text-lg bg-[#004E98] border-0 outline-none mt-2">
                                             {detail.region}
                                         </span>
-                                        <span>{detail.address}</span>
+                                        <span className="text-sm ml-1">
+                                            {detail.address}
+                                        </span>
 
                                         <div className="mt-5">
-                                            <button
-                                                className="btn btn-primary bg-[#F6bD60] hover:bg-[#FFC145] outline-none border-0"
-                                                onClick={() =>
-                                                    window.open(
-                                                        detail.hotel_url,
-                                                        "_blank"
-                                                    )
-                                                }
-                                            >
-                                                예약 바로가기
-                                            </button>
+                                            <div className="flex">
+                                                <button
+                                                    className="btn btn-primary bg-[#F6bD60] hover:bg-[#FFC145] outline-none border-0"
+                                                    onClick={() =>
+                                                        window.open(
+                                                            detail.hotel_url,
+                                                            "_blank"
+                                                        )
+                                                    }
+                                                >
+                                                    예약 바로가기
+                                                </button>
+                                                <span className="ml-1">
+                                                    <HeartButton
+                                                        hotel_id={hotel_id}
+                                                        is_wish={is_wish}
+                                                    />
+                                                </span>
+                                            </div>
                                             <div className="font-notoSans my-5">
                                                 <DetailKeywords
                                                     data={
