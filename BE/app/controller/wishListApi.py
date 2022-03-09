@@ -40,11 +40,12 @@ class ListApi(Resource):
                 .all()                   
 
         hotel_list = []
-
         for i in range(0,len(list)):
-            for j in Hotel.query.filter(Hotel.hotel_id == list[i][0]).all(): 
-                hotel_list.append(j.__dict__)
-        
+            hotel = dict(db.session.query(Hotel.hotel_id,Hotel.hotel_name,Hotel.region,Hotel.hotel_url,Hotel.hotel_img_url)\
+                .filter(Hotel.hotel_id == list[i][0])
+                .first())
+            hotel_list.append(hotel)
+
         return hotel_list
 
 
