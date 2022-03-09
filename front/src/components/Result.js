@@ -1,20 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Loading, Loading2 } from "./Loading";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
     searchDataState,
-    searchResultState,
     wishListIsDeletedState,
-    testState,
+    userInfoState,
 } from "../state/atom";
 import { hotelSearch } from "../action/HotelSearch";
 import HotelCard from "./cards/HotelCard";
 
 const Result = () => {
     const [loading, setLoading] = useState(false);
-    const [searchData, setSearchData] = useRecoilState(searchDataState);
     const [results, setResults] = useState([]);
-    const testdata = useRecoilValue(testState);
+
+    const searchData = useRecoilValue(searchDataState);
+    const userInfo = useRecoilValue(userInfoState);
     const [isDeleted, setIsDeleted] = useRecoilState(wishListIsDeletedState);
 
     const [data, setData] = useState([]);
@@ -31,7 +31,7 @@ const Result = () => {
         try {
             const locals = searchData.region.join("|");
             console.log(locals);
-            const response = await hotelSearch(searchData, locals);
+            const response = await hotelSearch(searchData, locals, userInfo.id);
             // console.log(response.data.data);
             setResults(response.data.data);
             setData(response.data.data.slice(0, 5));
@@ -104,7 +104,7 @@ const Result = () => {
         );
     return (
         <>
-            <div className=" gird justify-center md:mx-5 mx-32 mt-10 p-5 shadow-2xl bg-[#9DC3C2] items-center rounded-lg ">
+            <div className=" gird justify-center md:mx-5 mx-32 mt-10 p-5 shadow-2xl bg-[#9DC3C2] md:bg-gray-100 items-center rounded-lg ">
                 {data.map((h) => (
                     <HotelCard key={h.hotel_id} h={h} />
                 ))}
