@@ -65,7 +65,7 @@ const Header = () => {
                                 spy={true}
                                 smooth={true}
                                 key="1"
-                                className="text-md font-semibold font-notoSans my-2 cursor-pointer"
+                                className="text-md font-semibold font-notoSans my-2 cursor-pointer md:text-xs"
                             >
                                 {/* H O T E L S */}
                                 <div class="flex justify-center gap-1 my-1 w-full text-black">
@@ -79,7 +79,7 @@ const Header = () => {
                         ) : (
                             <Link
                                 to="/"
-                                className="text-md font-semibold font-notoSans mb-2"
+                                className="text-md font-semibold font-notoSans mb-2 md:text-xs"
                             >
                                 {/* H O T E L S */}
                                 <div class="flex justify-center gap-1 my-1 w-full text-black">
@@ -212,7 +212,7 @@ const Header = () => {
                                                     "client_id=" +
                                                     "944228758716-ik6sa442kp2ielcg2pqbi5npocgqkq1n.apps.googleusercontent.com" +
                                                     "&response_type=token" +
-                                                    "&redirect_uri=http://localhost/&" +
+                                                    "&redirect_uri=http://localhost:3000/&" +
                                                     "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                                             }
                                         >

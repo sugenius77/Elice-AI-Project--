@@ -14,7 +14,7 @@ const MapContainer = ({ searchPlace, region, address }) => {
         const map = new kakao.maps.Map(container, options);
         const ps = new kakao.maps.services.Places();
 
-        ps.keywordSearch(address, placesSearchCB);
+        ps.keywordSearch(searchPlace + region, placesSearchCB);
 
         function placesSearchCB(data, status, pagination) {
             if (status === kakao.maps.services.Status.OK) {

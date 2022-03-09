@@ -23,19 +23,37 @@ const HotelCard = ({ h }) => {
                         <img
                             src={h.hotel_img_url} //"https://via.placeholder.com/900x500.png?text=Hotel+hoya"
                             alt="sample"
-                            className=" mr-3 rounded-lg w-96 h-60 mb-3 cursor-pointer hover:scale-95 duration-200"
-                            onClick={() => history.push(`/hotel/${h.hotel_id}`)}
+                            className=" mr-3 rounded-lg w-96 h-60 mb-3 cursor-pointer hover:scale-95 duration-200 object-cover "
+                            onClick={() =>
+                                history.push({
+                                    pathname: `/hotel/${h.hotel_id}`,
+                                    state: {
+                                        hotel_id: h.hotel_id,
+                                        is_wish: h.is_wish,
+                                    },
+                                })
+                            }
                         />
                     </div>
                     <div className="col-start-2  col-end-4 ml-2 ">
                         <div className="">
                             <Link
-                                to={`/hotel/${h.hotel_id}`}
-                                className="text-3xl md:text-xl font-semibold hover:text-gray-400 hover:underline hover:font-bold"
+                                // to={`/hotel/${h.hotel_id}`}
+
+                                to={{
+                                    pathname: `/hotel/${h.hotel_id}`,
+                                    state: {
+                                        hotel_id: h.hotel_id,
+                                        is_wish: h.is_wish,
+                                    },
+                                }}
+                                className="text-3xl md:text-xl font-semibold
+                                hover:text-gray-400 hover:underline
+                                hover:font-bold"
                             >
                                 {h.hotel_name}
                             </Link>
-                            <span className="badge text-sm mt-2">
+                            <span className="badge text-xs mt-2 bg-[#3A6EA5] outline-none border-0">
                                 {h.region}
                             </span>
 
