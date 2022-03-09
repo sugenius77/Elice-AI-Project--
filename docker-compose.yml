@@ -7,7 +7,7 @@ services:
       [
         "--character-set-server=utf8mb4",
         "--skip-character-set-client-handshake",
-        "--collation-server=utf8mb4_unicode_ci",
+        "--collation-server=utf8mb4_unicode_ci"
       ]
     container_name: app_db
     restart: always
@@ -45,5 +45,5 @@ services:
       - ./front:/react-app
     ports:
       - "80:8080"
-    depends_on:
-      - be
+    # depends_on:
+    #   - be

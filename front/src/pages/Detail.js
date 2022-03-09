@@ -22,25 +22,25 @@ const Detail = ({ location }) => {
     console.log("params id ===> ", _id);
     console.log("is_wish ===> ", is_wish);
 
-    // detail components 접속 시 스크롤 최상단으로 이동
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+  // detail components 접속 시 스크롤 최상단으로 이동
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-    useEffect(() => {
-        async function getHotel() {
-            try {
-                const response = await hotelDetail(_id);
+  useEffect(() => {
+    async function getHotel() {
+      try {
+        const response = await hotelDetail(_id);
 
-                setDetail(response.data.data);
-                setLoading(false);
-            } catch (e) {
-                console.log("axios get Error");
-            }
-        }
-        getHotel();
-    }, []);
+        setDetail(response.data.data);
+        setLoading(false);
+      } catch (e) {
+        console.log("axios get Error");
+      }
+    }
+    getHotel();
+  }, []);
 
     useEffect(() => {
         console.log("detail state  ===> ", detail);
@@ -165,10 +165,37 @@ const Detail = ({ location }) => {
                             </button>
                         </div>
                     </div>
-                )}
+                  </div>
+                </div>
+              </div>
             </div>
-        </Layout>
-    );
+
+            <div className="flex flex-col items-center justify-center  my-4">
+              <div class="flex justify-center gap-1 my-1 w-full cursor-default">
+                <kbd className="kbd">m</kbd>
+                <kbd className="kbd">a</kbd>
+                <kbd className="kbd">p</kbd>
+              </div>
+              <MapContainer
+                searchPlace={detail.hotel_name}
+                region={detail.region}
+              />
+            </div>
+            <div className="flex items-center justify-center m-5">
+              <button
+                className="btn"
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
+                검색으로 돌아가기
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </Layout>
+  );
 };
 
 export default Detail;
