@@ -15,7 +15,7 @@ const SearchBox = () => {
     const [selectLocal, setSelectLocal] = useState(["000"]); //TODO 000으로 수정필요
 
     const [search] = useDebounce(text, 500);
-    const [region] = useDebounce(selectLocal, 300);
+    const [region] = useDebounce(selectLocal, 500);
 
     useEffect(() => {
         if (search) setSearchData({ region, search });
@@ -37,7 +37,7 @@ const SearchBox = () => {
                     <input
                         value={text}
                         type="text"
-                        className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full focus:outline-none p-6 focus:caret-point text-black flex mr-2 focus:scale-150 focus:mt-3 focus:ml-10 duration-100 focus:ring focus:ring-headerColor "
+                        className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full focus:outline-none p-6 focus:caret-point text-black flex mr-2 focus:scale-150 md:focus:scale-125 focus:mt-3 focus:ml-10 md:focus:ml-8 duration-100 focus:ring focus:ring-headerColor "
                         placeholder="🔎바다뷰가좋았어요 검색 "
                         onChange={(e) => setText(e.target.value)}
                     />

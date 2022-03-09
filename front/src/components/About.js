@@ -15,7 +15,7 @@ const About = () => {
                                 .
                             </span>
                         </h1>
-                        <p className="text-[#aaa] text-lg">
+                        <p className="text-[#aaa] text-lg md:text-sm">
                             그 여행, 그 숙소에서 좋았던 경험을 검색해보세요!
                             <br />
                             이전의 경험을 바탕으로 잊지못할 호텔을 찾아주는
