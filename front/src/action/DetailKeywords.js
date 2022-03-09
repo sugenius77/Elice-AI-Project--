@@ -9,8 +9,9 @@ const DetailKeywords = ({ data, positive }) => {
         <>
             {data !== undefined ? (
                 <div className="mb-2">
-                    {keywords.map((keyword) => (
+                    {keywords.map((keyword, index) => (
                         <kbd
+                            key={index}
                             className={`kbd text-sm font-notoSans  ${
                                 positive ? "border-blue-200" : "border-red-200"
                             }`}
