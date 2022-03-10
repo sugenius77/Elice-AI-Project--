@@ -43,6 +43,10 @@ const Result = () => {
     };
     useEffect(() => {
         loadData();
+    }, []);
+
+    useEffect(() => {
+        loadData();
     }, [searchData]);
 
     useEffect(() => {
@@ -104,7 +108,7 @@ const Result = () => {
         );
     return (
         <>
-            <div className=" gird justify-center md:mx-5 mx-32 mt-10 p-5 shadow-2xl bg-[#9DC3C2] md:bg-gray-100 items-center rounded-lg ">
+            <div className=" gird justify-center md:mx-5 mx-32 mt-10 p-5 md:py-5 md:px-1 shadow-2xl bg-[#9DC3C2] md:bg-gray-100 items-center rounded-lg ">
                 {data.map((h) => (
                     <HotelCard key={h.hotel_id} h={h} />
                 ))}
