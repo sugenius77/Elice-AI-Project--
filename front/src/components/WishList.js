@@ -40,7 +40,7 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
           <div className="mb-3.5">
             <div className="card card-side h-48 bg-base-100 shadow-xl h-45">
               <img
-                className="max-w-[40%] cursor-pointer"
+                className="max-w-[40%] cursor-pointer object-cover"
                 src={item.hotel_img_url}
                 onClick={() => {
                   history.push({
