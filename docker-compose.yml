@@ -45,5 +45,5 @@ services:
       - ./front:/react-app
     ports:
       - "80:8080"
-    # depends_on:
-    #   - be
+    depends_on:
+      - be
