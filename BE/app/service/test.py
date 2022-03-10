@@ -11,12 +11,13 @@ from multiprocessing import Pool
 ## 0. 테스트용 데이터 설정
 def set_test_data(hotel_info_df, hotel_review_df, test_num):
     ## base 변수 설정
-    model_name = 'base_d2v_model'
-    pos = ["Adjective", "Adverb", "Noun", "Verb"]
+    model_name = 'positive_d2v'
+    pos = ["Adjective", "Noun", "Verb"]
     token_min, token_max = 5, 50
+    vector_size = 1000
     window = 3
-    min_count = 10000
-    epochs = 30
+    min_count = 8000
+    epochs = 25
     
     test_date = set_date(hotel_review_df)
     test_pos = set_pos()
@@ -26,7 +27,7 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
     # 0 : base 그대로 반환
     if test_num == 0:
         return_input.append([hotel_info_df, hotel_review_df, model_name, 
-            pos, token_min, token_max, window, min_count, epochs])
+            pos, token_min, token_max, vector_size, window, min_count, epochs])
 
     # 1 : 리뷰 시작일별 테스트
     elif test_num == 1:
@@ -35,7 +36,7 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
         for index, date in enumerate(test_date):
             hotel_review_df = date
             return_input.append([hotel_info_df, hotel_review_df, f'{test_num}_{index}_d2v', 
-            pos, token_min, token_max, window, min_count, epochs])
+            pos, token_min, token_max, vector_size, window, min_count, epochs])
 
     # 2 : 품사별 테스트
     elif test_num == 2:
@@ -43,7 +44,7 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
 
         for index, pos in enumerate(test_pos):
             return_input.append([hotel_info_df, hotel_review_df, f'{test_num}_{index}_d2v', 
-            pos, token_min, token_max, window, min_count, epochs])
+            pos, token_min, token_max, vector_size, window, min_count, epochs])
 
     # 3 : 토큰 길이별 테스트
     elif test_num == 3:
@@ -51,7 +52,7 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
 
         for index, token in enumerate(test_token):
             return_input.append([hotel_info_df, hotel_review_df, f'{test_num}_{index}_d2v', 
-            pos, token[0], token[1], window, min_count, epochs])
+            pos, token[0], token[1], vector_size, window, min_count, epochs])
 
     # 4 : 토큰 길이별 테스트
     elif test_num == 4:
@@ -59,7 +60,7 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
 
         for index, window in enumerate(test_window):
             return_input.append([hotel_info_df, hotel_review_df, f'{test_num}_{index}_d2v', 
-            pos, token_min, token_max, window, min_count, epochs])
+            pos, token_min, token_max, vector_size, window, min_count, epochs])
 
     # 5 : min_count 테스트
     elif test_num == 5:
@@ -67,7 +68,7 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
 
         for index, min_count in enumerate(min_count_list):
             return_input.append([hotel_info_df, hotel_review_df, f'{test_num}_{index}_d2v', 
-            pos, token_min, token_max, window, min_count, epochs])
+            pos, token_min, token_max, vector_size, window, min_count, epochs])
     
     # 6 : epochs 테스트
     elif test_num == 6:
@@ -75,14 +76,22 @@ def set_test_data(hotel_info_df, hotel_review_df, test_num):
 
         for index, epochs in enumerate(epochs_list):
             return_input.append([hotel_info_df, hotel_review_df, f'{test_num}_{index}_d2v', 
-            pos, token_min, token_max, window, min_count, epochs])
-    
-    # 7 : custom
+            pos, token_min, token_max, vector_size, window, min_count, epochs])
+
+    # 7 : vector_size 테스트
     elif test_num == 7:
+        vector_list = set_vector()
+
+        for index, vector_size in enumerate(vector_list):
+            return_input.append([hotel_info_df, hotel_review_df, f'{test_num}_{index}_d2v', 
+            pos, token_min, token_max, vector_size, window, min_count, epochs])
+
+    # 8 : custom
+    elif test_num == 8:
         pos = ["Adjective", "Noun", "Verb"]
 
-        return_input.append([hotel_info_df, hotel_review_df, f'base_d2v', 
-        pos, token_min, token_max, window, 8000, 40])
+        return_input.append([hotel_info_df, hotel_review_df, f'800_35_d2v', 
+        pos, 5, 50, 800, window, 8000, 35])
     
     return return_input
 
@@ -130,6 +139,12 @@ def set_epochs():
 
     return epochs
 
+## 7. vector_size 테스트 : 20, 50, 100
+def set_vector():
+    vector_size = [200, 400, 600, 800]
+
+    return vector_size
+
 
 ### 생성된 모델 결과 확인
 
@@ -154,18 +169,18 @@ def show_recomended_hotel(hotel_info_df, hotel_review_df, return_data):
 
 if __name__ == '__main__':
     # 데이터 로드
-    hotel_info_df = pd.read_csv('./dataset/final/hotel_info.csv', encoding='utf-8')
+    hotel_info_df = pd.read_csv('./dataset/final/final_hotel_info.csv', encoding='utf-8')
     hotel_review_df = pd.read_csv('./dataset/final/final_hotel_review.csv', encoding='utf-8')
     hotel_review_df.rename(columns={'review' :'contents'}, inplace=True)
-    hotel_review_df = hotel_review_df.loc[hotel_review_df['date'] >= '2020-01']
+    #hotel_review_df = hotel_review_df.loc[hotel_review_df['date'] >= '2020-01']
 
     select_num = input("1 : 모델 생성 테스트, 2 : 모델 확인\n")
+    
     ## 모델 생성 -----
-    # 테스트 할 변수 선택 : 1(리뷰 시작일), 2(품사), 3(토큰 길이), 4(window), 5(min_count), 6(epochs), 7(custom)
     if select_num == '1':
-        print("테스트 할 변수 선택 : 1(리뷰 시작일), 2(품사), 3(토큰 길이), 4(window), 5(min_count), 6(epochs), 7(custom)")
+        # 테스트 할 변수 선택 : 0(기본값 생성), 1(리뷰 시작일), 2(품사), 3(토큰 길이), 4(window), 5(min_count), 6(epochs), 7(vector_size), 8(custom)
+        print('테스트 할 변수 선택 : 0(기본값 생성), 1(리뷰 시작일), 2(품사), 3(토큰 길이), 4(window), 5(min_count), 6(epochs), 7(vector_size), 8(custom)')
         test_num = int(input())
-        
         data = set_test_data(hotel_info_df, hotel_review_df, test_num)
 
         with Pool(4) as p:
@@ -175,10 +190,10 @@ if __name__ == '__main__':
     ## 모델 확인 -----
     # 테스트 할 지역, 예시 리뷰 입력
     if select_num == '2':
-        region = ['서울', '부산', '강원도', '제주', '여수']
-        print("원하는 문장을 입력 : ")
-        user_input = input()
-        #user_input = '편의점'
+        region = ['서울', '부산', '강원', '제주', '여수']
+        #region = ['강원']
+        #user_input = '가성비'
+        user_input = '바다뷰가 좋고 직원이 친절했어요'
         model_name = "positive_d2v"
 
         start = time.time()
@@ -188,4 +203,3 @@ if __name__ == '__main__':
         show_recomended_hotel(hotel_info_df, hotel_review_df, return_data)
         print(return_data)
         print(delta_t)
-

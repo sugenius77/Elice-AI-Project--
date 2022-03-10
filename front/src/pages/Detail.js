@@ -23,11 +23,11 @@ const Detail = () => {
 
     console.log("params id ===> ", _id);
 
-    // detail components 접속 시 스크롤 최상단으로 이동
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+  // detail components 접속 시 스크롤 최상단으로 이동
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
     // /hotel/hotel-info API 값 호출
     useEffect(() => {
@@ -35,45 +35,43 @@ const Detail = () => {
             try {
                 const response = await hotelDetail(_id, userInfo.id);
 
-                setDetail(response.data.data);
-                setLoading(false);
-            } catch (e) {
-                console.log("axios get Error");
-            }
-        }
-        getHotel();
-    }, []);
+        setDetail(response.data.data);
+        setLoading(false);
+      } catch (e) {
+        console.log("axios get Error");
+      }
+    }
+    getHotel();
+  }, [_id]);
 
-    useEffect(() => {
-        console.log("detail state  ===> ", detail);
-    }, [loading]);
+  useEffect(() => {
+    console.log("detail state  ===> ", detail);
+  }, [loading]);
 
-    return (
-        <Layout>
-            <div className=" w-full min-h-screen mt-24 ">
-                {loading ? (
-                    <Loading />
-                ) : (
-                    <div className="flex flex-col">
-                        <div className="w-full items-center justify-center flex mb-5 p-3">
-                            <div className="block hero w-3/4 bg-base-200 md:w-full  ">
-                                <div className="md:flex-col justify-start hero-content flex-row cursor-default ">
-                                    <img
-                                        // src="https://api.lorem.space/image/movie?w=260&h=400"
-                                        src={detail.hotel_img_url}
-                                        alt="img"
-                                        className="max-w-sm rounded-lg shadow-2xl"
-                                    />
-                                    <div>
-                                        <h1 className="text-5xl font-bold text-shadow-sm font-notoSans md:text-3xl ">
-                                            {detail.hotel_name}
-                                        </h1>
-                                        <span className="badge text-lg bg-[#004E98] border-0 outline-none mt-2">
-                                            {detail.region}
-                                        </span>
-                                        <span className="text-sm ml-1">
-                                            {detail.address}
-                                        </span>
+  return (
+    <Layout>
+      <div className=" w-full min-h-screen mt-24 ">
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="flex flex-col">
+            <div className="w-full items-center justify-center flex mb-5 p-3">
+              <div className="block hero w-3/4 bg-base-200 md:w-full  ">
+                <div className="md:flex-col justify-start hero-content flex-row cursor-default ">
+                  <img
+                    // src="https://api.lorem.space/image/movie?w=260&h=400"
+                    src={detail.hotel_img_url}
+                    alt="img"
+                    className="max-w-sm rounded-lg shadow-2xl"
+                  />
+                  <div>
+                    <h1 className="text-5xl font-bold text-shadow-sm font-notoSans md:text-3xl ">
+                      {detail.hotel_name}
+                    </h1>
+                    <span className="badge text-lg bg-[#004E98] border-0 outline-none mt-2">
+                      {detail.region}
+                    </span>
+                    <span className="text-sm ml-1">{detail.address}</span>
 
                                         <div className="mt-5">
                                             <div className="flex">
@@ -169,10 +167,38 @@ const Detail = () => {
                             </button>
                         </div>
                     </div>
-                )}
+                  </div>
+                </div>
+              </div>
             </div>
-        </Layout>
-    );
+
+            <div className="flex flex-col items-center justify-center  my-4">
+              <div class="flex justify-center gap-1 my-1 w-full cursor-default">
+                <kbd className="kbd">m</kbd>
+                <kbd className="kbd">a</kbd>
+                <kbd className="kbd">p</kbd>
+              </div>
+              <MapContainer
+                searchPlace={detail.hotel_name}
+                region={detail.region}
+                address={detail.address}
+              />
+            </div>
+            <div className="flex items-center justify-center m-5">
+              <button
+                className="btn"
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
+                검색으로 돌아가기
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </Layout>
+  );
 };
 
 export default Detail;
