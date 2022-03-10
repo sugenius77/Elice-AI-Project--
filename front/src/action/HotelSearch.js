@@ -5,9 +5,9 @@ export const hotelSearch = async (searchData, locals, id) =>
         `${process.env.REACT_APP_API}/hotel/recommend-hotel-list?region=${locals}&search=${searchData.search}&user_id=${id}`
     );
 
-export const hotelDetail = async (_id) =>
+export const hotelDetail = async (_id, user_id) =>
     await axios.get(
-        `${process.env.REACT_APP_API}/hotel/hotel-info?hotel_id=${_id}`
+        `${process.env.REACT_APP_API}/hotel/hotel-info?hotel_id=${_id}&user_id=${user_id}`
     );
 
 export function randomValueFromArray() {
