@@ -42,7 +42,7 @@ const Detail = () => {
             }
         }
         getHotel();
-    }, []);
+    }, [_id]);
 
     useEffect(() => {
         console.log("detail state  ===> ", detail);
