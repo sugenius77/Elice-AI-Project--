@@ -45,12 +45,7 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
                 onClick={() => {
                   history.push({
                     pathname: `/hotel/${item.hotel_id}`,
-                    state: {
-                      hotel_id: item.hotel_id,
-                      is_wish: true,
-                    },
                   });
-                  window.location.reload();
                   setOpen(false);
                 }}
                 alt="hotel_img"
@@ -61,10 +56,6 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
                   onClick={() => {
                     history.push({
                       pathname: `/hotel/${item.hotel_id}`,
-                      state: {
-                        hotel_id: item.hotel_id,
-                        is_wish: true,
-                      },
                     });
 
                     setOpen(false);
