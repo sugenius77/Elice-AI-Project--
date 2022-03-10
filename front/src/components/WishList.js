@@ -43,7 +43,14 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
                 className="max-w-[40%] cursor-pointer"
                 src={item.hotel_img_url}
                 onClick={() => {
-                  history.push(`/hotel/${item.hotel_id}`);
+                  history.push({
+                    pathname: `/hotel/${item.hotel_id}`,
+                    state: {
+                      hotel_id: item.hotel_id,
+                      is_wish: true,
+                    },
+                  });
+                  window.location.reload();
                   setOpen(false);
                 }}
                 alt="hotel_img"
@@ -52,7 +59,14 @@ const WishList = ({ setOpen, asyncGetHotels }) => {
                 <div
                   className="text-2xl font-bold hover:text-[#f6bd60] hover:shadow-sm"
                   onClick={() => {
-                    history.push(`/hotel/${item.hotel_id}`);
+                    history.push({
+                      pathname: `/hotel/${item.hotel_id}`,
+                      state: {
+                        hotel_id: item.hotel_id,
+                        is_wish: true,
+                      },
+                    });
+
                     setOpen(false);
                   }}
                 >
