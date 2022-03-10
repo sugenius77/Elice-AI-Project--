@@ -212,7 +212,7 @@ const Header = () => {
                                                     "client_id=" +
                                                     "944228758716-ik6sa442kp2ielcg2pqbi5npocgqkq1n.apps.googleusercontent.com" +
                                                     "&response_type=token" +
-                                                    "&redirect_uri=http://localhost:3000/&" +
+                                                    "&redirect_uri="+process.env.REACT_APP + "/&" +                                     
                                                     "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                                             }
                                         >
