@@ -9,18 +9,19 @@ import MapContainer from "../action/MapContainer";
 import DetailReview from "../action/DetailReview";
 import DetailKeywords from "../action/DetailKeywords";
 import HeartButton from "../action/HeartButton";
+import { useRecoilValue } from "recoil";
+import { userInfoState } from "../state/atom";
 
-const Detail = ({ location }) => {
+const Detail = () => {
+    //recoil
+    const userInfo = useRecoilValue(userInfoState);
+
     const [loading, setLoading] = useState(true);
     const [detail, setDetail] = useState([]);
     const { _id } = useParams();
     const history = useHistory();
 
-    const hotel_id = location.state.hotel_id;
-    const is_wish = location.state.is_wish;
-
     console.log("params id ===> ", _id);
-    console.log("is_wish ===> ", is_wish);
 
     // detail components 접속 시 스크롤 최상단으로 이동
     const { pathname } = useLocation();
@@ -28,10 +29,11 @@ const Detail = ({ location }) => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
+    // /hotel/hotel-info API 값 호출
     useEffect(() => {
         async function getHotel() {
             try {
-                const response = await hotelDetail(_id);
+                const response = await hotelDetail(_id, userInfo.id);
 
                 setDetail(response.data.data);
                 setLoading(false);
@@ -88,8 +90,10 @@ const Detail = ({ location }) => {
                                                 </button>
                                                 <span className="ml-1">
                                                     <HeartButton
-                                                        hotel_id={hotel_id}
-                                                        is_wish={is_wish}
+                                                        hotel_id={
+                                                            detail.hotel_id
+                                                        }
+                                                        is_wish={detail.is_wish}
                                                     />
                                                 </span>
                                             </div>
