@@ -3,7 +3,7 @@ import { Links } from "./Link";
 import { useDebounce } from "use-debounce";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import { testState, searchDataState } from "../state/atom";
+import { searchDataState } from "../state/atom";
 import LocalBtn from "./LocalBtn";
 
 const SearchBox = () => {
@@ -20,7 +20,7 @@ const SearchBox = () => {
     useEffect(() => {
         if (search) setSearchData({ region, search });
         console.log(searchData);
-    }, [search]);
+    }, [search, region]);
 
     useEffect(() => {
         console.log(selectLocal);
@@ -33,11 +33,11 @@ const SearchBox = () => {
                     isProperty={selectLocal}
                     setIsProperty={setSelectLocal}
                 />
-                <div className=" flex justify-center w-96 md:w-80 border rounded-full shadow-sm hover:shadow-lg">
+                <div className=" flex justify-center w-96 md:w-80 border rounded-full shadow-sm hover:shadow-lg md:p-1">
                     <input
                         value={text}
                         type="text"
-                        className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full focus:outline-none p-6 focus:caret-point text-black flex mr-2 focus:scale-150 md:focus:scale-125 focus:mt-3 focus:ml-10 md:focus:ml-8 duration-100 focus:ring focus:ring-headerColor "
+                        className="sm:w-60  md:w-3/4  w-full h-10 dark:bg-gray-200 bg-gray-50  bg-none border-none rounded-full focus:outline-none p-6 focus:caret-point text-black flex mr-2 focus:scale-150 md:focus:scale-100 duration-100 focus:ring focus:ring-headerColor "
                         placeholder="🔎바다뷰가좋았어요 검색 "
                         onChange={(e) => setText(e.target.value)}
                     />
