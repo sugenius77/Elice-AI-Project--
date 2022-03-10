@@ -16,7 +16,7 @@ AOS.init({
 });
 
 const Home = () => {
-    document.title = "키보드호텔";
+    document.title = "키보드로 소문난 호텔";
     return (
         <>
             <Layout id="1">
@@ -32,9 +32,9 @@ const Home = () => {
                         </video>
                     </div>
                     <div className="h-screen w-full bg-gradient-to-r from-black  opacity-50 z-30 absolute md:hidden lg:hidden"></div>
-                    <div className="min-h-screen md:bg-hero md:bg-cover md:bg-center lg:bg-hero lg:bg-cover lg:bg-center lg:w-full absolute md:static z-40">
+                    <div className="min-h-screen md:bg-white md:bg-cover md:bg-center lg:bg-center lg:w-full absolute md:static z-40">
                         <div className="md:text-center md:w-full relative items-center pt-36 pl-52 md:pl-0 justify-center w-fit flex-col">
-                            <h1 className=" text-7xl md:text-5xl pt-20  md:mt-16 mb-5 text-white font-title text-shadow-lg">
+                            <h1 className=" text-7xl md:text-5xl pt-20  md:mt-16 mb-2 text-white font-title text-shadow-lg">
                                 키보드로
                                 <br />
                                 소문난
@@ -42,9 +42,9 @@ const Home = () => {
                                 호텔
                             </h1>
 
-                            <p className=" mb-5 font-notoSans text-gray-100 text-shadow-lg">
+                            <div className=" mb-5 font-notoSans text-gray-100 text-shadow-xl">
                                 🔔무엇을 도와드릴까요?
-                            </p>
+                            </div>
                             <div className="flex md:justify-center z-40">
                                 <Link
                                     to="2"

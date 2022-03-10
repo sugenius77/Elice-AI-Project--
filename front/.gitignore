@@ -37,6 +37,7 @@ sketch
 .ionide
 .env
 
+
 # Support for Project snippet scope
 !.vscode/*.code-snippets
 
