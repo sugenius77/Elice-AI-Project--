@@ -72,6 +72,8 @@ class RecommendHotelApi(Resource):
 hotelInfoParser = hotel_api.parser()
 hotelInfoParser.add_argument(
     'hotel_id', type=int, help='호텔 id', location='args', required=True)
+hotelInfoParser.add_argument(
+    'user_id', type=str, help='구글 사용자 토큰', location='args', required=False)
 
 
 @hotel_api.route("/hotel-info", methods=["GET"])
@@ -87,6 +89,8 @@ class HotelInfoApi(Resource):
         '''
         args = hotelInfoParser.parse_args()
         hotel_id = args['hotel_id']
+        user_id = args['user_id']
+
         if hotel_id == None:
             abort(400, msg='요청 정보 정확하지 않음.')
 
@@ -94,6 +98,9 @@ class HotelInfoApi(Resource):
 
         hotel = db.session.query(Hotel).filter(
             Hotel.hotel_id == hotel_id).first().__dict__
+
+        hotel['is_wish'] = True if db.session.query(WishList.id).filter(
+            WishList.user_id == user_id, WishList.hotel_id == hotel_id).first() != None else False
 
         hotel['reviews'] = db.session.query(
             Review.review_id, Review.is_positive, Review.hotel_id, Review.contents,
