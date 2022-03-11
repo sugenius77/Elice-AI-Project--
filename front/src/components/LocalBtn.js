@@ -17,8 +17,7 @@ const LocalBtn = ({ isProperty, setIsProperty }) => {
         }
     };
 
-    const location = ["전체", "서울", "제주", "부산", "강원", "여수"];
-    const location2 = [
+    const location = [
         { label: "전체", id: "000" },
         { label: "서울", id: "002" },
         { label: "제주", id: "064" },
@@ -29,9 +28,9 @@ const LocalBtn = ({ isProperty, setIsProperty }) => {
 
     return (
         <div className="flex md:justify-around justify-between items-center mb-3">
-            {location2.map((local) => {
+            {location.map((local) => {
                 return (
-                    <>
+                    <React.Fragment key={local.id}>
                         <label
                             htmlFor={local.label}
                             className={` text-sm border rounded-2xl p-2 cursor-pointer shadow-sm ${
@@ -50,7 +49,7 @@ const LocalBtn = ({ isProperty, setIsProperty }) => {
                             className="hidden"
                             // Clicked={isProperty.find((e) => e === { local })}
                         />
-                    </>
+                    </React.Fragment>
                 );
             })}
         </div>

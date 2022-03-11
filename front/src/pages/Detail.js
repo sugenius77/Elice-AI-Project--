@@ -147,7 +147,7 @@ const Detail = () => {
                         </div>
 
                         <div className="flex flex-col items-center justify-center  my-4">
-                            <div class="flex justify-center gap-1 my-1 w-full cursor-default">
+                            <div className="flex justify-center gap-1 my-1 w-full cursor-default">
                                 <kbd className="kbd">m</kbd>
                                 <kbd className="kbd">a</kbd>
                                 <kbd className="kbd">p</kbd>

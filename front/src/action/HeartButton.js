@@ -13,20 +13,6 @@ const HeartButton = ({ hotel_id, is_wish }) => {
     const [like, setLike] = useState(false);
     const userInfo = useRecoilValue(userInfoState);
 
-    // console.log("userInfo ===> ", userInfo);
-    // console.log("hotelid ===> ", hotel_id);
-    // console.log("is_wish ===> ", is_wish);
-
-    // useEffect(() => {
-    //     if (wishList.length > 2) {
-    //         wishList.filter((hotel) => {
-    //             if (hotel.hotel_id === hotel_id) {
-    //                 setLike(true);
-    //             }
-    //         });
-    //     }
-    // }, []);
-
     React.useEffect(() => {
         if (is_wish) {
             setLike(true);
@@ -48,7 +34,7 @@ const HeartButton = ({ hotel_id, is_wish }) => {
                 toast.success("Wish List에서 확인하세요.");
             } catch (err) {
                 console.log(err);
-                if (err.response.status == 400) {
+                if (err.response.status === 400) {
                     toast.warning("Please Login");
                 }
             }

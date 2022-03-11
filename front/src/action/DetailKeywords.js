@@ -2,8 +2,8 @@ import React from "react";
 
 const DetailKeywords = ({ data, positive }) => {
     let keywords = data.split("|");
-    console.log("data", keywords);
-    console.log(positive);
+    // console.log("data", keywords);
+    // console.log(positive);
 
     return (
         <>

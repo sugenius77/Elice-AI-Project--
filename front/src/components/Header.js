@@ -31,7 +31,7 @@ const Header = () => {
     const [open, setOpen] = useState(false);
     const location = useLocation();
     const pathname = location.pathname.slice(0, 6);
-    console.log("pathname is header", pathname);
+    // console.log("pathname is header", pathname);
     const [userInfo, setUserInfo] = useRecoilState(userInfoState);
     const [wishList, setWishList] = useRecoilState(wishListState);
     const [showMenu, setShowMenu] = useState(false);
@@ -68,7 +68,7 @@ const Header = () => {
                                 className="text-md font-semibold font-notoSans my-2 cursor-pointer md:text-xs"
                             >
                                 {/* H O T E L S */}
-                                <div class="flex justify-center gap-1 my-1 w-full text-black">
+                                <div className="flex justify-center gap-1 my-1 w-full text-black">
                                     <kbd className="kbd">H</kbd>
                                     <kbd className="kbd">O</kbd>
                                     <kbd className="kbd">T</kbd>
@@ -79,10 +79,10 @@ const Header = () => {
                         ) : (
                             <Link
                                 to="/"
-                                className="text-md font-semibold font-notoSans mb-2 md:text-xs"
+                                className="text-md font-semibold font-notoSans items-center my-2 md:text-xs"
                             >
                                 {/* H O T E L S */}
-                                <div class="flex justify-center gap-1 my-1 w-full text-black">
+                                <div className="flex justify-center gap-1 my-1 w-full text-black">
                                     <kbd className="kbd">H</kbd>
                                     <kbd className="kbd">O</kbd>
                                     <kbd className="kbd">T</kbd>
@@ -205,6 +205,7 @@ const Header = () => {
                                 if (item.index === 3) {
                                     return (
                                         <li
+                                            key={item.index}
                                             className="list-none mx-2 p-1 cursor-pointer hover:scale-105 duration-150"
                                             onClick={() =>
                                                 (window.location.href =
@@ -212,7 +213,7 @@ const Header = () => {
                                                     "client_id=" +
                                                     "944228758716-ik6sa442kp2ielcg2pqbi5npocgqkq1n.apps.googleusercontent.com" +
                                                     "&response_type=token" +
-                                                    `&redirect_uri=${process.env.REACT_APP_REDIRECT}/&`  +                                     
+                                                    `&redirect_uri=${process.env.REACT_APP_REDIRECT}/&` +
                                                     "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                                             }
                                         >
@@ -235,7 +236,10 @@ const Header = () => {
                                     />
                                 </svg>;
                                 return (
-                                    <li className="list-none mx-2 p-1 hover:scale-105 duration-150 md:hidden">
+                                    <li
+                                        className="list-none mx-2 p-1 hover:scale-105 duration-150 md:hidden"
+                                        key={item.index}
+                                    >
                                         {pathname !== "/hotel" ? (
                                             <SLink
                                                 to={item.index}
