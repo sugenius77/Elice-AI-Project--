@@ -4,12 +4,12 @@ const About = () => {
     return (
         <>
             <div className="h-screen w-full mt-20 flex justify-center md:h-full md:my-36">
-                <div className="w-[800px] mx-24 md:m-0 md:px-6 md:w-11/12  my-auto">
+                <div className="w-[800px] mx-24 md:m-0 md:px-4 md:w-11/12  my-auto">
                     {/* <h1 className="text-6xl text-center m-5 font-title">
                         About
                     </h1> */}
                     <div className="flex flex-col w-full justify-between">
-                        <h1 className="text-4xl text-[#374553] mb-3 font-title">
+                        <h1 className="text-3xl text-[#374553] mb-3 font-title">
                             바다뷰가 너무 좋았어요
                             <span className="text-[#9DC3C2] text-6xl md:text-4xl">
                                 .
