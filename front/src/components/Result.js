@@ -25,14 +25,13 @@ const Result = () => {
 
     const loadData = async () => {
         setLoading(true);
-        console.log(searchData);
 
         console.log("userInfo.id", userInfo.id);
         // 데이터가 온전히 들어오지 않았을 시
         // setGenres({ ...genres });
         try {
             const locals = searchData.region.join("|");
-            console.log(locals);
+            // console.log(locals);
             const response = await hotelSearch(searchData, locals, userInfo.id);
             // console.log(response.data.data);
             setResults(response.data.data);
