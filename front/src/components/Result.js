@@ -26,7 +26,7 @@ const Result = () => {
     const loadData = async () => {
         setLoading(true);
 
-        console.log("userInfo.id", userInfo.id);
+        // console.log("userInfo.id", userInfo.id);
         // 데이터가 온전히 들어오지 않았을 시
         // setGenres({ ...genres });
         try {

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Links } from "./Link";
 import { useDebounce } from "use-debounce";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { searchDataState } from "../state/atom";
 import LocalBtn from "./LocalBtn";
 
