@@ -2,8 +2,9 @@ __pycache__/
 venv/
 
 #AI 모델 제외
-*.model 
+*.pkl
 *.npy
+
 #*.env
 
 #node_modules
