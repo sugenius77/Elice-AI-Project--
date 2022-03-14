@@ -23,6 +23,7 @@ Mako==1.1.6
 MarkupSafe==2.0.1
 numpy==1.22.2
 pandas==1.4.1
+pororo==0.4.2
 pycodestyle==2.8.0
 PyMySQL==1.0.2
 pyrsistent==0.18.1
