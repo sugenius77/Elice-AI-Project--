@@ -13,8 +13,8 @@ const SearchBox = () => {
     const [text, setText] = useState("");
     const [selectLocal, setSelectLocal] = useState(["000"]); //TODO 000으로 수정필요
 
-    const [search] = useDebounce(text, 500);
-    const [region] = useDebounce(selectLocal, 500);
+    const [search] = useDebounce(text, 700);
+    const [region] = useDebounce(selectLocal, 700);
 
     useEffect(() => {
         if (search) setSearchData({ region, search });
