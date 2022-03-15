@@ -1,10 +1,16 @@
 import pandas as pd
 import numpy as np
 import os
+import time
 
 from pororo import Pororo
 from sklearn.metrics.pairwise import cosine_similarity
 from multiprocessing import Pool
+
+
+def get_similarity(review, vec):
+    similarity = review['vector'].apply(lambda x: cosine_similarity(x.reshape(1, -1), vec.reshape(1, -1)))
+    return similarity
 
 def get_similarity_rank_df(hotel_info_df, hotel_review_df, region, user_input):
     # 몇 개의 리뷰를 기준으로 할지
@@ -21,8 +27,18 @@ def get_similarity_rank_df(hotel_info_df, hotel_review_df, region, user_input):
 
     # similarity 계산
     print("start calculate similarity")
-    filtered_hotel_review_df['similarity'] = filtered_hotel_review_df['vector'].apply(lambda x: cosine_similarity(x.reshape(1, -1), user_input_vec.reshape(1, -1)))
-    print("end calculate similarity")
+    start = time.time()
+
+    process_num = 4
+    with Pool(process_num) as p:
+        range_review = len(filtered_hotel_review_df) // process_num
+        ret1 = p.apply_async(get_similarity, (filtered_hotel_review_df[:range_review], user_input_vec))
+        ret2 = p.apply_async(get_similarity, (filtered_hotel_review_df[range_review:range_review*2], user_input_vec))
+        ret3 = p.apply_async(get_similarity, (filtered_hotel_review_df[range_review*2:range_review*3], user_input_vec))
+        ret4 = p.apply_async(get_similarity, (filtered_hotel_review_df[range_review*3:], user_input_vec))
+        filtered_hotel_review_df['similarity'] = pd.concat([ret1.get(), ret2.get(), ret3.get(), ret4.get()])
+    
+    print(f"end calculate similarity : {time.time() - start}")
 
     # hotel_id 별 top similarity review 추출
     top_hotel_review_df = filtered_hotel_review_df.sort_values(by='similarity', ascending=False).groupby('hotel_id').head(review_number)
