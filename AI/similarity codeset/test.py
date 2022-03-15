@@ -31,7 +31,7 @@ if __name__ == '__main__':
     hotel_review_df.rename(columns={'review' :'contents'}, inplace=True)
     #hotel_review_df = hotel_review_df.loc[hotel_review_df['date'] >= '2020-01']
 
-    region = ['서울', '강원', '여수']
+    region = ['서울', '강원', '여수', '제주']
     user_input = '바다뷰가 좋고 직원이 친절했어요'
 
     start = time.time()
