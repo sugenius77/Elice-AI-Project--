@@ -1,0 +1,2 @@
+positive_d2v.model.docvecs.vectors_docs.npy filter=lfs diff=lfs merge=lfs -text
+review.pkl filter=lfs diff=lfs merge=lfs -text
